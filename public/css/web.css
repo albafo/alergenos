@@ -1,0 +1,62 @@
+.col2height.row {
+    display: table;
+}
+
+.col2height.row [class*="col-"] {
+    float: none;
+    display: table-cell;
+    vertical-align: top;
+}
+
+
+/*FORMULARIOS GENERAL*/
+
+.textarea_feedback {
+    font-size:12px;
+}
+
+/* HOME_MENUS*/
+
+.insertarMenu {
+    padding-top: 21px;   
+}
+
+.insertarMenu:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.estado-activo {
+    color: green;
+}
+
+.estado-inactivo {
+    color:red;
+}
+
+.caja-menu:hover {
+    background-color:#FAFAFA;
+    cursor: pointer;
+}
+
+.caja-menu.selected {
+    background-color:#FAFAFA;
+}
+
+.pagination-menus {
+    margin-top: 0px !important;
+}
+
+
+/* PANTALLA_MENU */
+
+#opciones-menu .navbar-defualt {
+    margin-bottom:15px;
+   
+}
+
+/* PANTALLA_MENU_PLATOS */
+
+.caja-menu:active{
+    cursor:move;
+}
