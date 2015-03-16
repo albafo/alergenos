@@ -35,8 +35,10 @@
         </div> 
         <div class="col-sm-4 text-center">
             <h4>Platos</h4>
-            <div class="panel panel-default caja-menu">
-                <div class="panel-body">Calamares en su tinta</div>
+            <div class="lista-platos">
+                <div class="panel panel-default caja-menu">
+                    <div class="panel-body">Calamares en su tinta</div>
+                </div>
             </div>
         </div>
         <div class="col-sm-4 text-center">
@@ -51,6 +53,13 @@
 <script>
 jQuery(function($) {
     $( ".lista-categorias" ).sortable({
+        axis: "y",
+        update: function( event, ui ) {
+            alert(ui.item.attr('id'));
+        }
+        
+    });       
+    $( ".lista-platos" ).sortable({
         axis: "y",
         update: function( event, ui ) {
             alert(ui.item.attr('id'));
