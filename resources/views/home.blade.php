@@ -85,6 +85,8 @@
 	$(function() {
 		
 		$('body').on('click', '#crearMenu', function() {
+            $('#cajaError').addClass('hidden');
+
             var boton=$(this)
             boton.attr('disabled', true);
 			if($('#nombreMenu').val()!="") {

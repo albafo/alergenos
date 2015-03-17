@@ -35,12 +35,12 @@
 }
 
 .caja-menu:hover {
-    background-color:#FAFAFA;
+    background-color:#EAEAEA;
     cursor: pointer;
 }
 
 .caja-menu.selected {
-    background-color:#FAFAFA;
+    background-color:#EAEAEA;
 }
 
 .pagination-menus {
@@ -60,3 +60,38 @@
 .caja-menu:active{
     cursor:move;
 }
+
+.caja-menu .editDel {
+    position:absolute;
+    width:100%;
+}
+
+.caja-menu .editDel div{
+    visibility:hidden;
+}
+
+
+
+
+.caja-menu:hover .editDel div {
+    visibility:visible;
+    margin-top:10px;
+}
+
+.caja-menu .editDel .editar {
+    position:relative;
+    float:left;
+    margin-left:10px;
+}
+
+.caja-menu .editDel .borrar {
+    position:relative;
+    float:right;
+    margin-right:10px;
+}
+
+
+#pag-platos .caja-menu {
+    position:relative;
+} 
+

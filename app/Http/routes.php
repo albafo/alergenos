@@ -12,11 +12,12 @@
 */
 
 Route::get('/', 'WelcomeController@index');
-
 Route::get('home', 'HomeController@index');
-
 Route::post('menu/edit/{id}', 'MenuController@edit');
 Route::get('menu/destroy/{id}', 'MenuController@destroy');
+Route::post('categoria/store/{id}', 'CategoriaController@store');
+Route::post('categoria/update/{id_menu}/{id_cat}', 'CategoriaController@update');
+
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
