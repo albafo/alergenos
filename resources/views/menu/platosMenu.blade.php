@@ -16,7 +16,8 @@
         <div class="col-sm-4 text-center">
             <h4>Categorías</h4>
             <div class="lista-categorias" id="lista-categorias">
-                <div class="panel panel-default caja-menu selected" id="categoria-5">
+                @foreach($menu->categorias as $categoria)
+                <div class="panel panel-default caja-menu" id="categoria-{{$categoria->id}}">
                     <div class="editDel">
                         <div class="editar">
                             <a href="#"  title="Editar" class="glyphicon glyphicon-pencil editCat"></a>
@@ -25,20 +26,10 @@
                             <a href="#" title="Borrar" class="glyphicon glyphicon-remove"></a>
                         </div>
                     </div>
-                    <div class="panel-body">Entrantes</div>
+                    <div class="panel-body">{{$categoria->nombre}}</div>
                 </div>
-                <div class="panel panel-default caja-menu">
-                    <div class="panel-body">Carnes</div>
-                </div>
-                <div class="panel panel-default caja-menu">
-                    <div class="panel-body">Pescados</div>
-                </div>
-                <div class="panel panel-default caja-menu">
-                    <div class="panel-body">Arroces</div>
-                </div>
-                <div class="panel panel-default caja-menu">
-                    <div class="panel-body">Postres</div>
-                </div>
+                @endforeach
+                
                 
             </div>
             <a id="addCat" class="glyphicon glyphicon-plus"></a>

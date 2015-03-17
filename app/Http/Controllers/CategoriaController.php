@@ -93,10 +93,9 @@ class CategoriaController extends Controller {
 	 */
 	public function update(UpdateCategoria $request, $id_menu, $id_cat)
 	{
-        \DB::connection()->enableQueryLog();
+        
 
 		$categoria=Menu::find($id_menu)->categorias()->find($id_cat);
-        
         $categoria->nombre=$request->input('nombre');
         $categoria->save();
 	}
