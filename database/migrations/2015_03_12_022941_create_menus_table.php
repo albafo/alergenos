@@ -19,7 +19,7 @@ class CreateMenusTable extends Migration {
             $table->string('descripcion')->nullable();
             $table->date('caducidad')->nullable();
             $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('usuarios')->onDelete('cascade')->onUpdate('cascade');
             $table->boolean('estado')->default(true)->nullable();
 			$table->timestamps();
             $table->softDeletes();
