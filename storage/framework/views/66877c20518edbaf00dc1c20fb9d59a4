@@ -22,7 +22,7 @@
                             <a href="#"  title="Editar" class="glyphicon glyphicon-pencil editCat"></a>
                         </div>
                         <div class="borrar">
-                            <a href="#" title="Borrar" class="glyphicon glyphicon-remove"></a>
+                            <a href="#" title="Borrar" class="glyphicon glyphicon-remove delCat"></a>
                         </div>
                     </div>
                     <div class="panel-body"><?php echo e($categoria->nombre); ?></div>
@@ -80,6 +80,8 @@
 			  </div>
 			</div>
 
+            
+
 
 <script>
 jQuery(function($) {
@@ -130,6 +132,31 @@ jQuery(function($) {
         });
     });
     
+    
+    $('body').on('click', '.delCat', function() {
+        var id_cat=$(this).parent().parent().parent().attr('id');
+        id_cat=id_cat.split("-")[1];
+        bootbox.confirm("¿Estás seguro de eliminar la categoría? Se eliminarán todos los platos que la contengan", function(result) {
+            if(result) {
+                $.post("<?php echo e(url('categoria/destroy/'.$menu->id)); ?>/"+id_cat, {'_token':'<?php echo e(csrf_token()); ?>'}, function(data) {
+                    $('#categoria-'+id_cat).remove();
+                    $('#mensajes-platos-ok').bootstrapAlert({
+                        title:"Enhorabuena!",
+                        messages:['Categoría eliminada con éxito.'],
+                        type:'danger',
+                        time:5000
+                    });
+                }).fail(function(data) {
+                    $('#mensajes-platos-ok').bootstrapAlert({
+                        title:"Error!",
+                        messages:['Fallo al conectar con el servidor.'],
+                        type:'success',
+                        time:5000
+                    });
+                }, "json");
+            }
+        }); 
+    });
     
     
     $('body').on('click', '.editCat', function() {
@@ -195,7 +222,12 @@ jQuery(function($) {
                         time:5000
                     });
             }).fail(function(data) {
-                alert('Error');
+                $('#mensajes-platos-ok').bootstrapAlert({
+                        title:"Error!",
+                        messages:['Fallo al conectar con el servidor.'],
+                        type:'danger',
+                        time:5000
+                    });
             }, "json");
         }
         

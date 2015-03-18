@@ -136,12 +136,25 @@ jQuery(function($) {
     
     $('body').on('click', '.delCat', function() {
         var id_cat=$(this).parent().parent().parent().attr('id');
+        id_cat=id_cat.split("-")[1];
         bootbox.confirm("¿Estás seguro de eliminar la categoría? Se eliminarán todos los platos que la contengan", function(result) {
             if(result) {
-                $.post("{{url('categoria/destroy/'.$menu->id)}}", {'_token':'{{csrf_token()}}'}, function(data) {
-                
+                $.post("{{url('categoria/destroy/'.$menu->id)}}/"+id_cat, {'_token':'{{csrf_token()}}'}, function(data) {
+                    $('#categoria-'+id_cat).remove();
+                    $('#mensajes-platos-ok').bootstrapAlert({
+                        title:"Enhorabuena!",
+                        messages:['Categoría eliminada con éxito.'],
+                        type:'danger',
+                        time:5000
+                    });
                 }).fail(function(data) {
-                });
+                    $('#mensajes-platos-ok').bootstrapAlert({
+                        title:"Error!",
+                        messages:['Fallo al conectar con el servidor.'],
+                        type:'success',
+                        time:5000
+                    });
+                }, "json");
             }
         }); 
     });

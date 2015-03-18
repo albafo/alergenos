@@ -3,6 +3,7 @@
 use App\Http\Requests;
 use App\Http\Requests\CreateNewCategoria;
 use App\Http\Requests\ReordenarCategorias;
+use App\Http\Requests\DeleteCategoria;
 
 use App\Http\Requests\UpdateCategoria;
 
@@ -121,9 +122,9 @@ class CategoriaController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function destroy(DeleteCategoria $reuest, $id_menu, $id_cat)
 	{
-		//
+		Categoria::find($id_cat)->delete();
 	}
 
 }
