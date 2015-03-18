@@ -2,6 +2,8 @@
 
 use App\Http\Requests;
 use App\Http\Requests\CreateNewCategoria;
+use App\Http\Requests\ReordenarCategorias;
+
 use App\Http\Requests\UpdateCategoria;
 
 use App\Http\Controllers\Controller;
@@ -46,6 +48,8 @@ class CategoriaController extends Controller {
   
         $categoria=new Categoria();
         $categoria->nombre=$request->input('nombre');
+        $orden=Menu::find($id_menu)->categorias()->max('orden')+1;
+        $categoria->orden=$orden;
         Menu::find($id_menu)->categorias()->save($categoria);
         
         $return['html']='<div class="panel panel-default caja-menu" id="categoria-'.$categoria->id.'">
@@ -62,6 +66,17 @@ class CategoriaController extends Controller {
         return $return;
         
 	}
+    
+    public function reordenar(ReordenarCategorias $request, $id_menu){
+        $orden=1;
+        foreach($request->input('data') as $categoria) {
+            $id=explode("-", $categoria)[1];
+            $categoria=Categoria::find($id);
+            $categoria->orden=$orden;
+            $categoria->save();
+            $orden++;
+        }      
+    }
 
 	/**
 	 * Display the specified resource.

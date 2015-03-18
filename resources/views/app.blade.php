@@ -25,7 +25,7 @@
     <script src="{{asset('js/bootstrap-datetimepicker.min.js')}}"></script>
     <script src="{{asset('js/bootstrap-switch.min.js')}}"></script>
     <script src="{{asset('js/extra.js')}}"></script>
-
+    <script src="{{asset('js/bootbox.js')}}"></script>
 
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->

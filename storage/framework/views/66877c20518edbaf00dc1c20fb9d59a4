@@ -15,7 +15,7 @@
         <div class="col-sm-4 text-center">
             <h4>Categorías</h4>
             <div class="lista-categorias" id="lista-categorias">
-                <?php foreach($menu->categorias as $categoria): ?>
+                <?php foreach($menu->categorias->sortBy('orden', SORT_REGULAR, false) as $categoria): ?>
                 <div class="panel panel-default caja-menu" id="categoria-<?php echo e($categoria->id); ?>">
                     <div class="editDel">
                         <div class="editar">
@@ -185,7 +185,18 @@ jQuery(function($) {
     $( ".lista-categorias" ).sortable({
         axis: "y",
         update: function( event, ui ) {
-            alert(ui.item.attr('id'));
+            var data = $(this).sortable('toArray');
+           
+            $.post("<?php echo e(url('categoria/reordenar/'.$menu->id)); ?>", {'_token':'<?php echo e(csrf_token()); ?>', 'data':data}, function() {
+                 $('#mensajes-platos-ok').bootstrapAlert({
+                        title:"Enhorabuena!",
+                        messages:['Categorías reordenadas con éxito'],
+                        type:'success',
+                        time:5000
+                    });
+            }).fail(function(data) {
+                alert('Error');
+            }, "json");
         }
         
     });       

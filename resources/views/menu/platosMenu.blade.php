@@ -16,14 +16,14 @@
         <div class="col-sm-4 text-center">
             <h4>Categorías</h4>
             <div class="lista-categorias" id="lista-categorias">
-                @foreach($menu->categorias as $categoria)
+                @foreach($menu->categorias->sortBy('orden', SORT_REGULAR, false) as $categoria)
                 <div class="panel panel-default caja-menu" id="categoria-{{$categoria->id}}">
                     <div class="editDel">
                         <div class="editar">
                             <a href="#"  title="Editar" class="glyphicon glyphicon-pencil editCat"></a>
                         </div>
                         <div class="borrar">
-                            <a href="#" title="Borrar" class="glyphicon glyphicon-remove"></a>
+                            <a href="#" title="Borrar" class="glyphicon glyphicon-remove delCat"></a>
                         </div>
                     </div>
                     <div class="panel-body">{{$categoria->nombre}}</div>
@@ -81,6 +81,8 @@
 			  </div>
 			</div>
 
+            
+
 
 <script>
 jQuery(function($) {
@@ -131,6 +133,18 @@ jQuery(function($) {
         });
     });
     
+    
+    $('body').on('click', '.delCat', function() {
+        var id_cat=$(this).parent().parent().parent().attr('id');
+        bootbox.confirm("¿Estás seguro de eliminar la categoría? Se eliminarán todos los platos que la contengan", function(result) {
+            if(result) {
+                $.post("{{url('categoria/destroy/'.$menu->id)}}", {'_token':'{{csrf_token()}}'}, function(data) {
+                
+                }).fail(function(data) {
+                });
+            }
+        }); 
+    });
     
     
     $('body').on('click', '.editCat', function() {
@@ -186,7 +200,23 @@ jQuery(function($) {
     $( ".lista-categorias" ).sortable({
         axis: "y",
         update: function( event, ui ) {
-            alert(ui.item.attr('id'));
+            var data = $(this).sortable('toArray');
+           
+            $.post("{{url('categoria/reordenar/'.$menu->id)}}", {'_token':'{{csrf_token()}}', 'data':data}, function() {
+                 $('#mensajes-platos-ok').bootstrapAlert({
+                        title:"Enhorabuena!",
+                        messages:['Categorías reordenadas con éxito'],
+                        type:'success',
+                        time:5000
+                    });
+            }).fail(function(data) {
+                $('#mensajes-platos-ok').bootstrapAlert({
+                        title:"Error!",
+                        messages:['Fallo al conectar con el servidor.'],
+                        type:'danger',
+                        time:5000
+                    });
+            }, "json");
         }
         
     });       
