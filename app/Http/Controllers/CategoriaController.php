@@ -59,7 +59,7 @@ class CategoriaController extends Controller {
                             <a href="#"  title="Editar" class="glyphicon glyphicon-pencil editCat"></a>
                         </div>
                         <div class="borrar">
-                            <a href="#" title="Borrar" class="glyphicon glyphicon-remove"></a>
+                            <a href="#" title="Borrar" class="glyphicon glyphicon-remove delCat"></a>
                         </div>
                     </div>
                     <div class="panel-body">'.$categoria->nombre.'</div>

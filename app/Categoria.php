@@ -9,6 +9,13 @@ class Categoria extends Model {
 
 	protected $guarded = ['id'];
 
-	
+	public function platos() {
+        return $this->hasMany('App\Plato');
+    }
+    
+    public function menu() {
+        return $this->belongsTo('App\Menu');
+    }
+
 
 }

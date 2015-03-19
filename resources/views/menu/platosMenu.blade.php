@@ -16,6 +16,11 @@
         <div class="col-sm-4 text-center">
             <h4>Categorías</h4>
             <div class="lista-categorias" id="lista-categorias">
+                @unless($menu->categorias()->count())
+			    <span id="noCat">No has creado ninguna categoría todavía.</span>
+			    @else
+                <span id="noCat" class="hidden">No has creado ninguna categoría todavía.</span>
+
                 @foreach($menu->categorias->sortBy('orden', SORT_REGULAR, false) as $categoria)
                 <div class="panel panel-default caja-menu" id="categoria-{{$categoria->id}}">
                     <div class="editDel">
@@ -29,18 +34,19 @@
                     <div class="panel-body">{{$categoria->nombre}}</div>
                 </div>
                 @endforeach
-                
+                @endunless
                 
             </div>
             <a id="addCat" class="glyphicon glyphicon-plus"></a>
         </div> 
         <div class="col-sm-4 text-center">
             <h4>Platos</h4>
-            <div class="lista-platos">
-                <div class="panel panel-default caja-menu">
-                    <div class="panel-body">Calamares en su tinta</div>
-                </div>
+            <span id="msgPlatos">Seleccione una categoría</span>
+
+            <div class="lista-platos" id="lista-platos">
+                
             </div>
+            <a id="addPlato" class="glyphicon glyphicon-plus hidden"></a>
         </div>
         <div class="col-sm-4 text-center">
             <h4>Ingredientes</h4>
@@ -104,6 +110,7 @@ jQuery(function($) {
 				$.post("{{url('categoria/store/'.$menu->id)}}", {'_token':'{{csrf_token()}}', 'nombre':$('#myModalInput').val()}, function(data) {
                     //window.location.href = '{{url('menu/datos-menu')}}'+'/'+data.id; 
                     $('#lista-categorias').append(data.html);
+                    $('#noCat').addClass('hidden');
                     $('#myModal').modal('hide');
                     boton.attr('disabled', false);
 
@@ -134,7 +141,8 @@ jQuery(function($) {
     });
     
     
-    $('body').on('click', '.delCat', function() {
+    $('body').on('click', '.delCat', function(e) {
+        e.stopPropagation();
         var id_cat=$(this).parent().parent().parent().attr('id');
         id_cat=id_cat.split("-")[1];
         bootbox.confirm("¿Estás seguro de eliminar la categoría? Se eliminarán todos los platos que la contengan", function(result) {
@@ -147,6 +155,9 @@ jQuery(function($) {
                         type:'danger',
                         time:5000
                     });
+                    if($('#lista-categorias div').length<1) {
+                        $('#noCat').removeClass('hidden');
+                    }
                 }).fail(function(data) {
                     $('#mensajes-platos-ok').bootstrapAlert({
                         title:"Error!",
@@ -160,7 +171,8 @@ jQuery(function($) {
     });
     
     
-    $('body').on('click', '.editCat', function() {
+    $('body').on('click', '.editCat', function(e) {
+        e.stopPropagation();
         $('#cajaError').addClass('hidden');
 
         var id_cat=$(this).parent().parent().parent().attr('id');
@@ -208,6 +220,33 @@ jQuery(function($) {
         });
     });
     
+    $('body').on('click', "[id^='categoria-']", function(e) {
+       var id_cat=$(this).attr('id').split("-")[1];
+       $.get("{{url('plato/show')}}/"+id_cat, {'_token':'{{csrf_token()}}'}, function(data) {
+           $("[id^='categoria-']").removeClass('selected');
+           $("#categoria-"+id_cat).addClass('selected');
+           $('#lista-platos').html('');
+           if(data.html=="") {
+               $('#msgPlatos').text('No has añadido ningún plato en esta categoría');
+               $('#msgPlatos').removeClass('hidden');
+           }
+           else {
+               $('#msgPlatos').addClass('hidden');
+               $('#lista-platos').append(data.html);
+               
+           }
+           $('#addPlato').removeClass('hidden');
+           
+       }).fail(function() {
+           $('#mensajes-platos-ok').bootstrapAlert({
+               title:"Error!",
+               messages:['Fallo al conectar con el servidor.'],
+               type:'danger',
+               time:5000
+           });
+       });
+    });
+    
     
     
     $( ".lista-categorias" ).sortable({
@@ -233,13 +272,16 @@ jQuery(function($) {
         }
         
     });       
+    
     $( ".lista-platos" ).sortable({
         axis: "y",
         update: function( event, ui ) {
             alert(ui.item.attr('id'));
         }
         
-    });       
+    });   
+    
+    
 });
 </script>
 @endsection
