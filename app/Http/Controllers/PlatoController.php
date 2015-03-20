@@ -2,12 +2,17 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use App\Http\Requests\CreateNewPlato;
 use Illuminate\Http\Request;
 use App\Categoria;
+use App\Plato;
 
 class PlatoController extends Controller {
 
+    
+    public function __construct() {
+        $this->middleware('auth');
+    }
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -33,9 +38,13 @@ class PlatoController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(CreateNewPlato $request, $id_cat)
 	{
-		//
+		$plato=new Plato;
+        $plato->fill($request->all());
+        $orden=Categoria::find($id_cat)->platos()->max('orden')+1;
+        $plato->orden=$orden;
+        Categoria::find($id_cat)->platos()->save($plato);
 	}
 
 	/**

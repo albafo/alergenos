@@ -57,7 +57,7 @@
     
     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			  <div class="modal-dialog">
 			    <div class="modal-content">
 			      <div class="modal-header">
@@ -87,10 +87,46 @@
 			  </div>
 			</div>
 
+
+           <div class="modal fade" id="myModalPlato" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	            <div class="modal-dialog">
+			        <div class="modal-content">
+			            <div class="modal-header">
+			                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Editar Plato</h4>
+                         </div>
+			        <div class="modal-body">
+                        <form id="formPlato">
+                            <div class="form-group">
+
+                                <input type="text" name="nombre" class="form-control" id="myModalInput" placeholder="Nombre">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="precio" class="form-control" id="myModalInput" placeholder="Precio">
+
+                            </div>
+					    </form>
+		            </div>
+                    <div class="alert alert-danger hidden" id="cajaError">
+		                <strong>Ups!</strong> Hay algún error con el formulario.<br><br>
+					        <ul>
+							    
+							</ul>
+				    </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary" id="savePlato">Guardar cambios</button>
+                      </div>
+	                </div>
+                </div>
+            </div>
+			
+
             
 
 
 <script>
+var selectedCat=-1;
 jQuery(function($) {
     
     $('body').on('click', '#addCat', function() {
@@ -107,6 +143,7 @@ jQuery(function($) {
             var boton=$(this);
             boton.attr('disabled', true);
 			if($('#myModalInput').val()!="") {
+                
 				$.post("{{url('categoria/store/'.$menu->id)}}", {'_token':'{{csrf_token()}}', 'nombre':$('#myModalInput').val()}, function(data) {
                     //window.location.href = '{{url('menu/datos-menu')}}'+'/'+data.id; 
                     $('#lista-categorias').append(data.html);
@@ -235,6 +272,7 @@ jQuery(function($) {
                $('#lista-platos').append(data.html);
                
            }
+           selectedCat=id_cat;
            $('#addPlato').removeClass('hidden');
            
        }).fail(function() {
@@ -246,6 +284,55 @@ jQuery(function($) {
            });
        });
     });
+    
+    $('body').on('click', "#addPlato", function() {
+        if(selectedCat!=-1) {
+            $('#myModalPlato #myModalLabel').text('Crear plato');
+            $('#myModalPlato #savePlato').text('Crear plato');
+            $('#myModalPlato').modal();
+            $('body').off('click', '#savePlato');
+            $('body').on('click', "#savePlato", function() {
+                var data=$( "#formPlato" ).serializeArray();
+                data.push({name: '_token', value: '{{csrf_token()}}'});
+                $.post("{{url('plato/store')}}/"+selectedCat, data, function(data) {
+                    $('#myModalPlato').modal('hide');
+                    $('#mensajes-platos-ok').bootstrapAlert({
+                        title:"Enhorabuena!",
+                        messages:['Plato añadido con éxito'],
+                        type:'success',
+                        time:5000
+                    });
+                }).fail(function(data) {
+                    if(data.responseJSON!==undefined) {
+                        var messages_a=new Array();
+                        
+                        for(var i in data.responseJSON) {
+                           
+                            messages_a.push(data.responseJSON[i]);
+                            
+                        }
+                        $('#myModalPlato').modal('hide');
+                        $('#mensajes-platos-ok').bootstrapAlert({
+                            title:"Error!",
+                            messages:messages_a,
+                            type:'danger',
+                            time:5000
+                        });
+                    }
+                }, "json");
+            });
+        }
+        else {
+            $('#mensajes-platos-ok').bootstrapAlert({
+                title:"Error!",
+                messages:['No hay seleccionada ninguna categoría.'],
+                type:'danger',
+                time:5000
+            });
+        }
+        
+    });
+    
     
     
     

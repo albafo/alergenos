@@ -91,7 +91,7 @@ class Factory implements FactoryContract {
 		// for the validator. It is behind an interface so that multiple versions of
 		// it may be written besides database. We'll inject it into the validator.
 		$validator = $this->resolve($data, $rules, $messages, $customAttributes);
-
+        
 		if ( ! is_null($this->verifier))
 		{
 			$validator->setPresenceVerifier($this->verifier);
