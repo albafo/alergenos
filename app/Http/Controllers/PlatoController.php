@@ -45,6 +45,19 @@ class PlatoController extends Controller {
         $orden=Categoria::find($id_cat)->platos()->max('orden')+1;
         $plato->orden=$orden;
         Categoria::find($id_cat)->platos()->save($plato);
+        $html='<div class="panel panel-default caja-menu" id="plato-'.$plato->id.'">
+                    <div class="editDel">
+                        <div class="editar">
+                            <a href="#"  title="Editar" class="glyphicon glyphicon-pencil editPlato"></a>
+                        </div>
+                        <div class="borrar">
+                            <a href="#" title="Borrar" class="glyphicon glyphicon-remove delPlato"></a>
+                        </div>
+                    </div>
+                    <div class="panel-body">'.$plato->nombre.' - '.$plato->precio.'€</div>
+                </div>';
+        $return['html']=$html;
+        return $return;
 	}
 
 	/**
