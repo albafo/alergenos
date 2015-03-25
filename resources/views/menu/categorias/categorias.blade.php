@@ -24,3 +24,33 @@
     </div>
     <a id="addCat" class="glyphicon glyphicon-plus"></a>
 </div> 
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Editar categoría</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+
+                    <input type="text" class="form-control" id="myModalInput" placeholder="Inserte nombre">
+
+
+
+                </div>
+                <div class="alert alert-danger hidden" id="cajaError">
+                    <strong>Ups!</strong> Hay algún error con el formulario.<br><br>
+                    <ul>
+
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" id="myModalSave">Guardar cambios</button>
+            </div>
+        </div>
+    </div>
+</div>

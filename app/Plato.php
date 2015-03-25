@@ -10,5 +10,8 @@ class Plato extends Model {
     
     protected $guarded = ['id'];
 
+    public function categoria() {
+        return $this->belongsTo('App\Categoria');
+    }
 
 }

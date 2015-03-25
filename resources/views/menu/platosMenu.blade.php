@@ -22,35 +22,7 @@
     
     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
-            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			  <div class="modal-dialog">
-			    <div class="modal-content">
-			      <div class="modal-header">
-			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			        <h4 class="modal-title" id="myModalLabel">Editar categoría</h4>
-			      </div>
-			      <div class="modal-body">
-			        <div class="form-group">
-					   
-					    <input type="text" class="form-control" id="myModalInput" placeholder="Inserte nombre">
-                        
-						
-					
-					  </div>
-                      <div class="alert alert-danger hidden" id="cajaError">
-							<strong>Ups!</strong> Hay algún error con el formulario.<br><br>
-							<ul>
-							    
-							</ul>
-						</div>
-			      </div>
-			      <div class="modal-footer">
-			        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-			        <button type="button" class="btn btn-primary" id="myModalSave">Guardar cambios</button>
-			      </div>
-			    </div>
-			  </div>
-			</div>
+            
 
 
            
@@ -64,6 +36,7 @@ var selectedCat=-1;
 jQuery(function($) {
     
     $('body').on('click', '#addCat', function() {
+        
         $('#cajaError').addClass('hidden');
         $('body').off('click', '#myModalSave');
         $('#myModal .modal-title').text('Crear categoría');
@@ -71,12 +44,13 @@ jQuery(function($) {
         $('#myModalInput').val('');
 
         $('#myModal').modal();
+        
         $('body').on('click', '#myModalSave', function(){
-
+          
             var boton=$(this);
-            boton.attr('disabled', true);
 			if($('#myModalInput').val()!="") {
-                
+                boton.attr('disabled', true);
+
 				$.post("{{url('categoria/store/'.$menu->id)}}", {'_token':'{{csrf_token()}}', 'nombre':$('#myModalInput').val()}, function(data) {
                     //window.location.href = '{{url('menu/datos-menu')}}'+'/'+data.id; 
                     $('#lista-categorias').append(data.html);
@@ -283,15 +257,28 @@ jQuery(function($) {
     $('body').on('click', '.editPlato', function(e) {
         e.stopPropagation();
         $('#cajaError').addClass('hidden');
-
         var id_plato=$(this).parent().parent().parent().attr('id');
-        id_cat=id_cat.split("-")[1];
+        id_plato=id_plato.split("-")[1];
         $('body').off('click', '#savePlato');
         $('#myModalPlato #myModalLabel').text('Editar categoría');
-        $('#myModal #myModalSave').text('Reemplazar nombre');
-        $('#myModalInput').val(text);
+        $('#myModalPlato #myModalSave').text('Reemplazar nombre');
+        $.get("{{url('plato/datos/')}}/"+id_plato, {'_token':'{{csrf_token()}}'}, function(data){
+            $('#inputNombrePlato').val(data.nombre);
+            $('#inputPrecioPlato').val(data.precio);
+            $('#myModalPlato').modal();
+            $('body').on('click', '#savePlato', function(){
+                $.post("{{url('plato/update')}}/"+id_plato, {
+                    '_token':'{{csrf_token()}}', 
+                    'nombre':$('#myModalInput').val()
+                }, 
+                function(data) {
+                });
+            });
+        });
+        
 
-        $('#myModal').modal();
+        return;
+        
         $('body').on('click', '#myModalSave', function(){
             var boton=$(this);
             boton.attr('disabled', true);

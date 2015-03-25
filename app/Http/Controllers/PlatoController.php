@@ -90,6 +90,15 @@ class PlatoController extends Controller {
         else abort(403);
 		//
 	}
+    
+    /*Devuelve el modelo plato del id dado*/
+    
+    public function datos($id_plato) {
+        if(\Auth::id()==Plato::find($id_plato)->categoria->menu->user_id)    {
+            return Plato::find($id_plato);
+        }
+        else abort(403);
+    }
 
 	/**
 	 * Show the form for editing the specified resource.

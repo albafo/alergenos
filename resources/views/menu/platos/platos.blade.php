@@ -19,10 +19,10 @@
                 <form id="formPlato">
                     <div class="form-group">
 
-                        <input type="text" name="nombre" class="form-control" id="myModalInput" placeholder="Nombre">
+                        <input type="text" name="nombre" class="form-control" id="inputNombrePlato" placeholder="Nombre">
                     </div>
                     <div class="form-group">
-                        <input type="text" name="precio" class="form-control" id="myModalInput" placeholder="Precio">
+                        <input type="text" name="precio" class="form-control" id="inputPrecioPlato" placeholder="Precio">
 
                     </div>
                 </form>
