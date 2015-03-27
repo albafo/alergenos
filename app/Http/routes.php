@@ -22,6 +22,10 @@ Route::post('categoria/destroy/{id_menu}/{id_cat}', 'CategoriaController@destroy
 Route::get('plato/show/{id_cat}', 'PlatoController@show');
 Route::post('plato/store/{id_cat}', 'PlatoController@store');
 Route::get('plato/datos/{id_plato}', 'PlatoController@datos');
+Route::post('plato/update/{id_plato}', 'PlatoController@update');
+Route::post('plato/destroy/{id_plato}', 'PlatoController@destroy');
+Route::post('plato/reordenar/{id_cat}', 'PlatoController@reordenar');
+
 
 
 Route::controllers([

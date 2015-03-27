@@ -117,9 +117,20 @@ class PlatoController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update(Request $request, $id_plato)
 	{
-		//
+	    if(\Auth::id()==Plato::find($id_plato)->categoria->menu->user_id)    {
+            $this->validate($request, [
+                'nombre' => 'required|min:4|max:255',
+                'precio' => 'numeric'
+            ]);
+            $plato=Plato::find($id_plato);
+            $plato->fill($request->all());
+            $plato->save();
+            return $plato;
+        }
+        else abort(403);
+	
 	}
 
 	/**
@@ -128,9 +139,37 @@ class PlatoController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function destroy(Request $request, $id_plato)
 	{
-		//
+        
+        if(\Auth::id()==Plato::find($id_plato)->categoria->menu->user_id)    {
+            $this->validate($request, [
+                'nombre' => 'required|min:4|max:255',
+                'precio' => 'numeric'
+            ]);
+            Plato::find($id_plato)->delete();
+        }
+        else {
+            abort(403);
+        }
+
 	}
+    
+    public function reordenar(Request $request, $id_cat) {
+        if(\Auth::id()==Categoria::find($id_cat)->menu->user_id)    {
+            $orden=1;
+            foreach($request->input('data') as $plato) {
+                $id=explode("-", $plato)[1];
+                $plato=Plato::find($id);
+                $plato->orden=$orden;
+                $plato->save();
+                $orden++;
+            }      
+        }
+        else {
+            abort(403);
+        }
+        
+    }
 
 }

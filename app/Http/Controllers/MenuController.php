@@ -130,6 +130,7 @@ class MenuController extends Controller {
 	 */
 	public function destroy(EliminarMenu $request, $id)
 	{
+        
         Menu::find($id)->delete();
         return redirect('home')->with('ok', 'Menú eliminado con éxito');;
 	}
