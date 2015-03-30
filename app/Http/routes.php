@@ -25,6 +25,8 @@ Route::get('plato/datos/{id_plato}', 'PlatoController@datos');
 Route::post('plato/update/{id_plato}', 'PlatoController@update');
 Route::post('plato/destroy/{id_plato}', 'PlatoController@destroy');
 Route::post('plato/reordenar/{id_cat}', 'PlatoController@reordenar');
+Route::get('plato/ingredientes/{id_plato}', 'PlatoController@showIngredientes');
+Route::get('ingrediente/buscar-letra/{char}', 'IngredienteController@showByChar');
 
 
 

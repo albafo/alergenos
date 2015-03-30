@@ -11,6 +11,7 @@ class PlatoController extends Controller {
 
     
     public function __construct() {
+        
         $this->middleware('auth');
     }
 	/**
@@ -82,6 +83,31 @@ class PlatoController extends Controller {
                         </div>
                     </div>
                     <div class="panel-body">'.$plato->nombre.' - '.$plato->precio.'€</div>
+                </div>';
+            }
+            $return['html']=$html;
+            return $return;
+        }
+        else abort(403);
+		//
+	}
+
+    public function showIngredientes($id_plato) {
+        if(\Auth::id()==Plato::find($id_plato)->categoria->menu->user_id)    {
+            $ingredientes=Plato::find($id_plato)->ingredientes();
+            $html="";
+            
+            foreach($ingredientes as $ingrediente) {
+                $html.='<div class="panel panel-default caja-menu" id="ingrediente-'.$ingrediente->id.'">
+                    <div class="editDel">
+                        <div class="editar">
+                            
+                        </div>
+                        <div class="borrar">
+                            <a href="#" title="Borrar" class="glyphicon glyphicon-remove delIngrediente"></a>
+                        </div>
+                    </div>
+                    <div class="panel-body">'.$ingrediente->nombre.'</div>
                 </div>';
             }
             $return['html']=$html;

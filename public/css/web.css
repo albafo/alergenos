@@ -95,3 +95,15 @@
     position:relative;
 } 
 
+
+#listaIngredientesModal p:hover {
+    color: #fff;
+    background-color: green;
+    cursor:pointer;
+}
+
+#listaIngredientesModal p.selected {
+    color: #fff;
+    background-color: green;
+}
+

@@ -33,9 +33,16 @@
 
 <script>
     var selectedCat=-1;
+    var selectedPlato=-1;
+    var selectedIng=-1;
     
     function obtener_platos(id_cat) {
+        
         $.get("{{url('plato/show')}}/"+id_cat, {'_token':'{{csrf_token()}}'}, function(data) {
+               selectedPlato=-1;
+               $('#msgIngredientes').text('Seleccione un plato');
+               $('#msgIngredientes').removeClass('hidden');
+               $('#addIngrediente').addClass('hidden');
                $("[id^='categoria-']").removeClass('selected');
                $("#categoria-"+id_cat).addClass('selected');
                $('#lista-platos').html('');
@@ -50,6 +57,33 @@
                }
                selectedCat=id_cat;
                $('#addPlato').removeClass('hidden');
+
+           }).fail(function() {
+               $('#mensajes-platos-ok').bootstrapAlert({
+                   title:"Error!",
+                   messages:['Fallo al conectar con el servidor.'],
+                   type:'danger',
+                   time:5000
+               });
+           });
+    }
+    
+    function obtener_ingredientes(id_plato) {
+        $.get("{{url('plato/ingredientes')}}/"+id_plato, {'_token':'{{csrf_token()}}'}, function(data) {
+               $("[id^='plato-']").removeClass('selected');
+               $("#plato-"+id_plato).addClass('selected');
+               $('#lista-ingredientes').html('');
+               if(data.html=="") {
+                   $('#msgIngredientes').text('No has añadido ningún ingrediente a este plato');
+                   $('#msgIngredientes').removeClass('hidden');
+               }
+               else {
+                   $('#msgIngredientes').addClass('hidden');
+                   $('#lista-ingredientes').append(data.html);
+
+               }
+               selectedPlato=id_plato;
+               $('#addIngrediente').removeClass('hidden');
 
            }).fail(function() {
                $('#mensajes-platos-ok').bootstrapAlert({
@@ -373,7 +407,69 @@ jQuery(function($) {
             }, "json");
         }
         
-    });       
+    });
+    
+    $('body').on('click', "[id^='plato-']", function(e) {
+       var id_plato=$(this).attr('id').split("-")[1];
+       obtener_ingredientes(id_plato);
+    });
+    
+    $('body').on('click', "#addIngrediente", function(e) {
+        if(selectedPlato!=-1) {
+            $('#myModalIng .modal-title').text('Añadir Ingrediente');
+            $('#myModalIng #saveIngrediente').text('Añadir ingrediente');
+            
+            $('#myModalIng').modal();
+            $('body').off('click', '#saveIngrediente');
+            $('body').on('click', "#saveIngrediente", function() {
+                
+            });
+        }
+        else {
+            $('#mensajes-platos-ok').bootstrapAlert({
+                title:"Error!",
+                messages:['No hay seleccionado ningún plato.'],
+                type:'danger',
+                time:5000
+            });
+        }
+    });
+    
+    $('body').on('click', '#letrasIngredientes li a', function(e) {
+        var letra=$(this).text();
+        $.get('{{url('ingrediente/buscar-letra')}}/'+letra, {'_token':'{{csrf_token()}}'}, function(data){
+            if(data.html!="") {
+                
+                $('#listaIngredientesModal').html(data.html);
+            }
+            else {
+                $('#listaIngredientesModal').text("No hay ningún ingrediente que empieze por la letra "+letra);
+            }
+            selectedIng=-1;
+            $( "#myModalIng #saveIngrediente" ).prop( "disabled", true );
+        }).fail(function(data) {
+            $('#mensajes-platos-ok').bootstrapAlert({
+                title:"Error!",
+                messages:['Fallo al conectar con el servidor.'],
+                type:'danger',
+                time:5000
+            });
+        }, "json");
+    });
+    
+    $('body').on('click', '#listaIngredientesModal p', function(e) {
+        $('#listaIngredientesModal p').removeClass('selected');
+        $(this).addClass('selected');
+        selectedIng=$(this).attr('data-index');
+        $( "#myModalIng #saveIngrediente" ).prop( "disabled", false );
+
+    });
+    
+    $('body').on('click', '#myModalIng #saveIngrediente', function(e) {
+        alert(selectedIng);
+    });
+
+    
     
     $( ".lista-platos" ).sortable({
         axis: "y",
