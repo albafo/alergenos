@@ -13,15 +13,15 @@
 
 
 	<!-- Fonts -->
-	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script src="{{asset('js/jquery-ui.min.js')}}"></script>
         <script src="{{asset('js/jquery.ui.touch-punch.min.js')}}"></script>
 
     <script src="{{asset('js/moment-with-locales.js')}}"></script>
     <script src="{{asset('js/transition.js')}}"></script>
     <script src="{{asset('js/collapse.js')}}"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <script src="{{asset('js/bootstrap-datetimepicker.min.js')}}"></script>
     <script src="{{asset('js/bootstrap-switch.min.js')}}"></script>
     <script src="{{asset('js/extra.js')}}"></script>
@@ -35,7 +35,7 @@
 		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
 </head>
-<body>
+<body class="page-{{App\MyRequest::mySegments()}}">
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">

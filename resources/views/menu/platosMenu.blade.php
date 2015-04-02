@@ -426,6 +426,7 @@ jQuery(function($) {
             });
         }
         else {
+
             $('#mensajes-platos-ok').bootstrapAlert({
                 title:"Error!",
                 messages:['No hay seleccionado ningún plato.'],
@@ -448,12 +449,14 @@ jQuery(function($) {
             selectedIng=-1;
             $( "#myModalIng #saveIngrediente" ).prop( "disabled", true );
         }).fail(function(data) {
+            $('#myModalIng').modal('hide');
             $('#mensajes-platos-ok').bootstrapAlert({
                 title:"Error!",
                 messages:['Fallo al conectar con el servidor.'],
                 type:'danger',
                 time:5000
             });
+            
         }, "json");
     });
     
@@ -466,7 +469,64 @@ jQuery(function($) {
     });
     
     $('body').on('click', '#myModalIng #saveIngrediente', function(e) {
-        alert(selectedIng);
+        if(selectedPlato!=-1 && selectedIng!=-1) {
+            $.post("{{url('plato/add-ingrediente')}}/"+selectedPlato+"/"+selectedIng, {'_token':'{{csrf_token()}}'}, function(data){
+                if(data.repeated) {
+                   $('#myModalIng').modal('hide');
+                   $('#mensajes-platos-ok').bootstrapAlert({
+                        title:"Error!",
+                        messages:['Ingrediente ya añadido al plato'],
+                        type:'danger',
+                        time:5000
+                    });
+                }
+                else {
+                    $('#mensajes-platos-ok').bootstrapAlert({
+                        title:"Error!",
+                        messages:['Ingrediente añadido al plato'],
+                        type:'success',
+                        time:5000
+                    });
+                    obtener_ingredientes(selectedPlato);
+                    $('#myModalIng').modal('hide');
+                }
+            }).fail(function(data) {
+                $('#myModalIng').modal('hide');
+                $('#mensajes-platos-ok').bootstrapAlert({
+                        title:"Error!",
+                        messages:['Fallo al conectar con el servidor.'],
+                        type:'danger',
+                        time:5000
+                    });
+            }, "json");
+        }
+    });
+    
+    $('body').on('click', '.delIngrediente', function() {
+        var id_ing=$(this).parent().parent().parent().attr('id').split("-")[1];
+        if(selectedPlato!=-1) {
+            bootbox.confirm("¿Estás seguro de eliminar este ingrediente del plato seleccionado?", function(result) {
+                if(result) {
+                    $.post("{{url('plato/eliminar-ingrediente')}}/"+selectedPlato+"/"+id_ing, {'_token':'{{csrf_token()}}'},function() {
+                        obtener_ingredientes(selectedPlato);
+                        $('#mensajes-platos-ok').bootstrapAlert({
+                            title:"Error!",
+                            messages:['Ingrediente eliminado del plato'],
+                            type:'success',
+                            time:5000
+                        });
+                    }).fail(function(data) {
+                        $('#mensajes-platos-ok').bootstrapAlert({
+                            title:"Error!",
+                            messages:['Fallo al conectar con el servidor.'],
+                            type:'danger',
+                            time:5000
+                        });
+                    }, "json");
+
+                }
+            });
+        }
     });
 
     

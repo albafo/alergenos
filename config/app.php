@@ -2,6 +2,7 @@
 
 return [
 
+     
 	/*
 	|--------------------------------------------------------------------------
 	| Application Debug Mode
@@ -113,6 +114,7 @@ return [
 		/*
 		 * Laravel Framework Service Providers...
 		 */
+        'Barryvdh\Snappy\ServiceProvider',
         'Anhskohbo\NoCaptcha\NoCaptchaServiceProvider',
 		'Illuminate\Foundation\Providers\ArtisanServiceProvider',
 		'Illuminate\Auth\AuthServiceProvider',

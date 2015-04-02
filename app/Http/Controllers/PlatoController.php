@@ -94,7 +94,7 @@ class PlatoController extends Controller {
 
     public function showIngredientes($id_plato) {
         if(\Auth::id()==Plato::find($id_plato)->categoria->menu->user_id)    {
-            $ingredientes=Plato::find($id_plato)->ingredientes();
+            $ingredientes=Plato::find($id_plato)->ingredientes;
             $html="";
             
             foreach($ingredientes as $ingrediente) {
@@ -196,6 +196,35 @@ class PlatoController extends Controller {
             abort(403);
         }
         
+    }
+    
+    public function addIngrediente($id_plato, $id_ingrediente) {
+        if(\Auth::id()==Plato::find($id_plato)->categoria->menu->user_id) {
+            $plato=Plato::find($id_plato);
+            $return['repeated']=false;
+            
+            if(!$plato->ingredientes->contains($id_ingrediente)) {
+                $plato->ingredientes()->attach($id_ingrediente);
+            }
+            else {
+                $return['repeated']=true;
+            }
+            return $return;
+            
+        }
+        else {
+            abort(403);
+        }
+    }
+    
+    public function removeIngrediente($id_plato, $id_ingrediente) {
+        if(\Auth::id()==Plato::find($id_plato)->categoria->menu->user_id) {
+            Plato::find($id_plato)->ingredientes()->detach($id_ingrediente);
+           
+        }
+        else {
+            abort(403);
+        }
     }
 
 }

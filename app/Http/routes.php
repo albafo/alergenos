@@ -27,6 +27,8 @@ Route::post('plato/destroy/{id_plato}', 'PlatoController@destroy');
 Route::post('plato/reordenar/{id_cat}', 'PlatoController@reordenar');
 Route::get('plato/ingredientes/{id_plato}', 'PlatoController@showIngredientes');
 Route::get('ingrediente/buscar-letra/{char}', 'IngredienteController@showByChar');
+Route::post('plato/add-ingrediente/{id_plato}/{id_ingrediente}', 'PlatoController@addIngrediente');
+Route::post('plato/eliminar-ingrediente/{id_plato}/{id_ingrediente}', 'PlatoController@removeIngrediente');
 
 
 
@@ -34,5 +36,6 @@ Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
     'menu'  =>  'MenuController'
+ 
 ]);
 //Route::post('menu/edit/{id}', 'MenuController@edit');

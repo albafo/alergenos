@@ -22,7 +22,7 @@
                   <ul class="nav navbar-nav">
                     <li @if(Request::is('menu/datos-menu/*')) class="active" @endif><a href="{{url('menu/datos-menu/'.$menu->id)}}">Datos</a></li>
                     <li @if(Request::is('menu/platos-menu/*')) class="active" @endif><a href="{{url('menu/platos-menu/'.$menu->id)}}">Platos</a></li>
-                    <li @if(Request::is('menu/herramientas/*')) class="active" @endif><a href="#">Herramientas</a></li>
+                    <li @if(Request::is('menu/herramientas/*')) class="active" @endif><a href="{{url('menu/herramientas/'.$menu->id)}}">Herramientas</a></li>
                   </ul>
                 </div><!-- /.navbar-collapse -->
             </div>

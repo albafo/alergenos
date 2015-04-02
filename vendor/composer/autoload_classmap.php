@@ -7,9 +7,11 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'CrearTablaUsuarios' => $baseDir . '/database/migrations/2015_03_10_215725_crear_tabla_usuarios.php',
+    'CreateAlergenosIngredientes' => $baseDir . '/database/migrations/2015_04_01_235705_create_alergenos_ingredientes.php',
+    'CreateAlergenosTable' => $baseDir . '/database/migrations/temp/2015_04_01_235317_create_alergenos_table.php',
     'CreateCategoriasTable' => $baseDir . '/database/migrations/2015_03_13_180615_create_categorias_table.php',
     'CreateIngredientesPlatosTable' => $baseDir . '/database/migrations/2015_03_27_110313_create_ingredientes_platos_table.php',
-    'CreateIngredientesTable' => $baseDir . '/database/migrations/temp/2015_03_27_105423_create_ingredientes_table.php',
+    'CreateIngredientesTable' => $baseDir . '/database/migrations/2015_03_27_105423_create_ingredientes_table.php',
     'CreateMenusTable' => $baseDir . '/database/migrations/2015_03_12_022941_create_menus_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2015_10_11_100000_create_password_resets_table.php',
     'CreatePlatosTable' => $baseDir . '/database/migrations/2015_03_19_134825_create_platos_table.php',

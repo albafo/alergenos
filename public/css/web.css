@@ -107,3 +107,24 @@
     background-color: green;
 }
 
+
+#listadoHerramientas .caja-link  .panel-body {
+    text-align:center;
+}
+
+#listadoHerramientas .caja-link  .panel-body a{
+    text-decoration:inherit;
+    color:inherit;
+    display:block;
+}
+
+body[class*='page-menu-menu-pdf'] .navbar-default, body[class*='page-menu-preview-'] .navbar-default
+ {
+    display:none;
+}
+
+body[class*='page-menu-menu-pdf'], body[class*='page-menu-preview-'] .container
+ {
+     margin-top:20px;
+}
+

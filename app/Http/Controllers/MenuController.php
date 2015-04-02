@@ -11,6 +11,8 @@ use App\Menu;
 use Auth;
 use App;
 use App\Librerias\DateFormat\DateSql;
+use Illuminate\Http\Response;
+use Illuminate\Contracts\View\Factory;
 
 class MenuController extends Controller {
 
@@ -29,6 +31,45 @@ class MenuController extends Controller {
 	{
 		//
 	}
+    
+    public function getHerramientas($id) {
+        if($menu=Auth::user()->menus()->find($id)) {
+            return view('menu.herramientas',['menu'=>$menu]);
+        }
+        else abort(403);
+    }
+    
+    public function getPreview($id) {
+        if($menu=Auth::user()->menus()->find($id)) {
+            return view('menu.preview',['menu'=>$menu]);
+        }
+        else abort(403);
+    }
+    
+    public function getMenuPdf($id) {
+        $snappy = App::make('snappy.pdf');
+        //To file
+        //$snappy->generateFromHtml('<h1>Bill</h1><p>You owe me money, dude.</p>', '/tmp/bill-123.pdf');
+        //$snappy->generate('http://www.github.com', '/tmp/github.pdf');
+        //Or output:
+        if($menu=Auth::user()->menus()->find($id)) {
+            $view = view('menu.preview',['menu'=>$menu]);
+          
+            //$compiledView = $view->render();
+           
+
+
+            return new Response(
+                $snappy->getOutputFromHtml($view),
+                200,
+                array(
+                    'Content-Type'          => 'application/pdf',
+                    'Content-Disposition'   => 'attachment; filename="file.pdf"'
+                )
+            );
+        }else abort(403);
+        
+    }
 
 	/**
 	 * Show the form for creating a new resource.
