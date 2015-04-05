@@ -17,6 +17,7 @@ class CrearTablaUsuarios extends Migration {
 			$table->increments('id');
 			$table->string('nombre');
             $table->string('apellidos');
+            $table->enum('tipo', ['admin', 'user'])->default('user');
 			$table->string('email')->unique();
 			$table->string('password', 60);
             $table->boolean('confirmed')->default(false);

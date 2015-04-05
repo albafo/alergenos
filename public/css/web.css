@@ -8,6 +8,11 @@
     vertical-align: top;
 }
 
+.clickable:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
 
 /*FORMULARIOS GENERAL*/
 
@@ -21,10 +26,7 @@
     padding-top: 21px;   
 }
 
-.insertarMenu:hover {
-    text-decoration: underline;
-    cursor: pointer;
-}
+
 
 .estado-activo {
     color: green;
@@ -128,3 +130,65 @@ body[class*='page-menu-menu-pdf'], body[class*='page-menu-preview-'] .container
      margin-top:20px;
 }
 
+
+/* columns of same height styles */
+
+.row-full-height {
+  height: 100%;
+}
+.col-full-height {
+  height: 100%;
+  vertical-align: middle;
+}
+.row-same-height {
+  display: table;
+  width: 100%;
+  /* fix overflow */
+  table-layout: fixed;
+}
+.col-xs-height {
+  display: table-cell;
+  float: none !important;
+}
+
+@media (min-width: 768px) {
+  .col-sm-height {
+    display: table-cell;
+    float: none !important;
+  }
+}
+@media (min-width: 992px) {
+  .col-md-height {
+    display: table-cell;
+    float: none !important;
+  }
+}
+@media (min-width: 1200px) {
+  .col-lg-height {
+    display: table-cell;
+    float: none !important;
+  }
+}
+
+/* vertical alignment styles */
+
+.col-top {
+  vertical-align: top;
+}
+.col-middle {
+  vertical-align: middle;
+}
+.col-bottom {
+  vertical-align: bottom;
+}
+
+/*Caja alergenos*/
+.caja-alergenos {
+    margin-top:15px;
+    font-weight:bold;
+    font-size:30px;
+}
+.caja-alergenos img {
+    max-width:100%;
+    height:auto;
+}

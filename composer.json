@@ -10,7 +10,9 @@
         "barryvdh/laravel-snappy": "0.2.x",
         "h4cc/wkhtmltopdf-amd64": "0.12.x",
         "h4cc/wkhtmltoimage-amd64": "0.12.x",
-		"knplabs/knp-snappy": "0.3.*"
+		"knplabs/knp-snappy": "0.3.*",
+		"kartik-v/bootstrap-fileinput": "dev-master"
+
 	},
 	"require-dev": {
 		"phpunit/phpunit": "~4.0",

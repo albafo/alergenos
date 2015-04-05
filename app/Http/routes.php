@@ -11,7 +11,9 @@
 |
 */
 
-Route::get('/', 'WelcomeController@index');
+Route::get('/', function(){
+    return redirect('home');
+});
 Route::get('home', 'HomeController@index');
 Route::post('menu/edit/{id}', 'MenuController@edit');
 Route::get('menu/destroy/{id}', 'MenuController@destroy');
@@ -29,10 +31,16 @@ Route::get('plato/ingredientes/{id_plato}', 'PlatoController@showIngredientes');
 Route::get('ingrediente/buscar-letra/{char}', 'IngredienteController@showByChar');
 Route::post('plato/add-ingrediente/{id_plato}/{id_ingrediente}', 'PlatoController@addIngrediente');
 Route::post('plato/eliminar-ingrediente/{id_plato}/{id_ingrediente}', 'PlatoController@removeIngrediente');
+Route::get('admin/alergenos/nuevo', 'AlergenoController@create');
+Route::post('admin/alergenos/nuevo', 'AlergenoController@store');
+Route::get('admin/alergenos/editar/{id}', 'AlergenoController@edit');
+Route::post('admin/alergenos/editar/{id}', 'AlergenoController@update');
+Route::get('admin/alergenos/eliminar/{id}', 'AlergenoController@destroy');
 
 
 
 Route::controllers([
+    'admin'=>'AdminController',
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
     'menu'  =>  'MenuController'

@@ -9,7 +9,7 @@
 					<h3>Mis menús</h3>
 				</div>
 				<div class="col-xs-6 text-right">
-					<h5 class="insertarMenu" id="insertarMenu" data-toggle="modal" data-target="#myModal">+ Insertar menú</h5>
+					<h5 class="insertarMenu clickable" id="insertarMenu" data-toggle="modal" data-target="#myModal">+ Insertar menú</h5>
 				</div>
 			</div>
 			<?php use App\Librerias\DateFormat\DateSql; ?>

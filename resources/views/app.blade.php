@@ -10,6 +10,8 @@
 	<link href="{{ asset('/css/web.css') }}" rel="stylesheet">
     <link href="{{ asset('/css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet">
     <link href="{{ asset('/css/bootstrap-switch.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('bootstrap-fileinput/css/fileinput.min.css') }}" media="all" rel="stylesheet" type="text/css" />
+
 
 
 	<!-- Fonts -->
@@ -26,6 +28,7 @@
     <script src="{{asset('js/bootstrap-switch.min.js')}}"></script>
     <script src="{{asset('js/extra.js')}}"></script>
     <script src="{{asset('js/bootbox.min.js')}}"></script>
+	<script src="{{asset('bootstrap-fileinput/js/fileinput.min.js')}}" type="text/javascript"></script>
 
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
