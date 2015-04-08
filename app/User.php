@@ -31,6 +31,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	protected $hidden = ['password', 'remember_token', 'email_confirmation'];
 
+	public function toArray(){
+		$array = parent::toArray();
+        $array['DT_RowId'] = "row_".$this->id;
+        return $array;
+	}
     
     public function menus() {
         return $this->hasMany('App\Menu');

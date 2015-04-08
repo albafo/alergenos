@@ -11,8 +11,8 @@
     <link href="{{ asset('/css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet">
     <link href="{{ asset('/css/bootstrap-switch.min.css') }}" rel="stylesheet">
     <link href="{{ asset('bootstrap-fileinput/css/fileinput.min.css') }}" media="all" rel="stylesheet" type="text/css" />
-
-
+	<link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/plug-ins/1.10.6/integration/bootstrap/3/dataTables.bootstrap.css">
 
 	<!-- Fonts -->
 	<link href='http://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
@@ -29,7 +29,8 @@
     <script src="{{asset('js/extra.js')}}"></script>
     <script src="{{asset('js/bootbox.min.js')}}"></script>
 	<script src="{{asset('bootstrap-fileinput/js/fileinput.min.js')}}" type="text/javascript"></script>
-
+	<script type="text/javascript" language="javascript" src="http://cdn.datatables.net/1.10.6/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" language="javascript" src="http://cdn.datatables.net/plug-ins/1.10.6/integration/bootstrap/3/dataTables.bootstrap.js"></script>
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

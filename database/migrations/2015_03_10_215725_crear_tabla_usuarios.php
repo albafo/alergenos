@@ -20,8 +20,10 @@ class CrearTablaUsuarios extends Migration {
             $table->enum('tipo', ['admin', 'user'])->default('user');
 			$table->string('email')->unique();
 			$table->string('password', 60);
+			$table->boolean('status')->default(true);
             $table->boolean('confirmed')->default(false);
             $table->string('email_confirmation', 60);
+            $table->timestamp('expired_at');	
 			$table->rememberToken();
 			$table->timestamps();
             $table->softDeletes();

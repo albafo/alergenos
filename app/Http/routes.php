@@ -45,6 +45,8 @@ Route::get('ingredientes/findWithAlerg', 'IngredienteController@findWithAlerg');
 Route::get('ingredientes/show/{id}', 'IngredienteController@show');
 Route::post('ingredientes/editar/{id}', 'IngredienteController@update');
 Route::get('ingredientes/eliminar/{id}', 'IngredienteController@destroy');
+Route::get('admin/usuarios/datatable', 'UsuarioController@usuariosDT');
+Route::get('admin/usuario/{id}', 'HomeController@index');
 
 
 

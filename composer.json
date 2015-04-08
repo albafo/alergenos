@@ -12,7 +12,8 @@
         "h4cc/wkhtmltoimage-amd64": "0.12.x",
 		"knplabs/knp-snappy": "0.3.*",
 		"barryvdh/laravel-ide-helper": "~2.0",
-		"doctrine/dbal": "~2.3"
+		"doctrine/dbal": "~2.3",
+		"fzaninotto/faker": "1.5.*@dev"
 
 	},
 	"require-dev": {

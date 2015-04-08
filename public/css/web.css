@@ -214,3 +214,7 @@ body[class*='page-admin-ingredientes'] #listaIngredientes p:hover {
     border-bottom:1px solid #ccc;
     color:#fff;
 }
+
+#tableUsuarios tbody tr {
+    cursor:pointer;
+}

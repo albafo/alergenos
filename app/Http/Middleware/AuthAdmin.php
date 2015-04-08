@@ -28,8 +28,19 @@ class AuthAdmin {
 	
 	public function handle($request, Closure $next)
 	{
+		
+		if(\Session::has('auth-admin')) {
+			
+			$auth_admin=\Session::get('auth-admin');
+			$this->auth->loginUsingId($auth_admin->id);
+
+		}
+		
 		if ($this->auth->guest() || $this->auth->user()->tipo!="admin")
 		{
+			
+			
+			
 			if ($request->ajax())
 			{
 				return response('Unauthorized.', 401);

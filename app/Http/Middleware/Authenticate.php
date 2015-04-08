@@ -45,6 +45,11 @@ class Authenticate {
 		}
 		
 		if($this->auth->user()->tipo=="admin") {
+			if($request->is("admin/usuario/*")) {
+				\Session::put("auth-admin", $this->auth->user());
+				$this->auth->loginUsingId($request->id);
+				return $next($request);
+			}
 			return redirect()->guest('admin');
 		}
         

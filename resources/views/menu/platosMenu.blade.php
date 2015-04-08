@@ -482,7 +482,7 @@ jQuery(function($) {
                 }
                 else {
                     $('#mensajes-platos-ok').bootstrapAlert({
-                        title:"Error!",
+                        title:"Enhorabuena!",
                         messages:['Ingrediente añadido al plato'],
                         type:'success',
                         time:5000

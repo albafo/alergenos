@@ -12,7 +12,7 @@ class CreateAlergenosIngredientesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('alergenos_ingredientes', function(Blueprint $table)
+		Schema::create('alergeno_ingrediente', function(Blueprint $table)
 		{
             $table->increments('id');
 			$table->integer('ingrediente_id')->unsigned();
@@ -31,7 +31,7 @@ class CreateAlergenosIngredientesTable extends Migration {
 	 */
 	public function down()
 	{
-	    Schema::drop('alergenos_ingredientes');
+	    Schema::drop('alergeno_ingrediente');
 	}
 
 }

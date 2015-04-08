@@ -33,6 +33,10 @@ class AdminController extends Controller {
 		return view('admin.ingredientes', array('alergenos'=>$alergenos));
 	}
 	
+	public function getUsuarios() {
+		return view('admin.usuarios');
+	}
+	
 	/**
 	 * Show the form for creating a new resource.
 	 *
