@@ -1,5 +1,6 @@
 {
     "providers": [
+        "Barryvdh\\LaravelIdeHelper\\IdeHelperServiceProvider",
         "Barryvdh\\Snappy\\ServiceProvider",
         "Anhskohbo\\NoCaptcha\\NoCaptchaServiceProvider",
         "Illuminate\\Foundation\\Providers\\ArtisanServiceProvider",
@@ -51,6 +52,8 @@
         "App\\Providers\\RouteServiceProvider"
     ],
     "deferred": {
+        "command.ide-helper.generate": "Barryvdh\\LaravelIdeHelper\\IdeHelperServiceProvider",
+        "command.ide-helper.models": "Barryvdh\\LaravelIdeHelper\\IdeHelperServiceProvider",
         "command.app.name": "Illuminate\\Foundation\\Providers\\ArtisanServiceProvider",
         "command.clear-compiled": "Illuminate\\Foundation\\Providers\\ArtisanServiceProvider",
         "command.command.make": "Illuminate\\Foundation\\Providers\\ArtisanServiceProvider",
@@ -129,6 +132,9 @@
         "translation.loader": "Illuminate\\Translation\\TranslationServiceProvider"
     },
     "when": {
+        "Barryvdh\\LaravelIdeHelper\\IdeHelperServiceProvider": [
+
+        ],
         "Illuminate\\Foundation\\Providers\\ArtisanServiceProvider": [
 
         ],

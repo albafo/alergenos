@@ -6,10 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Ingrediente;
 use \DB;
+use App\Http\Requests\CreateNewIngrediente;
 class IngredienteController extends Controller {
     
     public function __construct() {
-        $this->middleware('auth');
+        $this->middleware('authLess');
     }
 
 	/**
@@ -37,9 +38,54 @@ class IngredienteController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(CreateNewIngrediente $request)
 	{
-		//
+		$this->middleware('admin');
+		$ingrediente=new Ingrediente;
+		$ingrediente->nombre=$request->get("nombre");
+		$ingrediente->save();
+		foreach($request->get("alergeno_id") as $alergeno_id) {
+			if($alergeno_id!="none") {
+				$ingrediente->alergenos()->attach($alergeno_id);
+			}
+		}
+	
+		
+	}
+	
+	public function find(Request $request) {
+		$ingredientes=Ingrediente::findBySearch($request->get("find"))->orderBy('nombre', 'asc')->get();
+        //$queries = DB::getQueryLog();
+        $html="";
+       
+        foreach($ingredientes as $ingrediente) {
+            $html.="<p data-index='".$ingrediente->id."'>".$ingrediente->nombre."</p>";
+        }
+        $return['html']=$html;
+        return $return;
+	}
+	
+	
+	public function findWithAlerg(Request $request) {
+		$ingredientes=Ingrediente::findBySearch($request->get("find"))->orderBy('nombre', 'asc')->get();
+        //$queries = DB::getQueryLog();
+        $html="";
+       
+        foreach($ingredientes as $ingrediente) {
+        	$alergenos="Alérgenos(";
+        	$i=0;
+        	foreach($ingrediente->alergenos as $alergeno) {
+        		if($i>0){
+        			$alergenos.=", ";
+        		}
+        		$alergenos.=$alergeno->nombre;
+        		$i++;
+        	}
+        	$alergenos.=")";
+            $html.="<p data-index='".$ingrediente->id."'><strong>".$ingrediente->nombre."</strong> -> ".$alergenos."</p>";
+        }
+        $return['html']=$html;
+        return $return;
 	}
 
 	/**
@@ -50,10 +96,14 @@ class IngredienteController extends Controller {
 	 */
 	public function show($id)
 	{
-		//
+		$ingrediente=Ingrediente::find($id);
+		$ingrediente->alergenos;
+		return $ingrediente;
+	
 	}
 
     public function showByChar($char) {
+    	
         //DB::connection()->enableQueryLog();
         $ingredientes=Ingrediente::findByChar($char)->orderBy('nombre', 'asc')->get();
         //$queries = DB::getQueryLog();
@@ -61,6 +111,30 @@ class IngredienteController extends Controller {
        
         foreach($ingredientes as $ingrediente) {
             $html.="<p data-index='".$ingrediente->id."'>".$ingrediente->nombre."</p>";
+        }
+        $return['html']=$html;
+        return $return;
+    }
+    
+    public function showByCharAlerg($char) {
+    	
+        //DB::connection()->enableQueryLog();
+        $ingredientes=Ingrediente::findByChar($char)->orderBy('nombre', 'asc')->get();
+        //$queries = DB::getQueryLog();
+        $html="";
+       
+        foreach($ingredientes as $ingrediente) {
+        	$alergenos="Alérgenos(";
+        	$i=0;
+        	foreach($ingrediente->alergenos as $alergeno) {
+        		if($i>0){
+        			$alergenos.=", ";
+        		}
+        		$alergenos.=$alergeno->nombre;
+        		$i++;
+        	}
+        	$alergenos.=")";
+            $html.="<p data-index='".$ingrediente->id."'><strong>".$ingrediente->nombre."</strong> -> ".$alergenos."</p>";
         }
         $return['html']=$html;
         return $return;
@@ -82,9 +156,26 @@ class IngredienteController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update(CreateNewIngrediente $request, $id)
 	{
-		//
+		$this->middleware('admin');
+		$ingrediente=Ingrediente::find($id);
+		
+		foreach($ingrediente->alergenos as $alergeno) {
+			if(!in_array($alergeno->id, $request->get('alergeno_id'))) {
+				$ingrediente->alergenos()->detach($alergeno->id);
+			}
+		}
+		
+		foreach($request->get("alergeno_id") as $alergeno_id) {
+			if($alergeno_id!="none" && !$ingrediente->alergenos->contains($alergeno_id)) {
+				$ingrediente->alergenos()->attach($alergeno_id);
+			}
+		}
+		
+		if($ingrediente->nombre!=$request->get("nombre"))
+			$ingrediente->nombre=$request->get("nombre");
+		$ingrediente->save();
 	}
 
 	/**
@@ -95,7 +186,9 @@ class IngredienteController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+		$this->middleware('admin');
+		Ingrediente::find($id)->delete();
+
 	}
 
 }

@@ -9,6 +9,7 @@ class Plato extends Model {
     use SoftDeletes;
     
     protected $guarded = ['id'];
+    private static $alergenosCol;
 
     public function categoria() {
         return $this->belongsTo('App\Categoria');
@@ -16,6 +17,19 @@ class Plato extends Model {
     
     public function ingredientes() {
         return $this->belongsToMany('App\Ingrediente');
+    }
+    
+    public function alergenos() {
+       
+        $c = new \Illuminate\Database\Eloquent\Collection;
+
+        foreach($this->ingredientes as $ingrediente) {
+            foreach($ingrediente->alergenos as $alergeno) {
+                $c->add($alergeno);
+            }
+        }
+        return $c->unique();        
+
     }
 
 }

@@ -13,10 +13,16 @@
                 <h3>{{$categoria->nombre}}</h3>
             </div>
         </div>
+       
+
         @foreach($categoria->platos as $plato)
         <div class="row">
             <div class="col-md-12">
                 <span>{{$plato->nombre}} - {{$plato->precio}}€</span>
+               
+                @foreach($plato->alergenos() as $alergeno)
+                <span><img height="50" src="{{asset($alergeno->img)}}" alt="{{$alergeno->nombre}}"></span>
+                @endforeach
             </div>
         </div>
         @endforeach

@@ -28,6 +28,11 @@ class AdminController extends Controller {
 		return view('admin.alergenos', array('alergenos'=>$alergenos));
 	}
 
+	public function getIngredientes() {
+		$alergenos=Alergeno::all();
+		return view('admin.ingredientes', array('alergenos'=>$alergenos));
+	}
+	
 	/**
 	 * Show the form for creating a new resource.
 	 *

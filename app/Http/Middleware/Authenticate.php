@@ -43,6 +43,10 @@ class Authenticate {
 				return redirect()->guest('auth/login');
 			}
 		}
+		
+		if($this->auth->user()->tipo=="admin") {
+			return redirect()->guest('admin');
+		}
         
         //Activar cuando esté el envío por mail
         /* 

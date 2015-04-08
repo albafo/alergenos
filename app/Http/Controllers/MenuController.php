@@ -41,6 +41,7 @@ class MenuController extends Controller {
     
     public function getPreview($id) {
         if($menu=Auth::user()->menus()->find($id)) {
+           
             return view('menu.preview',['menu'=>$menu]);
         }
         else abort(403);

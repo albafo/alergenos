@@ -11,7 +11,8 @@
         "h4cc/wkhtmltopdf-amd64": "0.12.x",
         "h4cc/wkhtmltoimage-amd64": "0.12.x",
 		"knplabs/knp-snappy": "0.3.*",
-		"kartik-v/bootstrap-fileinput": "dev-master"
+		"barryvdh/laravel-ide-helper": "~2.0",
+		"doctrine/dbal": "~2.3"
 
 	},
 	"require-dev": {
@@ -40,7 +41,8 @@
 		],
 		"post-update-cmd": [
 			"php artisan clear-compiled",
-			"php artisan optimize"
+        	"php artisan ide-helper:generate",
+        	"php artisan optimize"
 		],
 		"post-create-project-cmd": [
 			"php -r \"copy('.env.example', '.env');\"",

@@ -36,7 +36,7 @@
     var selectedPlato=-1;
     var selectedIng=-1;
     
-    function obtener_platos(id_cat) {
+    function obtener_platos(id_cat){
         
         $.get("{{url('plato/show')}}/"+id_cat, {'_token':'{{csrf_token()}}'}, function(data) {
                selectedPlato=-1;
@@ -68,7 +68,7 @@
            });
     }
     
-    function obtener_ingredientes(id_plato) {
+    function obtener_ingredientes(id_plato){
         $.get("{{url('plato/ingredientes')}}/"+id_plato, {'_token':'{{csrf_token()}}'}, function(data) {
                $("[id^='plato-']").removeClass('selected');
                $("#plato-"+id_plato).addClass('selected');

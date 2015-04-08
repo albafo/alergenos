@@ -114,6 +114,7 @@ return [
 		/*
 		 * Laravel Framework Service Providers...
 		 */
+		'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
         'Barryvdh\Snappy\ServiceProvider',
         'Anhskohbo\NoCaptcha\NoCaptchaServiceProvider',
 		'Illuminate\Foundation\Providers\ArtisanServiceProvider',
