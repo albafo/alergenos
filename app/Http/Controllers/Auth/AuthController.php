@@ -36,6 +36,13 @@ class AuthController extends Controller {
 		$this->middleware('guest', ['except' => 'getLogout']);
 	}
 	
+	public function getLogout() {
+		$this->auth->logout();
+		\Session::flush();
+		return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/');
+		
+	}
+	
 	public function postLogin(Request $request)
 	{
 		$this->validate($request, [

@@ -38,15 +38,30 @@ Route::post('admin/alergenos/nuevo', 'AlergenoController@store');
 Route::get('admin/alergenos/editar/{id}', 'AlergenoController@edit');
 Route::post('admin/alergenos/editar/{id}', 'AlergenoController@update');
 Route::get('admin/alergenos/eliminar/{id}', 'AlergenoController@destroy');
-Route::post('ingredientes/nuevo', 'IngredienteController@store');
+Route::post('ingredientes/nuevo',  [
+    'middleware' => 'admin',
+    'uses' => 'IngredienteController@store'
+]);
 Route::get('ingredientes/find', 'IngredienteController@find');
 Route::get('ingredientes/findWithAlerg', 'IngredienteController@findWithAlerg');
 
 Route::get('ingredientes/show/{id}', 'IngredienteController@show');
-Route::post('ingredientes/editar/{id}', 'IngredienteController@update');
-Route::get('ingredientes/eliminar/{id}', 'IngredienteController@destroy');
-Route::get('admin/usuarios/datatable', 'UsuarioController@usuariosDT');
-Route::get('admin/usuario/{id}', 'HomeController@index');
+Route::post('ingredientes/editar/{id}',  [
+    'middleware' => 'admin',
+    'uses' => 'IngredienteController@update'
+]);
+Route::get('ingredientes/eliminar/{id}', [
+    'middleware' => 'admin',
+    'uses' => 'IngredienteController@destroy'
+]);
+Route::get('admin/usuarios/datatable', [
+    'middleware' => 'admin',
+    'uses' =>'UsuarioController@usuariosDT'
+]);
+Route::get('admin/usuario/{id}', 'UsuarioController@edit');
+Route::get('usuario/datos',  'UsuarioController@edit');
+Route::post('usuario/datos',  'UsuarioController@update');
+Route::get('iconos/{id}/{name}',  'IconoController@show');
 
 
 

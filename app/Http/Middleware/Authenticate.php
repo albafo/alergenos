@@ -45,6 +45,11 @@ class Authenticate {
 		}
 		
 		if($this->auth->user()->tipo=="admin") {
+		
+			if($request->is("admin/usuarios*") || $request->is("usuario/datos*")) {
+				
+				return $next($request);
+			}
 			if($request->is("admin/usuario/*")) {
 				\Session::put("auth-admin", $this->auth->user());
 				$this->auth->loginUsingId($request->id);
@@ -52,6 +57,8 @@ class Authenticate {
 			}
 			return redirect()->guest('admin');
 		}
+		
+		
         
         //Activar cuando esté el envío por mail
         /* 

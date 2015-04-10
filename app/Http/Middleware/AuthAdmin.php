@@ -28,7 +28,7 @@ class AuthAdmin {
 	
 	public function handle($request, Closure $next)
 	{
-		
+	
 		if(\Session::has('auth-admin')) {
 			
 			$auth_admin=\Session::get('auth-admin');

@@ -43,7 +43,19 @@ $(function() {
             { "data": "created_at" },
             { "data": "expired_at" },
             { "data": "status" }
-        ]
+        ],
+        "createdRow": function ( row, data, index ) {
+            
+            if ( data["status"]==1 ) {
+                $('td', row).eq(5).addClass('estado-activo');
+                $('td', row).eq(5).text('Activo');
+            }
+            else {
+                $('td', row).eq(5).addClass('estado-inactivo');
+                $('td', row).eq(5).text('Inactivo');
+            
+            }
+        }
     }); 
     $('#tableUsuarios tbody').on('click', 'tr', function () {
         var id = $(this).attr('id');
