@@ -12,7 +12,7 @@ use App\User;
 class UsuarioController extends Controller {
 	
 	public function __construct() {
-		$this->middleware('auth');
+		$this->middleware('auth', ['except'=>'renew']);
 	}
 	
 	
@@ -80,12 +80,18 @@ class UsuarioController extends Controller {
 		
 		$usuario->nombre=$request->get("nombre");
 		$usuario->apellidos=$request->get("apellidos");
+		$usuario->nombre_establ=$request->get("nombre_establ");
+		$usuario->direccion=$request->get("direccion");
+		$usuario->telefono=$request->get("telefono");
+		
 		
 		if($request->hasFile("icono_estb") && $request->file('icono_estb')->isValid()) {
 			if($usuario->icono_estb!="") {
 				$this->eliminarIcono($usuario);
 			}
-			$this->guardarIcono($usuario, $request);
+			if(!$this->guardarIcono($usuario, $request)) {
+				return redirect('usuario/datos')->withErrors(["Imagen ya existente en el servidor"]);
+			}
 		}
 		else if($request->get("deletedImg")==1) {
 			$this->eliminarIcono($usuario);
@@ -97,20 +103,31 @@ class UsuarioController extends Controller {
 	}
 	
 	public function eliminarIcono($usuario) {
-		if(Storage::exists($usuario->icono_estb)) {
-			Storage::delete($usuario->icono_estb);
-			$usuario->icono_estb="";
+		if(Storage::disk('iconos_estb')->exists($usuario->id."/".$usuario->icono_estb)) {
+			Storage::disk('iconos_estb')->delete($usuario->id."/".$usuario->icono_estb);
 		}
+		$usuario->icono_estb="";
 	}
 	
 	public function guardarIcono($usuario, $request) {
 	
 		$nombreImg=$request->file('icono_estb')->getClientOriginalName();
-		if(Storage::exists("app/iconos/".$usuario->id."/".$nombreImg)) {
-			return redirect('usuario/datos')->withErrors(["Imagen ya existente en el servidor"]);
+		if($usuario->icono_estb && Storage::disk('iconos_estb')->exists($usuario->id."/".$usuario->icono_estb)) {
+			return false;
 		}
-		$request->file('icono_estb')->move(storage_path()."/app/iconos/".$usuario->id, $nombreImg);
-		$usuario->icono_estb="iconos/".$usuario->id."/".$nombreImg;
+		$request->file('icono_estb')->move(public_path()."/iconos-estb/".$usuario->id, $nombreImg);
+		$usuario->icono_estb=$nombreImg;
+		return true;
+	}
+	
+	public function renew() {
+		if(\Auth::guest()){
+			return redirect("auth/login");
+		}
+		if(strtotime(\Auth::user()->expired_at) - time() > env('TIME_ACTIVATE_RENEW')) {
+			return redirect("/home");
+		}
+		echo "Próximamente";
 	}
 
 

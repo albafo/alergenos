@@ -27,9 +27,27 @@ class saveMenu extends Request {
             'nombre' => 'required|min:4|max:255',
             'caducidad'=>'regex:/^[0-3][0-9]\/[0-1][0-9]\/\d{4}$/',
             'descripcion'=>'max:255',
-            'activo'=>'boolean'
+            'activo'=>'boolean',
+            'precio'=>'numeric'
         ];
 	}
+	
+	public function update_request() {
+        
+        
+        $input = array_map('trim', $this->all());
+        if($input['precio']!="") {
+            $input['precio'] = str_replace(',', '.', $input['precio']);
+            $input['precio'] = str_replace('€', '', $input['precio']);
+            $input['precio'] = str_replace('$', '', $input['precio']);
+
+
+        }
+        else {
+            unset($input['precio']);
+        }
+        $this->replace($input);
+    }
     
     
 

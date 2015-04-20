@@ -5,6 +5,8 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Laravel</title>
+	<link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Muli' rel='stylesheet' type='text/css'>
 
 	<link href="{{ asset('/css/app.css') }}" rel="stylesheet">
 	<link href="{{ asset('/css/web.css') }}" rel="stylesheet">
@@ -39,7 +41,7 @@
 		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
 </head>
-<body class="page-{{App\MyRequest::mySegments()}}">
+<body class="page-{{App\MyRequest::mySegments()}} @yield('class-body')">
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -49,27 +51,27 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Laravel</a>
 			</div>
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/') }}">Home</a></li>
+					<li><a href="{{ url('/') }}">{{trans('web.inicio')}}</a></li>
+					
 					@if(!Auth::guest() && Auth::user()->tipo=="user" && Session::has('auth-admin') && Session::get('auth-admin')->tipo=="admin")
-					<li><a href="{{ url('admin/usuarios') }}">Home Admin</a></li>
+					<li><a href="{{ url('admin/usuarios') }}">{{trans('web.admin')}}</a></li>
 					@endif
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
 					@if (Auth::guest())
-						<li><a href="{{ url('/auth/login') }}">Login</a></li>
-						<li><a href="{{ url('/auth/register') }}">Register</a></li>
+						
+						<li><a href="{{ url('/auth/register') }}">{{trans('web.registro')}}</a></li>
 					@else
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->nombre }} <span class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu">
-								<li><a href="{{ url('usuario/datos') }}">Mis datos</a></li>
-								<li><a href="{{ url('/auth/logout') }}">Logout</a></li>
+								<li><a href="{{ url('usuario/datos') }}">{{trans('web.misDatos')}}</a></li>
+								<li><a href="{{ url('/auth/logout') }}">{{trans('web.salir')}}</a></li>
 							</ul>
 						</li>
 					@endif
@@ -77,9 +79,17 @@
 			</div>
 		</div>
 	</nav>
+	<div class="row cabeceraLogo">
+		<div class="col-sm-5 col-sm-offset-1">
+			<h1>CartaONline</h1>
+		</div>
+		<div class="col-sm-6 menuCabecera">
+			@yield('menuCabecera')
+		</div>
+	</div>
      @if (Session::get('ok'))
 						<div class="alert alert-success">
-							<strong>Enhorabuena!</strong><br><br>
+							<strong>{{trans('mensajes.titleCong')}}</strong><br><br>
 							<ul>
 								
 									<li>{{ Session::get('ok')}}</li>

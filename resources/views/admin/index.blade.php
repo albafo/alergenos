@@ -28,6 +28,19 @@
                 </div>
             </div>
         </div>
+        <div clas="row">
+            <div class="col-md-12">
+                <div class="panel panel-default caja-menu ui-sortable-handle caja-link">
+                    @if(Ticket::noReaded()>0)
+                    <div class="numberAlert badge">
+                        {{Ticket::noReaded()}}
+                    </div>
+                    
+                    @endif
+                    <div class="panel-body"><a href="{{url('admin/tickets')}}">Tickets</a></div>
+                </div>
+            </div>
+        </div>
     </div>
 </<div>
 <script>

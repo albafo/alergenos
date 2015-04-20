@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Alergeno;
+use App\Ticket;
 
 class AdminController extends Controller {
 
@@ -36,6 +37,13 @@ class AdminController extends Controller {
 	public function getUsuarios() {
 		return view('admin.usuarios');
 	}
+	
+	public function getTickets() {
+		return view('admin.tickets');
+	}
+	
+
+
 	
 	/**
 	 * Show the form for creating a new resource.

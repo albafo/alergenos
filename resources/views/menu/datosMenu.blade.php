@@ -23,10 +23,10 @@
         </div> 
         <div class="col-sm-6">
             <div class="form-group">
-                <label for="inputCaducidad" class="col-sm-2 control-label">Fecha caducidad</label>
+                <label for="precio" class="col-sm-2 control-label">Precio</label>
                 <div class="col-sm-10">
-                    <?php use App\Librerias\DateFormat\DateSql ?>
-                    <input type='text' class="form-control" id='datetimepicker1' name="caducidad" value="{{DateSql::changeFromSql($menu->caducidad)}}"/>                          
+                    
+                    <input type='text' class="form-control"  name="precio" value="{{$menu->precio}}"/>                          
                 </div>
             </div>
         </div> 

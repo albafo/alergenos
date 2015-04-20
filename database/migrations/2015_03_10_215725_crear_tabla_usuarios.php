@@ -23,6 +23,7 @@ class CrearTablaUsuarios extends Migration {
 			$table->boolean('status')->default(true);
             $table->boolean('confirmed')->default(false);
             $table->string('email_confirmation', 60);
+            $table->string('nombre_establ');
             $table->string('icono_estb');
             $table->timestamp('expired_at');	
 			$table->rememberToken();

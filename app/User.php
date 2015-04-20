@@ -22,7 +22,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['email', 'nombre', 'apellidos', 'password', 'email_confirmation'];
+	protected $fillable = ['email', 'nombre', 'apellidos', 'password', 'email_confirmation', 'nombre_establ'];
+	protected $guarded = ['expired_at'];
 
 	/**
 	 * The attributes excluded from the model's JSON form.
@@ -39,5 +40,23 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     
     public function menus() {
         return $this->hasMany('App\Menu');
+    }
+    
+    public function tickets() {
+    	return $this->hasMany('App\Ticket');
+    }
+    
+    public function platos() {
+    	//\DB::connection()->enableQueryLog();
+
+    	$platos=Plato::whereHas('categoria.menu.usuario', function($query) {
+    		$query->where('user_id', '=', $this->id);
+    	})->get();
+    	//$queries = \DB::getQueryLog();
+    	return ($platos->sortBy('nombre'));
+    	
+    	
+    
+    		
     }
 }

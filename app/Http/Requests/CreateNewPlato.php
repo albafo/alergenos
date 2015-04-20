@@ -31,9 +31,14 @@ class CreateNewPlato extends Request {
     
     public function update_request() {
         
+        
         $input = array_map('trim', $this->all());
         if($input['precio']!="") {
             $input['precio'] = str_replace(',', '.', $input['precio']);
+            $input['precio'] = str_replace('€', '', $input['precio']);
+            $input['precio'] = str_replace('$', '', $input['precio']);
+
+
         }
         else {
             unset($input['precio']);

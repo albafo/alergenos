@@ -38,23 +38,29 @@ class MenuController extends Controller {
         }
         else abort(403);
     }
+
     
-    public function getPreview($id) {
+    public function getPreview($id, $id_plantilla) {
         if($menu=Auth::user()->menus()->find($id)) {
            
-            return view('menu.preview',['menu'=>$menu]);
+            return view('menu.preview-'.$id_plantilla,['menu'=>$menu]);
         }
         else abort(403);
     }
     
-    public function getMenuPdf($id) {
+    
+    
+    public function getMenuPdf($id, $id_plantilla) {
         $snappy = App::make('snappy.pdf');
         //To file
         //$snappy->generateFromHtml('<h1>Bill</h1><p>You owe me money, dude.</p>', '/tmp/bill-123.pdf');
         //$snappy->generate('http://www.github.com', '/tmp/github.pdf');
         //Or output:
         if($menu=Auth::user()->menus()->find($id)) {
-            $view = view('menu.preview',['menu'=>$menu]);
+            
+            
+            
+            $view = view('menu.preview-'.$id_plantilla,['menu'=>$menu]);
           
             //$compiledView = $view->render();
            
@@ -65,12 +71,53 @@ class MenuController extends Controller {
                 200,
                 array(
                     'Content-Type'          => 'application/pdf',
-                    'Content-Disposition'   => 'attachment; filename="file.pdf"'
+                    'Content-Disposition'   => 'attachment; filename="'.$menu->nombre.'.pdf"'
                 )
             );
         }else abort(403);
         
     }
+    
+    public function getExportListado() {
+        $snappy = App::make('snappy.pdf');
+        //To file
+        //$snappy->generateFromHtml('<h1>Bill</h1><p>You owe me money, dude.</p>', '/tmp/bill-123.pdf');
+        //$snappy->generate('http://www.github.com', '/tmp/github.pdf');
+        //Or output:
+        
+            
+            
+            
+            $view = view('menu.listado-ingredientes');
+          
+            //$compiledView = $view->render();
+           
+
+
+            return new Response(
+                $snappy->getOutputFromHtml($view),
+                200,
+                array(
+                    'Content-Type'          => 'application/pdf',
+                    'Content-Disposition'   => 'attachment; filename="listado-ingredientes.pdf"'
+                )
+            );
+      
+        
+    }
+    
+    
+    
+    public function getListadoIngredientes() {
+        
+            
+            
+            
+            return view('menu.listado-ingredientes');
+       
+        
+	    
+	}
 
 	/**
 	 * Show the form for creating a new resource.
@@ -138,12 +185,7 @@ class MenuController extends Controller {
 	public function edit(saveMenu $request, $id)
 	{
         $input = array_map('trim', $request->all());
-        if($input['caducidad']!="") {
-	        $input['caducidad']=DateSql::changeToSql($input['caducidad']);
-        }
-        else {
-            $input['caducidad']=null;
-        }
+        
         if(!isset($input['estado'])) {
             $input['estado']=0;
         }
@@ -176,5 +218,7 @@ class MenuController extends Controller {
         Menu::find($id)->delete();
         return redirect('home')->with('ok', 'Menú eliminado con éxito');;
 	}
+	
+
 
 }

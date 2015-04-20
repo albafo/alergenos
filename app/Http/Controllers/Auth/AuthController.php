@@ -5,6 +5,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use App\Events\NewUser;
+
 
 class AuthController extends Controller {
 
@@ -62,6 +64,26 @@ class AuthController extends Controller {
 					->withErrors([
 						'email' => $this->getFailedLoginMessage(),
 					]);
+	}
+	
+	public function postRegister(Request $request)
+	{
+		$validator = $this->registrar->validator($request->all());
+
+		if ($validator->fails())
+		{
+			$this->throwValidationException(
+				$request, $validator
+			);
+		}
+
+		$this->auth->login($this->registrar->create($request->all()));
+		event(new NewUser($this->auth->user()));
+		return redirect($this->redirectPath());
+	}
+	
+	public function getRenew() {
+		echo "Próximamente";
 	}
 	
 	public function redirectPath(){

@@ -52,6 +52,11 @@ return [
 			'driver' => 'local',
 			'root'   => public_path(),
 		],
+		
+		'iconos_estb' => [
+			'driver' => 'local',
+			'root'   => public_path().'/iconos-estb',
+		],
 
 		's3' => [
 			'driver' => 's3',

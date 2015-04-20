@@ -27,7 +27,7 @@
                     </div>
                 </form>
             </div>
-            <div class="alert alert-danger hidden" id="cajaError">
+            <div class="alert alert-danger hidden cajaError">
                 <strong>Ups!</strong> Hay algún error con el formulario.<br><br>
                 <ul>
 

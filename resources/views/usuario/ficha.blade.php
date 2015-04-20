@@ -85,6 +85,16 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-sm-12">        
+                                <div class="form-group">
+                                    <label for="nombre_establ" class="col-sm-4 control-label">Nombre establecimiento</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="nombre_establ" id="nombre_establ" class="form-control"   value="{{Auth::user()->nombre_establ}}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div> 
                     <div class="col-sm-6">
                         @if(Auth::user()->tipo=="user" && Session::has('auth-admin') && Session::get('auth-admin')->tipo=="admin")
@@ -98,42 +108,85 @@
                         </div>
                         @endif
                         <div class="row">
-                            <div class="form-group">
-                <label for="inputCaducidad" class="col-sm-4 control-label">Icono establecimiento</label>
-                <div class="col-sm-8">
-                    <input id="file_img" type="file" name="icono_estb" accept="image/*" >
-                    <script>
-                    /* Initialize your widget via javascript as follows */
-                    $("#file_img").fileinput({
-                        @if(Auth::user()->icono_estb!="")
-                        initialPreview: [
-                            "<img src='{{asset(Auth::user()->icono_estb)}}' class='file-preview-image'>"
-                        ],
-                        
-                        initialPreviewShowDelete:false,
-                        @endif
-                        overwriteInitial: true,
-                        maxFileSize: 500,
-                        dropZoneEnabled: true,
-                    	previewFileType: "image",
-                    	browseClass: "btn btn-success",
-                    	browseLabel: " Cargar icono",
-                    	browseIcon: '<i class="glyphicon glyphicon-picture"></i>',
-                    	removeClass: "btn btn-danger",
-                    	removeLabel: " Borrar",
-                    	removeIcon: '<i class="glyphicon glyphicon-trash"></i>',
-                    	uploadClass: "btn btn-info",
-                    	showUpload: false,
-                    	uploadAsync: false,
-                    	maxFilesNum: 1,
-                    });
-                    
-                    
-                    </script>
-                </div>
-            </div>
+                            <div class="col-sm-12">        
+                                <div class="form-group">
+                                    <label for="inputCaducidad" class="col-sm-4 control-label">Icono establecimiento</label>
+                                        <div class="col-sm-8">
+                                        <input id="file_img" type="file" name="icono_estb" accept="image/*" >
+                                        <script>
+                                        /* Initialize your widget via javascript as follows */
+                                        $("#file_img").fileinput({
+                                            @if(Auth::user()->icono_estb!="")
+                                            initialPreview: [
+                                                "<img src='{{asset('iconos-estb/'.Auth::user()->id.'/'.Auth::user()->icono_estb)}}' class='file-preview-image'>"
+                                            ],
+                                            
+                                            initialPreviewShowDelete:false,
+                                            @endif
+                                            overwriteInitial: true,
+                                            maxFileSize: 500,
+                                            dropZoneEnabled: true,
+                                        	previewFileType: "image",
+                                        	browseClass: "btn btn-success",
+                                        	browseLabel: " Cargar icono",
+                                        	browseIcon: '<i class="glyphicon glyphicon-picture"></i>',
+                                        	removeClass: "btn btn-danger",
+                                        	removeLabel: " Borrar",
+                                        	removeIcon: '<i class="glyphicon glyphicon-trash"></i>',
+                                        	uploadClass: "btn btn-info",
+                                        	showUpload: false,
+                                        	uploadAsync: false,
+                                        	maxFilesNum: 1,
+                                        });
+                                        
+                                        
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="input-status" class="col-sm-4 control-label">Dirección establecimiento</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="direccion" class="form-control" value="{{Auth::user()->direccion}}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="input-status" class="col-sm-4 control-label">Teléfono establecimiento</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="telefono" class="form-control" value="{{Auth::user()->telefono}}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="caducidad" class="col-sm-4 control-label">Suscripción hasta</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" name="caducidad"  class="form-control"   value="{{DateSql::changeFromSqlTime(Auth::user()->expired_at)}} (UTC/GMT)" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label  class="col-sm-4 control-label"></label>
+                                    <div class="col-sm-8">
+                                        <button id="renovar" class="btn btn-primary @if(strtotime(Auth::user()->expired_at) - time() > env('TIME_ACTIVATE_RENEW')) disabled @endif">Renovar suscripción</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    
                 </div>
                 <div class="row">
                     <div class="col-sm-6 text-center">
@@ -155,6 +208,15 @@ $(function() {
     $('#file_img').on('fileclear', function(event) {
         $('#deletedImg').val(1);
     });
+    
+    @if(strtotime(Auth::user()->expired_at) - time() <= env('TIME_ACTIVATE_RENEW'))
+        $('body').on('click', '#renovar', function (e) {
+            e.preventDefault();
+           alert("Próximamente activaremos la pasarela de pago para poder renovar su suscripción"); 
+        });
+    @endif
+    
+    
 });
 </script>
 @endsection

@@ -22,10 +22,16 @@ class createNewMenu extends Request {
 	 */
 	public function rules()
 	{
+		
 		return [
-        'nombreMenu' => 'required|min:4|max:255'
+        	'nombreMenu' => 'required|min:4|max:255'
+        	
         ];
 	}
+	
+	
+    
+    
     
     
 

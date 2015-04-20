@@ -44,6 +44,7 @@
         $.get("{{url('plato/show')}}/"+id_cat, {'_token':'{{csrf_token()}}'}, function(data) {
                selectedPlato=-1;
                $('#msgIngredientes').text('Seleccione un plato');
+               $('#lista-ingredientes').html('');
                $('#msgIngredientes').removeClass('hidden');
                $('#addIngrediente').addClass('hidden');
                $("[id^='categoria-']").removeClass('selected');
@@ -119,14 +120,15 @@ jQuery(function($) {
     
     $('body').on('click', '#addCat', function() {
         
-        $('#cajaError').addClass('hidden');
+        $('.cajaError').addClass('hidden');
         $('body').off('click', '#myModalSave');
         $('#myModal .modal-title').text('Crear categoría');
         $('#myModal #myModalSave').text('Crear categoría');
         $('#myModalInput').val('');
 
         $('#myModal').modal();
-        
+                $('.cajaError').addClass('hidden');
+
         $('body').on('click', '#myModalSave', function(){
           
             var boton=$(this);
@@ -147,14 +149,14 @@ jQuery(function($) {
                         time:5000
                     });
 				}).fail(function(data) {
-                    $('#cajaError ul').html('');
+                    $('.cajaError ul').html('');
                     if(data.responseJSON !== undefined && data.responseJSON.nombre.length>0) {
-                        $('#cajaError ul').append('<li>'+data.responseJSON.nombre+'</li>');
-                        $('#cajaError').removeClass('hidden');
+                        $('.cajaError ul').append('<li>'+data.responseJSON.nombre+'</li>');
+                        $('.cajaError').removeClass('hidden');
                     }
                     else {
-                        $('#cajaError ul').append('<li>Fallo de conexión. Compruebe su acceso a la red.</li>');
-                        $('#cajaError').removeClass('hidden');
+                        $('.cajaError ul').append('<li>Fallo de conexión. Compruebe su acceso a la red.</li>');
+                        $('.cajaError').removeClass('hidden');
                     }
                     boton.attr('disabled', false);
 
@@ -199,7 +201,7 @@ jQuery(function($) {
     
     $('body').on('click', '.editCat', function(e) {
         e.stopPropagation();
-        $('#cajaError').addClass('hidden');
+        $('.cajaError').addClass('hidden');
 
         var id_cat=$(this).parent().parent().parent().attr('id');
         var text=$(this).parent().parent().parent().find('.panel-body').text();
@@ -210,6 +212,8 @@ jQuery(function($) {
         $('#myModalInput').val(text);
 
         $('#myModal').modal();
+                $('.cajaError').addClass('hidden');
+
         $('body').on('click', '#myModalSave', function(){
             var boton=$(this);
             boton.attr('disabled', true);
@@ -227,14 +231,14 @@ jQuery(function($) {
                     boton.attr('disabled', false);
 
 				}).fail(function(data) {
-                    $('#cajaError ul').html('');
+                    $('.cajaError ul').html('');
                     if(data.responseJSON !== undefined && data.responseJSON.nombre.length>0) {
-                        $('#cajaError ul').append('<li>'+data.responseJSON.nombre+'</li>');
-                        $('#cajaError').removeClass('hidden');
+                        $('.cajaError ul').append('<li>'+data.responseJSON.nombre+'</li>');
+                        $('.cajaError').removeClass('hidden');
                     }
                     else {
-                        $('#cajaError ul').append('<li>Fallo de conexión. Compruebe su acceso a la red.</li>');
-                        $('#cajaError').removeClass('hidden');
+                        $('.cajaError ul').append('<li>Fallo de conexión. Compruebe su acceso a la red.</li>');
+                        $('.cajaError').removeClass('hidden');
                     }
                     boton.attr('disabled', false);
 
@@ -256,6 +260,8 @@ jQuery(function($) {
             $('#myModalPlato .modal-title').text('Crear plato');
             $('#myModalPlato #savePlato').text('Crear plato');
             $('#myModalPlato').modal();
+                    $('.cajaError').addClass('hidden');
+
             $('body').off('click', '#savePlato');
             $('body').on('click', "#savePlato", function() {
                 
@@ -304,7 +310,7 @@ jQuery(function($) {
     
     $('body').on('click', '.editPlato', function(e) {
         e.stopPropagation();
-        $('#cajaError').addClass('hidden');
+        $('.cajaError').addClass('hidden');
         var id_plato=$(this).parent().parent().parent().attr('id');
         id_plato=id_plato.split("-")[1];
         $('body').off('click', '#savePlato');
@@ -314,6 +320,9 @@ jQuery(function($) {
             $('#inputNombrePlato').val(data.nombre);
             $('#inputPrecioPlato').val(data.precio);
             $('#myModalPlato').modal();
+            
+            $('.cajaError').addClass('hidden');
+
             $('body').on('click', '#savePlato', function(){
                 var data=$( "#formPlato" ).serializeArray();
                 data.push({name: '_token', value: '{{csrf_token()}}'});
@@ -423,6 +432,8 @@ jQuery(function($) {
             $('#myModalIng #saveIngrediente').text('Añadir ingrediente');
             
             $('#myModalIng').modal();
+                    $('.cajaError').addClass('hidden');
+
             $('body').off('click', '#saveIngrediente');
             $('body').on('click', "#saveIngrediente", function() {
                 

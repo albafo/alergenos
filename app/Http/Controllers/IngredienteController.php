@@ -1,6 +1,8 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use App\Ticket;
+
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
@@ -189,6 +191,16 @@ class IngredienteController extends Controller {
 		$this->middleware('admin');
 		Ingrediente::find($id)->delete();
 
+	}
+	
+	public function peticion(Request $request) {
+		$this->validate($request, [
+        	'peticion' => 'required'
+    	]);
+    	
+    	$ticket=new Ticket();
+    	$ticket->peticion="Petición de ingredientes: ".$request->get('peticion');
+    	\Auth::user()->tickets()->save($ticket);
 	}
 
 }

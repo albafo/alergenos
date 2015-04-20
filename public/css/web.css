@@ -37,7 +37,7 @@
 }
 
 .caja-menu:hover {
-    background-color:#EAEAEA;
+    background-color:#eee;
     cursor: pointer;
 }
 
@@ -120,14 +120,172 @@
     display:block;
 }
 
-body[class*='page-menu-menu-pdf'] .navbar-default, body[class*='page-menu-preview-'] .navbar-default
+body[class*='page-menu-menu-pdf'] .navbar-default, body[class*='page-menu-preview'] .navbar-default
  {
-    display:none;
+    display:none !important;
 }
 
-body[class*='page-menu-menu-pdf'], body[class*='page-menu-preview-'] .container
+body[class*='page-menu-menu-pdf'], body[class*='page-menu-preview'] .container
  {
      margin-top:20px;
+}
+
+
+
+
+/*PLANTILLA MENU DIARIO*/
+
+.menu-template-1 {
+    background-color:#fff !important;
+    font-family: 'Muli', sans-serif !important;
+    color:#562D30;
+}
+
+.menu-template-1 h1 {
+  font-family: 'Muli', sans-serif !important;
+}
+
+.menu-template-1 .cabeceraLogo {
+    display:none !important;
+}
+
+.menu-template-2 .cabeceraLogo {
+    display:none !important;
+}
+
+.menu-template-1 .nombreRest {
+    font-size:45px;
+    
+}
+
+
+.menu-template-2 {
+    background-color:#fff !important;
+    color:#404040;
+}
+.menu-template-2 .nombreRest {
+    font-size:45px;
+    background-color:#000;
+    color:#fff;
+}
+
+.menu-template-2 .nombreMenu {
+    
+    font-size:35px;
+    margin-top:20px;
+   
+}
+
+.menu-template-2 .categoriaPlato {
+      font-size: 25px;
+      margin-top: 30px;
+      font-weight:bold;
+      border-bottom:1px solid #D6D6D6;
+}
+
+.menu-template-2 .plato {
+    font-size:18px;
+}
+
+.menu-template-2 .precio
+{
+  background-color: #000;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-top: 40px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 50px;
+}
+
+.menu-template-2 .alergeno {
+    display:inline-block;
+      margin-left: 15px;
+      margin-right: 15px;
+}
+
+.menu-template-2 .alergenos {
+      border-top: 1px solid #CECECE;
+      margin-top: 40px;
+      padding-top: 20px;
+}
+
+
+.listado-ingredientes .alergeno {
+    display:inline-block;
+      margin-left: 15px;
+      margin-right: 15px;
+}
+
+.listado-ingredientes .alergenos {
+      border-top: 1px solid #CECECE;
+      margin-top: 40px;
+      padding-top: 20px;
+}
+
+.listado-ingredientes .plato {
+    margin-top:15px;
+}
+
+.listado-ingredientes .cabeceraLogo {
+    display:none !important;
+}
+
+
+
+
+.menu-template-1 .fondoNombreMenu {
+    background-image:url("../img/menu1-fondo-nombre.png");
+    width:489px;
+    height:62px;
+    font-size:30px;
+    color:#fff;
+    padding-top:20px;
+    margin-top: -15px;
+}
+
+.menu-template-1 .categoriaPlato {
+      font-size: 25px;
+      margin-top: 30px;
+}
+
+.menu-template-1 .separadorCategoria {
+    background-image:url("../img/menu1-separador-categorias.png");
+    width:456px;
+    height:26px;
+    margin-top:-5px;
+}
+
+.menu-template-1 .plato {
+    font-size:20px;
+}
+
+.menu-template-1 .precio
+{
+  background-color: #C4D556;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-top: 40px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 50px;
+  max-width:25%;
+}
+
+.menu-template-1 .alergeno {
+    display:inline-block;
+      margin-left: 15px;
+      margin-right: 15px;
+}
+
+.menu-template-1 .alergenos {
+      border-top: 1px solid #CECECE;
+  margin-top: 40px;
+  padding-top: 20px;
 }
 
 
@@ -182,6 +340,20 @@ body[class*='page-menu-menu-pdf'], body[class*='page-menu-preview-'] .container
   vertical-align: bottom;
 }
 
+
+/* centered columns styles */
+.row-centered {
+    text-align:center;
+}
+.col-centered {
+    display:inline-block;
+    float:none;
+    /* reset the text-align */
+    text-align:left;
+    /* inline-block space fix */
+    margin-right:-4px;
+}
+
 /*Caja alergenos*/
 .caja-alergenos {
     margin-top:15px;
@@ -217,4 +389,157 @@ body[class*='page-admin-ingredientes'] #listaIngredientes p:hover {
 
 #tableUsuarios tbody tr {
     cursor:pointer;
+}
+
+.navbar {
+    min-height:25px !important;
+    margin-bottom:0 !important;
+    box-shadow: 0px 0px 7px 2px #111;
+}
+
+.navbar-nav>li>a {
+    padding-top:3px !important;
+    padding-bottom:3px !important;
+}
+
+.navbar-default {
+    background-color:#000 !important;
+    border:none !important;
+    border-radius:0 !important;
+}
+
+.navbar img {
+    max-height:50px !important;
+}
+
+.navbar-brand {
+    padding:0 !important;
+}
+
+.cabeceraLogo {
+    background-image:url('../img/fondo-alergenos-bn.jpg');
+    background-position:0 0;
+    min-height:80px;
+    margin-bottom:40px;
+    box-shadow: 0px 0px 7px 2px #ccc;
+
+}
+
+.panel-default>.panel-heading {
+    background-color:#0081c3 !important;
+    color:#fff !important;
+    font-weight:bold;
+}
+
+body {
+    background-color:#ececec !important;
+    font-family:'Lato' !important;
+}
+
+body h1{
+        font-family:'Lato' !important;
+
+}
+
+.cabeceraLogo {
+    color:#94bb12;
+}
+
+.cabeceraLogo.row {
+    margin-left:0 !important;
+    margin-right: 0 !important;
+}
+
+.caja-menu .nombreMenu {
+    font-size:20px;
+}
+
+.caja-menu .row {
+    line-height:50px;
+}
+
+.caja-menu {
+    transition: 0.5s all;
+  -webkit-transition: 0.5s all;
+  -moz-transition: 0.5s all;
+  -o-transition: 0.5s all;
+}
+
+.menuCabecera {
+    text-align:right;
+}
+
+.menuCabecera .navbar-default {
+    background:none !important;
+    font-size:22px !important;
+    margin-top:25px !important;
+    color:#94bb12 !important;
+}
+
+
+.menuCabecera .navbar-default .navbar-nav>li>a {
+    color:#94bb12 !important;
+}
+
+.navbar-default .navbar-nav  a {
+    color:#fff;
+}
+
+
+
+.menuCabecera .navbar-default .navbar-nav > .active > a {
+    background:none !important;
+    font-weight:bold !important;
+    color:#1193BB !important;
+    padding-bottom:5px;
+    border-bottom:2px solid #1193BB;
+}
+
+.dropdown-menu>li>a {
+    color:#000 !important;
+}
+
+
+.textoLostIng {
+    font-size:17px;
+    margin-bottom:10px;
+}
+
+.numberAlert {
+    position: absolute;
+      top: -5px;
+      left: 8px;
+      background-color: red !important;
+      z-index:100;
+}
+
+
+.ticketRow {
+    padding-top:10px;
+    padding-bottom:10px;
+}
+
+#modalPlantillas .cuerpo a {
+    
+    
+}
+
+#modalPlantillas .cuerpo img{
+    max-width:100%;
+    height:auto;
+    border:1px solid #333;
+}
+
+.page-menu-export-listado .navbar-default{
+    display:none !important;
+    
+}
+
+.page-menu-export-listado .btn{
+    display:none !important;
+    
+}
+
+.page-menu-export-listado {
+    background-color:#fff !important;
 }

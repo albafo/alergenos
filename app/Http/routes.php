@@ -58,10 +58,18 @@ Route::get('admin/usuarios/datatable', [
     'middleware' => 'admin',
     'uses' =>'UsuarioController@usuariosDT'
 ]);
+Route::post('ingredientes/peticion', 'IngredienteController@peticion');
 Route::get('admin/usuario/{id}', 'UsuarioController@edit');
 Route::get('usuario/datos',  'UsuarioController@edit');
 Route::post('usuario/datos',  'UsuarioController@update');
 Route::get('iconos/{id}/{name}',  'IconoController@show');
+Route::get('user/renew',  'UsuarioController@renew');
+Route::get('admin/ticketsTable',  'TicketController@ticketsTable');
+Route::get('admin/ticket/{id}',  'TicketController@getTicket');
+Route::get('admin/ticket/noReaded/{id}',  'TicketController@removeReaded');
+Route::get('admin/ticket/delete/{id}',  'TicketController@remove');
+
+
 
 
 

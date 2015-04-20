@@ -19,4 +19,8 @@ class Ingrediente extends Model {
         return $this->belongsToMany('App\Alergeno');
     
     }
+    
+    public function plato() {
+        return $this->belongsToMany('App\Plato');
+    }
 }

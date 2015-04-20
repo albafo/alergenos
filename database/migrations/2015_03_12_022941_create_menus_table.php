@@ -21,6 +21,8 @@ class CreateMenusTable extends Migration {
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('usuarios')->onDelete('cascade')->onUpdate('cascade');
             $table->boolean('estado')->default(true)->nullable();
+           	$table->decimal('precio', 5, 2)->nullable();
+
 			$table->timestamps();
             $table->softDeletes();
 		});

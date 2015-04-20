@@ -20,7 +20,7 @@
 				<div class="panel panel-default caja-menu" id="menu-{{$menu->id}}">
 					<div class="panel-body">
 						<div class="row">
-							<div class="col-md-6"><strong>{{$menu->nombre}}</strong></div>
+							<div class="col-md-6 nombreMenu"><strong>{{$menu->nombre}}</strong></div>
 							
 	
 							<div class="col-md-6 text-right">Fecha de alta: {{DateSql::changeFromSql($menu->created_at)}}</div>

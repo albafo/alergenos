@@ -44,6 +44,17 @@ class Authenticate {
 			}
 		}
 		
+		if($this->auth->user()->tipo!="admin" && strtotime($this->auth->user()->expired_at)<=time()) {
+			if ($request->ajax())
+			{
+				return response('Unauthorized.', 401);
+			}
+			else
+			{
+				return redirect('user/renew');
+			}
+		}
+		
 		if($this->auth->user()->tipo=="admin") {
 		
 			if($request->is("admin/usuarios*") || $request->is("usuario/datos*")) {
@@ -71,6 +82,8 @@ class Authenticate {
             $this->auth->logout();
             return redirect('auth/login')->withErrors($errors);
         }*/
+        
+        
 
 		return $next($request);
 	}
