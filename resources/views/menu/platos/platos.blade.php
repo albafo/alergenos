@@ -18,6 +18,14 @@
             <div class="modal-body">
                 <form id="formPlato">
                     <div class="form-group">
+                        <select class="form-control" name="platoAdded" id="platosList">
+                          <option value="0">Platos ya añadidos</option>
+                          @foreach(Auth::user()->platos() as $plato)
+                          <option value="{{$plato->id}}">{{$plato->nombre}}</option>
+                          @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
 
                         <input type="text" name="nombre" class="form-control" id="inputNombrePlato" placeholder="Nombre">
                     </div>
@@ -39,4 +47,11 @@
             </div>
         </div>
     </div>
+    <script>
+        $(function() {
+            $('body').on('change', '#platosList', function() {
+                $('#inputNombrePlato').val($(this).find(":selected").text());
+            });
+        });
+    </script>
 </div>

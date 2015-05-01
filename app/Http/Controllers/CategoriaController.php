@@ -126,5 +126,28 @@ class CategoriaController extends Controller {
 	{
 		Categoria::find($id_cat)->delete();
 	}
+	
+	public function idiomas($id_cat) {
+		if(\Auth::id()==Categoria::find($id_cat)->menu->user_id) {
+			$idiomas=array();
+			$i=0;
+			
+			foreach(\Auth::user()->idiomas as $idioma) {
+				$idiomas[$i]["idIdioma"]=$idioma->id;
+				$idiomas[$i]["nombreIdioma"]=$idioma->nombre;
+				$categoria=Categoria::find($id_cat);
+				$idiomas[$i]["traduccion"]="";
+				if($traduccion=$categoria->traduccion()->find($idioma->id))
+					$idiomas[$i]["traduccion"]=$traduccion->pivot->content;
+				
+				$i++;
+			}
+			
+			
+			
+			return \Response::json($idiomas);
+		}
+		else abort(403);
+	}
 
 }

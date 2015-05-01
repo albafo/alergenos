@@ -41,24 +41,42 @@ class PlatoController extends Controller {
 	 */
 	public function store(CreateNewPlato $request, $id_cat)
 	{
-		$plato=new Plato;
-        $plato->fill($request->all());
-        $orden=Categoria::find($id_cat)->platos()->max('orden')+1;
-        $plato->orden=$orden;
-        Categoria::find($id_cat)->platos()->save($plato);
-        $html='<div class="panel panel-default caja-menu" id="plato-'.$plato->id.'">
-                    <div class="editDel">
-                        <div class="editar">
-                            <a href="#"  title="Editar" class="glyphicon glyphicon-pencil editPlato"></a>
+		
+		if($request->has('platoAdded') && $request->get('platoAdded')!=0) {
+		    if(\Auth::id()!=Plato::find($request->get('platoAdded'))->categoria()->first()->menu->user_id) {
+		        abort(403);
+		    }
+		    else {
+		        $plato=Plato::find($request->get('platoAdded'));
+		    }
+		}
+		else {
+    		$plato=new Plato;
+            $plato->nombre=$request->get('nombre');
+            
+            $orden=Categoria::find($id_cat)->platos()->max('orden')+1;
+            $plato->orden=$orden;
+            $plato->save();
+            
+            
+		}
+		$plato->categoria()->attach($id_cat);
+		if($request->has('precio'))
+		    $plato->categorias()->updateExistingPivot($id_cat, ["pecio"=>$request->get('precio')]);
+		            
+		$html='<div class="panel panel-default caja-menu" id="plato-'.$plato->id.'">
+                        <div class="editDel">
+                            <div class="editar">
+                                <a href="#"  title="Editar" class="glyphicon glyphicon-pencil editPlato"></a>
+                            </div>
+                            <div class="borrar">
+                                <a href="#" title="Borrar" class="glyphicon glyphicon-remove delPlato"></a>
+                            </div>
                         </div>
-                        <div class="borrar">
-                            <a href="#" title="Borrar" class="glyphicon glyphicon-remove delPlato"></a>
-                        </div>
-                    </div>
-                    <div class="panel-body">'.$plato->nombre.' - '.$plato->precio.'€</div>
-                </div>';
-        $return['html']=$html;
-        return $return;
+                        <div class="panel-body">'.$plato->nombre.' - '.$plato->categoria()->find($id_cat)->pivot->precio.'€</div>
+                    </div>';
+            $return['html']=$html;
+            return $return;
 	}
 
 	/**
@@ -93,7 +111,7 @@ class PlatoController extends Controller {
 	}
 
     public function showIngredientes($id_plato) {
-        if(\Auth::id()==Plato::find($id_plato)->categoria->menu->user_id)    {
+        if(\Auth::id()==Plato::find($id_plato)->categoria()->first()->menu->user_id)    {
             $ingredientes=Plato::find($id_plato)->ingredientes;
             $html="";
             
@@ -120,7 +138,7 @@ class PlatoController extends Controller {
     /*Devuelve el modelo plato del id dado*/
     
     public function datos($id_plato) {
-        if(\Auth::id()==Plato::find($id_plato)->categoria->menu->user_id)    {
+        if(\Auth::id()==Plato::find($id_plato)->categoria()->first()->menu->user_id)    {
             return Plato::find($id_plato);
         }
         else abort(403);
@@ -145,13 +163,13 @@ class PlatoController extends Controller {
 	 */
 	public function update(Request $request, $id_plato)
 	{
-	    if(\Auth::id()==Plato::find($id_plato)->categoria->menu->user_id)    {
+	    if(\Auth::id()==Plato::find($id_plato)->categoria()->first()->menu->user_id)    {
             $this->validate($request, [
                 'nombre' => 'required|min:4|max:255',
                 'precio' => 'numeric'
             ]);
             $plato=Plato::find($id_plato);
-            $plato->fill($request->all());
+            $plato->fill($request->except('platoAdded'));
             $plato->save();
             return $plato;
         }
@@ -165,15 +183,15 @@ class PlatoController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy(Request $request, $id_plato)
+	public function destroy(Request $request, $id_plato, $id_cat)
 	{
         
-        if(\Auth::id()==Plato::find($id_plato)->categoria->menu->user_id)    {
-            $this->validate($request, [
+        if(\Auth::id()==Plato::find($id_plato)->categoria()->first()->menu->user_id)    {
+            /*$this->validate($request, [
                 'nombre' => 'required|min:4|max:255',
                 'precio' => 'numeric'
-            ]);
-            Plato::find($id_plato)->delete();
+            ]);*/
+            Plato::find($id_plato)->categoria()->detach($id_cat);
         }
         else {
             abort(403);
@@ -199,7 +217,7 @@ class PlatoController extends Controller {
     }
     
     public function addIngrediente($id_plato, $id_ingrediente) {
-        if(\Auth::id()==Plato::find($id_plato)->categoria->menu->user_id) {
+        if(\Auth::id()==Plato::find($id_plato)->categoria()->first()->menu->user_id) {
             $plato=Plato::find($id_plato);
             $return['repeated']=false;
             

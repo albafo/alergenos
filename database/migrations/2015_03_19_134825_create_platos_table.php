@@ -15,10 +15,7 @@ class CreatePlatosTable extends Migration {
 		Schema::create('platos', function(Blueprint $table)
 		{
 			$table->increments('id');
-            $table->integer('categoria_id')->unsigned();
-            $table->foreign('categoria_id')->references('id')->on('categorias');
             $table->string('nombre');
-            $table->decimal('precio', 5, 2)->nullable();
             $table->integer('orden');
 			$table->timestamps();
             $table->softDeletes();

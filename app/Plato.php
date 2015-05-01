@@ -12,7 +12,7 @@ class Plato extends Model {
     private static $alergenosCol;
 
     public function categoria() {
-        return $this->belongsTo('App\Categoria');
+        return $this->belongsToMany('App\Categoria');
     }
     
     public function ingredientes() {

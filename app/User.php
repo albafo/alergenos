@@ -46,17 +46,21 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     	return $this->hasMany('App\Ticket');
     }
     
-    public function platos() {
+    public function platos($id_categoria=null) {
     	//\DB::connection()->enableQueryLog();
 
     	$platos=Plato::whereHas('categoria.menu.usuario', function($query) {
     		$query->where('user_id', '=', $this->id);
+    	})->whereHas('categoria', function($query) use ($id_categoria) {
+    		if($id_categoria)
+    			$query->where('categoria','<>', $id_categoria);
     	})->get();
     	//$queries = \DB::getQueryLog();
     	return ($platos->sortBy('nombre'));
     	
-    	
+    }
     
-    		
+    public function idiomas() {
+    	return $this->hasMany('App\Idioma');
     }
 }

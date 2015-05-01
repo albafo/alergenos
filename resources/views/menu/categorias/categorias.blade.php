@@ -35,8 +35,10 @@
             <div class="modal-body">
                 <div class="form-group">
 
-                    <input type="text" class="form-control" id="myModalInput" placeholder="Inserte nombre">
-
+                    <p> <input type="text" class="form-control" id="myModalInput" placeholder="Inserte nombre"> </p>
+                    <div class="otrosIdiomas">
+                        
+                    </div>
 
 
                 </div>

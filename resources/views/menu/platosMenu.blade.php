@@ -210,44 +210,51 @@ jQuery(function($) {
         $('#myModal .modal-title').text('Editar categoría');
         $('#myModal #myModalSave').text('Reemplazar nombre');
         $('#myModalInput').val(text);
-
-        $('#myModal').modal();
-                $('.cajaError').addClass('hidden');
-
-        $('body').on('click', '#myModalSave', function(){
-            var boton=$(this);
-            boton.attr('disabled', true);
-			if($('#myModalInput').val()!="") {
-				$.post("{{url('categoria/update/'.$menu->id)}}/"+id_cat, {'_token':'{{csrf_token()}}', 'nombre':$('#myModalInput').val()}, function(data) {
-                    //window.location.href = '{{url('menu/datos-menu')}}'+'/'+data.id; 
-                    $('#categoria-'+id_cat+' .panel-body').text($('#myModalInput').val());
-                    $('#myModal').modal('hide');
-                    $('#mensajes-platos-ok').bootstrapAlert({
-                        title:"Enhorabuena!",
-                        messages:['Categoría modificada con éxito'],
-                        type:'success',
-                        time:5000
-                    });
-                    boton.attr('disabled', false);
-
-				}).fail(function(data) {
-                    $('.cajaError ul').html('');
-                    if(data.responseJSON !== undefined && data.responseJSON.nombre.length>0) {
-                        $('.cajaError ul').append('<li>'+data.responseJSON.nombre+'</li>');
-                        $('.cajaError').removeClass('hidden');
-                    }
-                    else {
-                        $('.cajaError ul').append('<li>Fallo de conexión. Compruebe su acceso a la red.</li>');
-                        $('.cajaError').removeClass('hidden');
-                    }
-                    boton.attr('disabled', false);
-
+        $.get("{{url('categoria/idiomas/')}}/"+id_cat, {'_token':'{{csrf_token()}}'}, function(data){
+             $('#myModal .otrosIdiomas p').remove();
+            $.each(data, function( index, idioma ) {
+                  $('#myModal .otrosIdiomas').append('<p><input type="text" class="form-control" value="'+idioma.traduccion+'" name="idioma[]" data-id="'+idioma.idIdioma+'" placeholder="Inserte nombre"></p>')
+            });
+            
+       
+            $('#myModal').modal();
+            $('.cajaError').addClass('hidden');
+    
+            $('body').on('click', '#myModalSave', function(){
+                var boton=$(this);
+                boton.attr('disabled', true);
+    			if($('#myModalInput').val()!="") {
+    				$.post("{{url('categoria/update/'.$menu->id)}}/"+id_cat, {'_token':'{{csrf_token()}}', 'nombre':$('#myModalInput').val()}, function(data) {
+                        //window.location.href = '{{url('menu/datos-menu')}}'+'/'+data.id; 
+                        $('#categoria-'+id_cat+' .panel-body').text($('#myModalInput').val());
+                        $('#myModal').modal('hide');
+                        $('#mensajes-platos-ok').bootstrapAlert({
+                            title:"Enhorabuena!",
+                            messages:['Categoría modificada con éxito'],
+                            type:'success',
+                            time:5000
+                        });
+                        boton.attr('disabled', false);
+    
+    				}).fail(function(data) {
+                        $('.cajaError ul').html('');
+                        if(data.responseJSON !== undefined && data.responseJSON.nombre.length>0) {
+                            $('.cajaError ul').append('<li>'+data.responseJSON.nombre+'</li>');
+                            $('.cajaError').removeClass('hidden');
+                        }
+                        else {
+                            $('.cajaError ul').append('<li>Fallo de conexión. Compruebe su acceso a la red.</li>');
+                            $('.cajaError').removeClass('hidden');
+                        }
+                        boton.attr('disabled', false);
+    
+                        
+                    }, "json");
+                        
                     
-                }, "json");
-                    
-                
-			}
-        });
+    			}
+            });
+        }, "json");
     });
     
     $('body').on('click', "[id^='categoria-']", function(e) {
@@ -259,8 +266,12 @@ jQuery(function($) {
         if(selectedCat!=-1) {
             $('#myModalPlato .modal-title').text('Crear plato');
             $('#myModalPlato #savePlato').text('Crear plato');
+            $('#myModalPlato #platosList').removeClass('hidden');
+            $('#myModalPlato #platosList').val(0);
+            $('#inputNombrePlato').val("");
+            $('#inputPrecioPlato').val("");
             $('#myModalPlato').modal();
-                    $('.cajaError').addClass('hidden');
+            $('.cajaError').addClass('hidden');
 
             $('body').off('click', '#savePlato');
             $('body').on('click', "#savePlato", function() {
@@ -319,6 +330,7 @@ jQuery(function($) {
         $.get("{{url('plato/datos/')}}/"+id_plato, {'_token':'{{csrf_token()}}'}, function(data){
             $('#inputNombrePlato').val(data.nombre);
             $('#inputPrecioPlato').val(data.precio);
+            $('#myModalPlato #platosList').addClass('hidden');
             $('#myModalPlato').modal();
             
             $('.cajaError').addClass('hidden');
@@ -328,7 +340,7 @@ jQuery(function($) {
                 data.push({name: '_token', value: '{{csrf_token()}}'});
                 $.post("{{url('plato/update')}}/"+id_plato, data,
                 function(data) {
-                    obtener_platos(data.categoria_id);
+                    obtener_platos(selectedCat);
                     $('#myModalPlato').modal('hide');
                     $('#mensajes-platos-ok').bootstrapAlert({
                         title:"Enhorabuena!",
@@ -364,7 +376,7 @@ jQuery(function($) {
         id_plato=id_plato.split("-")[1];
         bootbox.confirm("¿Estás seguro de eliminar este plato?", function(result) {
             if(result) {
-                $.post("{{url('plato/destroy')}}/"+id_plato, {'_token':'{{csrf_token()}}'}, function(data) {
+                $.post("{{url('plato/destroy')}}/"+id_plato+"/"+selectedCat, {'_token':'{{csrf_token()}}'}, function(data) {
                     $('#plato-'+id_plato).remove();
                     $('#mensajes-platos-ok').bootstrapAlert({
                         title:"Enhorabuena!",
