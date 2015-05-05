@@ -24,11 +24,15 @@ Route::post('categoria/destroy/{id_menu}/{id_cat}', 'CategoriaController@destroy
 Route::get('categoria/idiomas/{id_cat}', 'CategoriaController@idiomas');
 Route::get('plato/show/{id_cat}', 'PlatoController@show');
 Route::post('plato/store/{id_cat}', 'PlatoController@store');
-Route::get('plato/datos/{id_plato}', 'PlatoController@datos');
+Route::get('plato/datos/{id_plato}/{id_cat}', 'PlatoController@datos');
 Route::post('plato/update/{id_plato}', 'PlatoController@update');
+Route::post('plato/update/{id_plato}/{id_cat}', 'PlatoController@update');
+
 Route::post('plato/destroy/{id_plato}/{id_cat}', 'PlatoController@destroy');
 Route::post('plato/reordenar/{id_cat}', 'PlatoController@reordenar');
 Route::get('plato/ingredientes/{id_plato}', 'PlatoController@showIngredientes');
+Route::get('plato/idiomas/{id_plato}', 'PlatoController@idiomas');
+
 Route::get('ingrediente/buscar-letra/{char}', 'IngredienteController@showByChar');
 Route::get('ingrediente/buscar-letra-alerg/{char}', 'IngredienteController@showByCharAlerg');
 
@@ -69,6 +73,11 @@ Route::get('admin/ticketsTable',  'TicketController@ticketsTable');
 Route::get('admin/ticket/{id}',  'TicketController@getTicket');
 Route::get('admin/ticket/noReaded/{id}',  'TicketController@removeReaded');
 Route::get('admin/ticket/delete/{id}',  'TicketController@remove');
+Route::get('idiomas',  'IdiomaController@getIndex');
+Route::post('idioma/nuevo',  'IdiomaController@postNuevo');
+Route::get('idioma/editar/{id}',  'IdiomaController@getEditar');
+Route::get('idioma/borrar/{id}',  'IdiomaController@getBorrar');
+
 
 
 

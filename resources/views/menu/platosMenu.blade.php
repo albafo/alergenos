@@ -125,7 +125,7 @@ jQuery(function($) {
         $('#myModal .modal-title').text('Crear categoría');
         $('#myModal #myModalSave').text('Crear categoría');
         $('#myModalInput').val('');
-
+        $('input').val('');
         $('#myModal').modal();
                 $('.cajaError').addClass('hidden');
 
@@ -134,8 +134,11 @@ jQuery(function($) {
             var boton=$(this);
 			if($('#myModalInput').val()!="") {
                 boton.attr('disabled', true);
+                var data= $('#formCat').serializeArray();
+               
+                data.push({name: '_token', value: '{{csrf_token()}}'});
 
-				$.post("{{url('categoria/store/'.$menu->id)}}", {'_token':'{{csrf_token()}}', 'nombre':$('#myModalInput').val()}, function(data) {
+				$.post("{{url('categoria/store/'.$menu->id)}}", data, function(data) {
                     //window.location.href = '{{url('menu/datos-menu')}}'+'/'+data.id; 
                     $('#lista-categorias').append(data.html);
                     $('#noCat').addClass('hidden');
@@ -213,7 +216,9 @@ jQuery(function($) {
         $.get("{{url('categoria/idiomas/')}}/"+id_cat, {'_token':'{{csrf_token()}}'}, function(data){
              $('#myModal .otrosIdiomas p').remove();
             $.each(data, function( index, idioma ) {
-                  $('#myModal .otrosIdiomas').append('<p><input type="text" class="form-control" value="'+idioma.traduccion+'" name="idioma[]" data-id="'+idioma.idIdioma+'" placeholder="Inserte nombre"></p>')
+                  $('#myModal .otrosIdiomas').append('\
+                  <p>'+idioma.nombreIdioma+'</p>\
+                  <p><input type="text" class="form-control" value="'+idioma.traduccion+'" name="idioma['+idioma.idIdioma+']" data-id="'+idioma.idIdioma+'" placeholder="'+idioma.nombreIdioma+'"></p>')
             });
             
        
@@ -224,7 +229,10 @@ jQuery(function($) {
                 var boton=$(this);
                 boton.attr('disabled', true);
     			if($('#myModalInput').val()!="") {
-    				$.post("{{url('categoria/update/'.$menu->id)}}/"+id_cat, {'_token':'{{csrf_token()}}', 'nombre':$('#myModalInput').val()}, function(data) {
+    			    var data= $('#formCat').serializeArray();
+               
+                    data.push({name: '_token', value: '{{csrf_token()}}'});
+    				$.post("{{url('categoria/update/'.$menu->id)}}/"+id_cat, data, function(data) {
                         //window.location.href = '{{url('menu/datos-menu')}}'+'/'+data.id; 
                         $('#categoria-'+id_cat+' .panel-body').text($('#myModalInput').val());
                         $('#myModal').modal('hide');
@@ -270,6 +278,7 @@ jQuery(function($) {
             $('#myModalPlato #platosList').val(0);
             $('#inputNombrePlato').val("");
             $('#inputPrecioPlato').val("");
+            $('#myModalPlato .otrosIdiomas p input').val('');
             $('#myModalPlato').modal();
             $('.cajaError').addClass('hidden');
 
@@ -325,47 +334,55 @@ jQuery(function($) {
         var id_plato=$(this).parent().parent().parent().attr('id');
         id_plato=id_plato.split("-")[1];
         $('body').off('click', '#savePlato');
-        $('#myModalPlato #myModalLabel').text('Editar categoría');
+        $('#myModalPlato #myModalLabel').text('Editar plato');
         $('#myModalPlato #myModalSave').text('Reemplazar nombre');
-        $.get("{{url('plato/datos/')}}/"+id_plato, {'_token':'{{csrf_token()}}'}, function(data){
+        $.get("{{url('plato/datos/')}}/"+id_plato+"/"+selectedCat, {'_token':'{{csrf_token()}}'}, function(data){
             $('#inputNombrePlato').val(data.nombre);
-            $('#inputPrecioPlato').val(data.precio);
+            $('#inputPrecioPlato').val(data.categoria[0].pivot.precio);
             $('#myModalPlato #platosList').addClass('hidden');
-            $('#myModalPlato').modal();
+            $.get("{{url('plato/idiomas/')}}/"+id_plato, {'_token':'{{csrf_token()}}'}, function(data){
+                $('#myModalPlato .otrosIdiomas p').remove();
+                $.each(data, function( index, idioma ) {
+                      $('#myModalPlato .otrosIdiomas').append('\
+                      <p>'+idioma.nombreIdioma+'</p>\
+                      <p><input type="text" class="form-control" value="'+idioma.traduccion+'" name="idioma['+idioma.idIdioma+']" data-id="'+idioma.idIdioma+'" placeholder="'+idioma.nombreIdioma+'"></p>')
+                });
+                $('#myModalPlato').modal();
             
-            $('.cajaError').addClass('hidden');
-
-            $('body').on('click', '#savePlato', function(){
-                var data=$( "#formPlato" ).serializeArray();
-                data.push({name: '_token', value: '{{csrf_token()}}'});
-                $.post("{{url('plato/update')}}/"+id_plato, data,
-                function(data) {
-                    obtener_platos(selectedCat);
-                    $('#myModalPlato').modal('hide');
-                    $('#mensajes-platos-ok').bootstrapAlert({
-                        title:"Enhorabuena!",
-                        messages:['Plato editado con éxito'],
-                        type:'success',
-                        time:5000
-                    });
-                }).fail(function(data){
-                    if(data.responseJSON!==undefined) {
-                        ajax_errors(data.responseJSON);
-                        $('#myModalPlato').modal('hide');
-
-                    }
-                    else {
+                $('.cajaError').addClass('hidden');
+    
+                $('body').on('click', '#savePlato', function(){
+                    var data=$( "#formPlato" ).serializeArray();
+                    data.push({name: '_token', value: '{{csrf_token()}}'});
+                    $.post("{{url('plato/update')}}/"+id_plato+"/"+selectedCat, data,
+                    function(data) {
+                        obtener_platos(selectedCat);
                         $('#myModalPlato').modal('hide');
                         $('#mensajes-platos-ok').bootstrapAlert({
-                            title:"Error!",
-                            messages:['Error al conectar con el servidor'],
-                            type:'danger',
+                            title:"Enhorabuena!",
+                            messages:['Plato editado con éxito'],
+                            type:'success',
                             time:5000
                         });
-                    }
+                    }).fail(function(data){
+                        if(data.responseJSON!==undefined) {
+                            ajax_errors(data.responseJSON);
+                            $('#myModalPlato').modal('hide');
+    
+                        }
+                        else {
+                            $('#myModalPlato').modal('hide');
+                            $('#mensajes-platos-ok').bootstrapAlert({
+                                title:"Error!",
+                                messages:['Error al conectar con el servidor'],
+                                type:'danger',
+                                time:5000
+                            });
+                        }
+                        
+                    });
                     
                 });
-                
             });
         });
     });
@@ -496,7 +513,9 @@ jQuery(function($) {
     
     $('body').on('click', '#myModalIng #saveIngrediente', function(e) {
         if(selectedPlato!=-1 && selectedIng!=-1) {
-            $.post("{{url('plato/add-ingrediente')}}/"+selectedPlato+"/"+selectedIng, {'_token':'{{csrf_token()}}'}, function(data){
+             var data=$( "#formPlato" ).serializeArray();
+            data.push({name: '_token', value: '{{csrf_token()}}'});
+            $.post("{{url('plato/add-ingrediente')}}/"+selectedPlato+"/"+selectedIng, data, function(data){
                 if(data.repeated) {
                    $('#myModalIng').modal('hide');
                    $('#mensajes-platos-ok').bootstrapAlert({

@@ -49,9 +49,22 @@ class CategoriaController extends Controller {
   
         $categoria=new Categoria();
         $categoria->nombre=$request->input('nombre');
+        
+        
+        
+        
+        
         $orden=Menu::find($id_menu)->categorias()->max('orden')+1;
         $categoria->orden=$orden;
         Menu::find($id_menu)->categorias()->save($categoria);
+        
+        
+        if (is_array($request->get('idioma'))) {
+    		foreach($request->get('idioma') as $indexIdioma=>$traduccion) {
+            	
+            	$categoria->traduccion()->attach($indexIdioma, ['table_name'=>$categoria->getTable(), 'content' => $traduccion]);
+            }
+	    }
         
         $return['html']='<div class="panel panel-default caja-menu" id="categoria-'.$categoria->id.'">
                     <div class="editDel">
@@ -113,6 +126,24 @@ class CategoriaController extends Controller {
 
 		$categoria=Menu::find($id_menu)->categorias()->find($id_cat);
         $categoria->nombre=$request->input('nombre');
+        if (is_array($request->get('idioma'))) {
+	        foreach($request->get('idioma') as $indexIdioma=>$traduccion) {
+	        	
+	        	if($traduccion) {
+	        		
+	        		if(!$categoria->hasTraduccion($indexIdioma)) {
+	        			$categoria->traduccion()->attach($indexIdioma, ['table_name'=>$categoria->getTable(), 'content' => $traduccion]);
+	        		}
+	        		
+	        		else $categoria->traduccion()->updateExistingPivot($indexIdioma, ['content'=>$traduccion]);
+	        	}
+	        	else {
+	        		$categoria->traduccion()->detach($indexIdioma);
+	        	}
+	        
+	        }
+        }
+        
         $categoria->save();
 	}
 

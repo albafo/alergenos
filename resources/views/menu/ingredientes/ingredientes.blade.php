@@ -41,6 +41,14 @@
                 <div class="row text-center" id="listaIngredientesModal">
                     <span>No ha seleccionado ninguna letra</span>
                 </div>
+                <form id="idiomasIngredientes">
+                <div class="otrosIdiomas">
+                        @foreach(Auth::user()->idiomas as $idioma) 
+                            <p>{{$idioma->nombre}}</p>
+                            <p><input type="text" class="form-control" name="idioma[{{$idioma->id}}]" data-id="{{$idioma->id}}" placeholder="{{$idioma->nombre}}"> </p>
+                        @endforeach
+                </div>
+                </form>
                 
             </div>
             <div class="alert alert-danger hidden cajaError" >

@@ -26,8 +26,14 @@ class Categoria extends Model {
             ->withPivot('table_name')
             ->wherePivot('table_name', '=', $this->getTable());
             
-            
-        
+    }
+    
+    public function hasTraduccion($idioma_id) {
+         return ! is_null(
+        $this->traduccion()
+             ->where('idioma_id', $idioma_id)
+             ->first()
+        );
     }
 
 

@@ -28,31 +28,37 @@
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Editar categoría</h4>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-
-                    <p> <input type="text" class="form-control" id="myModalInput" placeholder="Inserte nombre"> </p>
-                    <div class="otrosIdiomas">
-                        
+            <form id="formCat">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Editar categoría</h4>
+                </div>
+                <div class="modal-body">
+                    
+                    <div class="form-group">
+    
+                        <p> <input type="text" class="form-control" id="myModalInput" name=nombre placeholder="Inserte nombre"> </p>
+                        <div class="otrosIdiomas">
+                            @foreach(Auth::user()->idiomas as $idioma) 
+                                <p>{{$idioma->nombre}}</p>
+                                <p><input type="text" class="form-control" name="idioma[{{$idioma->id}}]" data-id="{{$idioma->id}}" placeholder="{{$idioma->nombre}}"> </p>
+                            @endforeach
+                        </div>
+    
+    
                     </div>
-
-
+                    <div class="alert alert-danger hidden cajaError" >
+                        <strong>Ups!</strong> Hay algún error con el formulario.<br><br>
+                        <ul>
+    
+                        </ul>
+                    </div>
                 </div>
-                <div class="alert alert-danger hidden cajaError" >
-                    <strong>Ups!</strong> Hay algún error con el formulario.<br><br>
-                    <ul>
-
-                    </ul>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" id="myModalSave">Guardar cambios</button>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" id="myModalSave">Guardar cambios</button>
-            </div>
+            </form>
         </div>
     </div>
 </div>

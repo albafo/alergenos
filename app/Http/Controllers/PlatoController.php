@@ -61,8 +61,20 @@ class PlatoController extends Controller {
             
 		}
 		$plato->categoria()->attach($id_cat);
+		
 		if($request->has('precio'))
-		    $plato->categorias()->updateExistingPivot($id_cat, ["pecio"=>$request->get('precio')]);
+		    $plato->categoria()->updateExistingPivot($id_cat, ["precio"=>$request->get('precio')]);
+		    
+		    
+		if (is_array($request->get('idioma'))) {
+    		foreach($request->get('idioma') as $indexIdioma=>$traduccion) {
+            	
+            	$plato->traduccion()->attach($indexIdioma, ['table_name'=>$plato->getTable(), 'content' => $traduccion]);
+            }
+	    }
+		
+		
+	
 		            
 		$html='<div class="panel panel-default caja-menu" id="plato-'.$plato->id.'">
                         <div class="editDel">
@@ -73,7 +85,7 @@ class PlatoController extends Controller {
                                 <a href="#" title="Borrar" class="glyphicon glyphicon-remove delPlato"></a>
                             </div>
                         </div>
-                        <div class="panel-body">'.$plato->nombre.' - '.$plato->categoria()->find($id_cat)->pivot->precio.'€</div>
+                        <div class="panel-body">'.$plato->nombre.' - '.$plato->categoria()->pivot->precio.'€</div>
                     </div>';
             $return['html']=$html;
             return $return;
@@ -91,6 +103,7 @@ class PlatoController extends Controller {
             $html="";
             
             foreach($platos as $plato) {
+            
                 $html.='<div class="panel panel-default caja-menu" id="plato-'.$plato->id.'">
                     <div class="editDel">
                         <div class="editar">
@@ -100,7 +113,7 @@ class PlatoController extends Controller {
                             <a href="#" title="Borrar" class="glyphicon glyphicon-remove delPlato"></a>
                         </div>
                     </div>
-                    <div class="panel-body">'.$plato->nombre.' - '.$plato->precio.'€</div>
+                    <div class="panel-body">'.$plato->nombre.' - '.$plato->categoria->find($id_cat)->pivot->precio.'€</div>
                 </div>';
             }
             $return['html']=$html;
@@ -137,9 +150,11 @@ class PlatoController extends Controller {
     
     /*Devuelve el modelo plato del id dado*/
     
-    public function datos($id_plato) {
+    public function datos($id_plato, $id_cat) {
         if(\Auth::id()==Plato::find($id_plato)->categoria()->first()->menu->user_id)    {
-            return Plato::find($id_plato);
+            $plato=Plato::find($id_plato);
+            $plato->categoria->find($id_cat);
+            return $plato;
         }
         else abort(403);
     }
@@ -161,7 +176,7 @@ class PlatoController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update(Request $request, $id_plato)
+	public function update(Request $request, $id_plato, $id_cat)
 	{
 	    if(\Auth::id()==Plato::find($id_plato)->categoria()->first()->menu->user_id)    {
             $this->validate($request, [
@@ -169,7 +184,28 @@ class PlatoController extends Controller {
                 'precio' => 'numeric'
             ]);
             $plato=Plato::find($id_plato);
-            $plato->fill($request->except('platoAdded'));
+            $plato->nombre=$request->get('nombre');
+            
+            $plato->categoria()->updateExistingPivot($id_cat, ["precio"=>$request->get("precio")]);
+            
+            if (is_array($request->get('idioma'))) {
+	            foreach($request->get('idioma') as $indexIdioma=>$traduccion) {
+	        	
+	        	    if($traduccion) {
+	        		
+	        		    if(!$plato->hasTraduccion($indexIdioma)) {
+	        			    $plato->traduccion()->attach($indexIdioma, ['table_name'=>$plato->getTable(), 'content' => $traduccion]);
+	        		    }
+	        		
+	        		    else $plato->traduccion()->updateExistingPivot($indexIdioma, ['content'=>$traduccion]);
+	        	    }
+	        	    else {
+	        		    $plato->traduccion()->detach($indexIdioma);
+	        	    }
+	        
+	            }
+            }
+            
             $plato->save();
             return $plato;
         }
@@ -223,6 +259,7 @@ class PlatoController extends Controller {
             
             if(!$plato->ingredientes->contains($id_ingrediente)) {
                 $plato->ingredientes()->attach($id_ingrediente);
+                
             }
             else {
                 $return['repeated']=true;
@@ -244,5 +281,30 @@ class PlatoController extends Controller {
             abort(403);
         }
     }
+    
+    
+    public function idiomas($id_plato) {
+		if(\Auth::id()==Plato::find($id_plato)->categoria()->first()->menu->user_id) {
+			$idiomas=array();
+			$i=0;
+			
+			foreach(\Auth::user()->idiomas as $idioma) {
+				$idiomas[$i]["idIdioma"]=$idioma->id;
+				$idiomas[$i]["nombreIdioma"]=$idioma->nombre;
+				$plato=Plato::find($id_plato);
+				$idiomas[$i]["traduccion"]="";
+				if($traduccion=$plato->traduccion()->find($idioma->id))
+					$idiomas[$i]["traduccion"]=$traduccion->pivot->content;
+				
+				$i++;
+			}
+			
+			
+			
+			return \Response::json($idiomas);
+		}
+		else abort(403);
+	}
+
 
 }

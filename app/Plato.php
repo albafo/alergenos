@@ -12,7 +12,7 @@ class Plato extends Model {
     private static $alergenosCol;
 
     public function categoria() {
-        return $this->belongsToMany('App\Categoria');
+        return $this->belongsToMany('App\Categoria')->withPivot('precio');
     }
     
     public function ingredientes() {
@@ -30,6 +30,24 @@ class Plato extends Model {
         }
         return $c->unique();        
 
+    }
+    
+     public function traduccion() {
+    
+        
+            return $this->belongsToMany('App\Idioma', 'content_idiomas', 'content_id', 'idioma_id')
+            ->withPivot('content')
+            ->withPivot('table_name')
+            ->wherePivot('table_name', '=', $this->getTable());
+            
+    }
+    
+    public function hasTraduccion($idioma_id) {
+         return ! is_null(
+        $this->traduccion()
+             ->where('idioma_id', $idioma_id)
+             ->first()
+        );
     }
 
 }
