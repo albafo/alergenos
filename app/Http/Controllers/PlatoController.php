@@ -85,7 +85,7 @@ class PlatoController extends Controller {
                                 <a href="#" title="Borrar" class="glyphicon glyphicon-remove delPlato"></a>
                             </div>
                         </div>
-                        <div class="panel-body">'.$plato->nombre.' - '.$plato->categoria()->pivot->precio.'€</div>
+                        <div class="panel-body">'.$plato->nombre.' - '.$plato->categoria->find($id_cat)->pivot->precio.'€</div>
                     </div>';
             $return['html']=$html;
             return $return;
