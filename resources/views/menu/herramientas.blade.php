@@ -52,6 +52,10 @@
               <div class="col-md-6">
                    <a href="#" data-index="2"><img src="{{asset('img/plantilla-2.jpg')}}"></a>    
               </div>
+              
+              <div class="col-md-6">
+                   <a href="#" data-index="3"><img src="{{asset('img/plantilla-3.png')}}"></a>    
+              </div>
           </div>
            
       </div>

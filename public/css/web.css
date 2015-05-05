@@ -149,15 +149,16 @@ body[class*='page-menu-menu-pdf'], body[class*='page-menu-preview'] .container
     display:none !important;
 }
 
-.menu-template-2 .cabeceraLogo {
-    display:none !important;
-}
+
 
 .menu-template-1 .nombreRest {
     font-size:45px;
     
 }
 
+.menu-template-2 .cabeceraLogo {
+    display:none !important;
+}
 
 .menu-template-2 {
     background-color:#fff !important;
@@ -210,6 +211,39 @@ body[class*='page-menu-menu-pdf'], body[class*='page-menu-preview'] .container
       border-top: 1px solid #CECECE;
       margin-top: 40px;
       padding-top: 20px;
+}
+
+
+/*PLANTILLAS CARTA*/
+
+
+
+.menu-template-3 .cabeceraLogo{
+    display:none !important;
+}
+
+.menu-template-3 {
+    background-color:#fff !important;
+    color:#404040;
+}
+
+.menu-template-3 .nota-alergenos {
+    font-size:16px;
+    text-transform:uppercase;
+}
+
+.menu-template-3 .nombreRestaurante {
+    margin-top:30px;
+    font-size:20px;
+    color:#800007;
+    text-transform:uppercase;
+    font-weight:bold;
+}
+
+.menu-template-3 .categoriaPlato {
+    margin-top:15px;
+    margin-bottom:15px;
+    font-size:20px;
 }
 
 
@@ -543,3 +577,5 @@ body h1{
 .page-menu-export-listado {
     background-color:#fff !important;
 }
+
+

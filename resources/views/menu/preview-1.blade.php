@@ -12,8 +12,9 @@ menu-template-1
              @if(Auth::user()->icono_estb)
             <div class="row">
                 <div class="col-md-12" >
+                  
                     <img src="{{asset('iconos-estb/'.Auth::user()->id.'/'.Auth::user()->icono_estb)}}" style="max-width:100%; max-height:100px">
-                    
+                   
                 </div>
             </div>
             @endif
