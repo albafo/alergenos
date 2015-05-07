@@ -40,17 +40,17 @@ class MenuController extends Controller {
     }
 
     
-    public function getPreview($id, $id_plantilla) {
+    public function getPreview($id, $id_plantilla, $traduccion) {
         if($menu=Auth::user()->menus()->find($id)) {
-           
-            return view('menu.preview-'.$id_plantilla,['menu'=>$menu]);
+          
+            return view('menu.preview-'.$id_plantilla,['menu'=>$menu, 'traduccion'=>$traduccion]);
         }
         else abort(403);
     }
     
     
     
-    public function getMenuPdf($id, $id_plantilla) {
+    public function getMenuPdf($id, $id_plantilla, $traduccion) {
         $snappy = App::make('snappy.pdf');
         //To file
         //$snappy->generateFromHtml('<h1>Bill</h1><p>You owe me money, dude.</p>', '/tmp/bill-123.pdf');
@@ -60,7 +60,7 @@ class MenuController extends Controller {
             
             
             
-            $view = view('menu.preview-'.$id_plantilla,['menu'=>$menu]);
+            $view = view('menu.preview-'.$id_plantilla,['menu'=>$menu, 'traduccion'=>$traduccion]);
           
             //$compiledView = $view->render();
            

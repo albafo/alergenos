@@ -38,6 +38,18 @@ menu-template-1
             <div class="row">
                 <div class="col-md-12 categoriaPlato">
                     {{$categoria->nombre}}
+                    @if($traduccion)
+                        
+                        @foreach(Auth::user()->idiomas as $idioma) 
+                       
+                            @if($categoria->hasTraduccion($idioma->id))
+                                - {{ $categoria->traduccion()->find($idioma->id)->pivot->content }}
+                            @endif
+                            
+                        @endforeach
+                        
+                    
+                    @endif
                 </div>
             </div>
            
@@ -51,6 +63,20 @@ menu-template-1
                     @foreach($plato->alergenos() as $alergeno)
                     <span><img height="40" src="{{asset($alergeno->img)}}" alt="{{$alergeno->nombre}}"></span>
                     @endforeach
+                    
+                    @if($traduccion)
+                        <br><span class="platosTraduccion">(
+                        @foreach(Auth::user()->idiomas as $idioma) 
+                       
+                            @if($plato->hasTraduccion($idioma->id))
+                                 <span class="traduccion">{{ $plato->traduccion()->find($idioma->id)->pivot->content }}</span>
+                            @endif
+                            
+                        @endforeach
+                        )</span>
+                    
+                    @endif
+                    
                 </div>
             </div>
             @endforeach

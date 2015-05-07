@@ -135,6 +135,8 @@ body[class*='page-menu-menu-pdf'], body[class*='page-menu-preview'] .container
 
 /*PLANTILLA MENU DIARIO*/
 
+
+
 .menu-template-1 {
     background-color:#fff !important;
     font-family: 'Muli', sans-serif !important;
@@ -156,6 +158,18 @@ body[class*='page-menu-menu-pdf'], body[class*='page-menu-preview'] .container
     
 }
 
+.menu-template-1 .platosTraduccion {
+    font-size:15px;
+}
+
+.menu-template-1 span.traduccion:last-child:after {
+  content: " " !important;
+}
+
+.menu-template-1 span.traduccion:after {
+  content: ",";
+}
+
 .menu-template-2 .cabeceraLogo {
     display:none !important;
 }
@@ -164,6 +178,12 @@ body[class*='page-menu-menu-pdf'], body[class*='page-menu-preview'] .container
     background-color:#fff !important;
     color:#404040;
 }
+
+.menu-template-2 .platosTraduccion {
+    font-size:14px;
+}
+
+
 .menu-template-2 .nombreRest {
     font-size:45px;
     background-color:#000;
@@ -186,6 +206,7 @@ body[class*='page-menu-menu-pdf'], body[class*='page-menu-preview'] .container
 
 .menu-template-2 .plato {
     font-size:18px;
+    margin-top:25px;
 }
 
 .menu-template-2 .precio
@@ -212,6 +233,15 @@ body[class*='page-menu-menu-pdf'], body[class*='page-menu-preview'] .container
       margin-top: 40px;
       padding-top: 20px;
 }
+
+.menu-template-2 span.traduccion:last-child:after {
+  content: " " !important;
+}
+
+.menu-template-2 span.traduccion:after {
+  content: ",";
+}
+
 
 
 /*PLANTILLAS CARTA*/
@@ -267,6 +297,17 @@ body[class*='page-menu-menu-pdf'], body[class*='page-menu-preview'] .container
     display:none !important;
 }
 
+.listado-ingredientes .nombreRest {
+    font-size:25px;
+    font-weight:bold;
+    border-top:1px solid #ccc;
+    border-bottom:1px solid #ccc;
+    padding-bottom:5px;
+    padding-top:5px;
+    margin-top:15px;
+    margin-bottom:15px;
+}
+
 
 
 
@@ -294,6 +335,7 @@ body[class*='page-menu-menu-pdf'], body[class*='page-menu-preview'] .container
 
 .menu-template-1 .plato {
     font-size:20px;
+    margin-top:25px;
 }
 
 .menu-template-1 .precio

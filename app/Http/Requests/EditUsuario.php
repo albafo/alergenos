@@ -25,7 +25,7 @@ class EditUsuario extends Request {
 	{
 		
 		$returnArray=[
-	    	'nombre' => 'required|min:4|max:255',
+	    	'nombre' => 'required|min:2|max:255',
 	        'apellidos'=>'required|min:4|max:255',
 	        'icono_estb'=>'image|max:500'
 		];

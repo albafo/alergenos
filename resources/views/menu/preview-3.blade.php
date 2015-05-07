@@ -38,14 +38,15 @@ menu-template-3
                     <div class="row">
                         <div class="col-md-12 categoriaPlato text-center">
                             {{$categoria->nombre}}
-                            
-                            @foreach(Auth::user()->idiomas as $idioma)
-                            
-                            @if($categoria->hasTraduccion($idioma->id))
-                                - {{ $categoria->traduccion()->find($idioma->id)->pivot->content }}
+                            @if($traduccion)
+                                @foreach(Auth::user()->idiomas as $idioma)
+                                
+                                @if($categoria->hasTraduccion($idioma->id))
+                                    - {{ $categoria->traduccion()->find($idioma->id)->pivot->content }}
+                                @endif
+                                
+                                @endforeach
                             @endif
-                            
-                            @endforeach
                         </div>
                     </div>
                    
@@ -56,6 +57,8 @@ menu-template-3
                         <tr>
                     
                             <td>{{$plato->nombre}} - {{$plato->categoria()->find($categoria->id)->pivot->precio}}€
+                            
+                            @if($traduccion)
                             @foreach(Auth::user()->idiomas as $idioma)
                             
                             @if($plato->hasTraduccion($idioma->id))
@@ -63,6 +66,7 @@ menu-template-3
                             @endif
                             
                             @endforeach
+                            @endif
                             </td>
                             <td>
                                 @foreach($plato->alergenos() as $alergeno)

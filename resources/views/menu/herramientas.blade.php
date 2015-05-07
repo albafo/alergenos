@@ -45,6 +45,9 @@
       </div>
       <div class="modal-body cuerpo">
           <div class="row">
+              <div class="col-md-12 text-center">
+                <label for="idiomaActivado">Activar traducciones</label> <input type="checkbox" id="idiomaActivado" name="idiomaActivado">
+              </div>
               <div class="col-md-6" style="margin-top:10px;">
                    <a href="#" data-index="1"><img src="{{asset('img/plantilla-1.jpg')}}"></a>    
               </div>
@@ -75,7 +78,6 @@
             var link=$(this).find('a').attr('href');
             
             $('#modalPlantillas .cuerpo a').each(function() {
-                
                 $(this).attr('href', link+"/"+$(this).attr('data-index'));
             });
             $('#modalPlantillas').modal();
@@ -84,9 +86,17 @@
        
        $('.caja-href').click(function(e){
            var link=$(this).find('a').attr('href');
-           window.location.href=link;  
+           window.location.href=link; 
        });
       
+       $('body').on('click', '#modalPlantillas .cuerpo a', function (e) {
+             e.preventDefault();
+             var traduccion="0";
+             if($('#idiomaActivado').is(':checked')) {
+                 traduccion="1";
+             }
+             window.location.href=$(this).attr('href')+"/"+traduccion;
+       });
       
     });
 </script>
