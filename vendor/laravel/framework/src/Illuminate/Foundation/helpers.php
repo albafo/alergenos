@@ -676,4 +676,3 @@ if ( ! function_exists('elixir'))
 		throw new InvalidArgumentException("File {$file} not defined in asset manifest.");
 	}
 }
-

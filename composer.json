@@ -15,7 +15,8 @@
 		"doctrine/dbal": "~2.3",
 		"fzaninotto/faker": "1.5.*@dev",
 		"intervention/image": "~2.1",
-		"intervention/imagecache": "~2.1"
+		"intervention/imagecache": "~2.1",
+        "guzzlehttp/guzzle": "~5.0"
 
 	},
 	"require-dev": {
