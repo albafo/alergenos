@@ -35,8 +35,9 @@ Route::get('plato/idiomas/{id_plato}', 'PlatoController@idiomas');
 
 Route::get('ingrediente/buscar-letra/{char}', 'IngredienteController@showByChar');
 Route::get('ingrediente/buscar-letra-alerg/{char}', 'IngredienteController@showByCharAlerg');
+Route::get('ingrediente/customAlerg/{id_menu}/{id_ingrediente}', 'IngredienteController@getAlergeno');
 
-Route::post('plato/add-ingrediente/{id_plato}/{id_ingrediente}', 'PlatoController@addIngrediente');
+Route::post('plato/add-ingrediente/{id_menu}/{id_plato}/{id_ingrediente}', 'PlatoController@addIngrediente');
 Route::post('plato/eliminar-ingrediente/{id_plato}/{id_ingrediente}', 'PlatoController@removeIngrediente');
 Route::get('admin/alergenos/nuevo', 'AlergenoController@create');
 Route::post('admin/alergenos/nuevo', 'AlergenoController@store');

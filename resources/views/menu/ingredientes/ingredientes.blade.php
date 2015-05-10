@@ -29,25 +29,38 @@
                 </div>
                 <div class="row">
                     <form id="buscadorIng" class="form-horizontal">
-                    
+
                         <div class="col-md-12">
-                        
+
                             <input type="text" name="nombre" class="form-control" id="findIng" placeholder="Buscar ingrediente">
-            
-                        </div> 
+
+                        </div>
                     </form>
                 </div>
                 <hr/>
                 <div class="row text-center" id="listaIngredientesModal">
                     <span>No ha seleccionado ninguna letra</span>
                 </div>
+                <hr>
+                <div class="row">
+                    <form id="customAlergeno" class="form-horizontal">
+
+                        <div class="col-md-12">
+                            <label>Inserte el alérgeno que considere si no aparece en el ingrediente. Se asociará a los mismos ingredientes que aparezcan en el menú</label>
+                            <input type="text" name="alergCustom" class="form-control"  id="alergCustom" placeholder="Alérgeno no listado">
+
+                        </div>
+                    </form>
+                </div>
+                <hr>
+
                 <form id="idiomasIngredientes">
-                <div class="otrosIdiomas">
+                <!--<div class="otrosIdiomas">
                         @foreach(Auth::user()->idiomas as $idioma) 
                             <p>{{$idioma->nombre}}</p>
                             <p><input type="text" class="form-control" name="idioma[{{$idioma->id}}]" data-id="{{$idioma->id}}" placeholder="{{$idioma->nombre}}"> </p>
                         @endforeach
-                </div>
+                </div>-->
                 </form>
                 
             </div>

@@ -41,7 +41,7 @@ class Ticket extends Model {
 
             $firstAdmin=User::whereTipo("admin")->first();
             $msg->to($firstAdmin->email, $firstAdmin->nombre);
-            $msg->from('no-reply@adehon', '');
+            $msg->from('web@alergias-hosteleria.com', '');
             $msg->replyTo($emailUser);
             $msg->subject("Nuevo ticket generado");
             $admins=User::whereTipo("admin")->get();

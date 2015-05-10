@@ -3,6 +3,7 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateNewPlato;
+use App\Ingrediente;
 use Illuminate\Http\Request;
 use App\Categoria;
 use App\Plato;
@@ -142,6 +143,7 @@ class PlatoController extends Controller {
                 </div>';
             }
             $return['html']=$html;
+
             return $return;
         }
         else abort(403);
@@ -252,14 +254,33 @@ class PlatoController extends Controller {
         
     }
     
-    public function addIngrediente($id_plato, $id_ingrediente) {
+    public function addIngrediente(Request $request, $id_menu, $id_plato, $id_ingrediente) {
         if(\Auth::id()==Plato::find($id_plato)->categoria()->first()->menu->user_id) {
             $plato=Plato::find($id_plato);
             $return['repeated']=false;
             
             if(!$plato->ingredientes->contains($id_ingrediente)) {
                 $plato->ingredientes()->attach($id_ingrediente);
-                
+                if($request->has("alergCustom")) {
+
+                    if (Ingrediente::find($id_ingrediente)->hasCustomAlergeno($id_menu)) {
+                        if($request->get("alergCustom")!="") {
+                            Ingrediente::find($id_ingrediente)->customAlergeno()->updateExistingPivot($id_menu, ['nombre' => $request->get("alergCustom")]);
+                        }
+                        else {
+                            Ingrediente::find($id_ingrediente)->customAlergeno()->detach($id_menu);
+                        }
+                    } else Ingrediente::find($id_ingrediente)->customAlergeno()->attach($id_menu, ['nombre' => $request->get("alergCustom")]);
+                }
+                else {
+                    if (Ingrediente::find($id_ingrediente)->hasCustomAlergeno($id_menu)) {
+
+                        Ingrediente::find($id_ingrediente)->customAlergeno()->detach($id_menu);
+                        
+                    }
+                }
+
+
             }
             else {
                 $return['repeated']=true;
@@ -273,7 +294,7 @@ class PlatoController extends Controller {
     }
     
     public function removeIngrediente($id_plato, $id_ingrediente) {
-        if(\Auth::id()==Plato::find($id_plato)->categoria->menu->user_id) {
+        if(\Auth::id()==Plato::find($id_plato)->categoria()->first()->menu->user_id) {
             Plato::find($id_plato)->ingredientes()->detach($id_ingrediente);
            
         }

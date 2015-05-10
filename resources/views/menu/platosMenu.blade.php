@@ -459,7 +459,7 @@ jQuery(function($) {
         if(selectedPlato!=-1) {
             $('#myModalIng .modal-title').text('Añadir Ingrediente');
             $('#myModalIng #saveIngrediente').text('Añadir ingrediente');
-            
+
             $('#myModalIng').modal();
                     $('.cajaError').addClass('hidden');
 
@@ -507,15 +507,18 @@ jQuery(function($) {
         $('#listaIngredientesModal p').removeClass('selected');
         $(this).addClass('selected');
         selectedIng=$(this).attr('data-index');
+        $.get('{{url('ingrediente/customAlerg/'.$menu->id)}}/'+selectedIng, {}, function(data){
+            $('#alergCustom').val(data);
+        });
         $( "#myModalIng #saveIngrediente" ).prop( "disabled", false );
 
     });
     
     $('body').on('click', '#myModalIng #saveIngrediente', function(e) {
         if(selectedPlato!=-1 && selectedIng!=-1) {
-             var data=$( "#formPlato" ).serializeArray();
+             var data=$( "#customAlergeno" ).serializeArray();
             data.push({name: '_token', value: '{{csrf_token()}}'});
-            $.post("{{url('plato/add-ingrediente')}}/"+selectedPlato+"/"+selectedIng, data, function(data){
+            $.post("{{url('plato/add-ingrediente')}}/{{$menu->id}}/"+selectedPlato+"/"+selectedIng, data, function(data){
                 if(data.repeated) {
                    $('#myModalIng').modal('hide');
                    $('#mensajes-platos-ok').bootstrapAlert({

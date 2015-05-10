@@ -203,4 +203,11 @@ class IngredienteController extends Controller {
     	\Auth::user()->tickets()->save($ticket);
 	}
 
+    public function getAlergeno($id_menu, $id_ingrediente) {
+
+        if(Ingrediente::find($id_ingrediente)->hasCustomAlergeno($id_menu))
+            return Ingrediente::find($id_ingrediente)->customAlergeno()->find($id_menu)->pivot->nombre;
+
+    }
+
 }
