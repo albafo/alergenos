@@ -276,7 +276,7 @@ class PlatoController extends Controller {
                     if (Ingrediente::find($id_ingrediente)->hasCustomAlergeno($id_menu)) {
 
                         Ingrediente::find($id_ingrediente)->customAlergeno()->detach($id_menu);
-                        
+
                     }
                 }
 

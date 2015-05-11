@@ -59,9 +59,19 @@ class IngredienteController extends Controller {
 		$ingredientes=Ingrediente::findBySearch($request->get("find"))->orderBy('nombre', 'asc')->get();
         //$queries = DB::getQueryLog();
         $html="";
-       
+
         foreach($ingredientes as $ingrediente) {
-            $html.="<p data-index='".$ingrediente->id."'>".$ingrediente->nombre."</p>";
+            $alergenos="Alérgenos(";
+            $i=0;
+            foreach($ingrediente->alergenos as $alergeno) {
+                if($i>0){
+                    $alergenos.=", ";
+                }
+                $alergenos.=$alergeno->nombre;
+                $i++;
+            }
+            $alergenos.=")";
+            $html.="<p data-index='".$ingrediente->id."'><strong>".$ingrediente->nombre."</strong> -> ".$alergenos."</p>";
         }
         $return['html']=$html;
         return $return;
@@ -112,7 +122,18 @@ class IngredienteController extends Controller {
         $html="";
        
         foreach($ingredientes as $ingrediente) {
-            $html.="<p data-index='".$ingrediente->id."'>".$ingrediente->nombre."</p>";
+            $alergenos="Alérgenos(";
+            $i=0;
+            foreach($ingrediente->alergenos as $alergeno) {
+                if($i>0){
+                    $alergenos.=", ";
+                }
+                $alergenos.=$alergeno->nombre;
+                $i++;
+            }
+
+            $alergenos.=")";
+            $html.="<p data-index='".$ingrediente->id."'><strong>".$ingrediente->nombre."</strong> -> ".$alergenos."</p>";
         }
         $return['html']=$html;
         return $return;
