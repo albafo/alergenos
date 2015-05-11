@@ -50,7 +50,7 @@
 							<div class="col-md-6 col-md-offset-4">
 								<button type="submit" class="btn btn-primary">Login</button>
 
-								<a class="btn btn-link" href="{{ url('/password/email') }}">{{trans('web.forgotPass')}}</a>
+								<a class="btn btn-link" href="{{ url('/auth/register') }}">¿No tienes cuenta? Regístrate aquí</a>
 							</div>
 						</div>
 					</form>

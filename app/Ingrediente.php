@@ -41,4 +41,6 @@ class Ingrediente extends Model {
 
 
 
+
+
 }

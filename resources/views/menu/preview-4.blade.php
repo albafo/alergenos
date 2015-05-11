@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('class-body')
-menu-template-3
+menu-template-4
 @endsection
 
 @section('content')
@@ -68,20 +68,20 @@ menu-template-3
                             @endforeach
                             @endif
                                 @if($plato->numIngVisibles()>0)
-                                    <br>
-                                    <i>(
-                                        <?php $i=0; ?>
-                                        @foreach($plato->ingredientes as $ingrediente)
-                                            @if($ingrediente->plato()->find($plato->id)->pivot->visible_home)
-                                                @if($i>0)
-                                                    ,
-                                                @endif
-                                                {{$ingrediente->nombre}}
-                                                <?php $i++;?>
-                                            @endif
-                                        @endforeach
-                                        )</i>
-                                @endif
+                                <br>
+                                <i>(
+                                <?php $i=0; ?>
+                                @foreach($plato->ingredientes as $ingrediente)
+                                    @if($ingrediente->plato()->find($plato->id)->pivot->visible_home)
+                                    @if($i>0)
+                                        ,
+                                    @endif
+                                {{$ingrediente->nombre}}
+                                    <?php $i++;?>
+                                    @endif
+                                @endforeach
+                                )</i>
+                                    @endif
                             </td>
                             <td>
                                 @foreach($plato->alergenos() as $alergeno)

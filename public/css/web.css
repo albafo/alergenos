@@ -285,6 +285,45 @@ body[class*='page-menu-menu-pdf'], body[class*='page-menu-preview'] .container
 }
 
 
+
+
+
+
+.menu-template-4 .cabeceraLogo{
+    display:none !important;
+}
+
+.menu-template-4 {
+    background-color:#000 !important;
+    color:#fff;
+}
+
+.menu-template-4 .nota-alergenos {
+    font-size:16px;
+    text-transform:uppercase;
+    color: #ffffff;
+}
+
+.menu-template-4 .nombreRestaurante {
+    margin-top:30px;
+    font-size:30px;
+    color:#800007;
+    text-transform:uppercase;
+    font-weight:bold;
+
+}
+
+.menu-template-4 .categoriaPlato {
+    margin-top:15px;
+    margin-bottom:15px;
+    font-size:20px;
+    background-image: url('../img/franja.png');
+    background-size: cover;
+    background-position: center;
+    margin-left: 15px;
+}
+
+
 .listado-ingredientes .alergeno {
     display:inline-block;
       margin-left: 15px;

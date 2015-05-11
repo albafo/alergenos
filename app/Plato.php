@@ -61,4 +61,14 @@ class Plato extends Model {
         );
     }
 
+    public function numIngVisibles() {
+        $i=0;
+        foreach($this->ingredientes as $ingrediente) {
+            if($ingrediente->plato()->find($this->id)->pivot->visible_home) {
+                $i++;
+            }
+        }
+        return $i;
+    }
+
 }

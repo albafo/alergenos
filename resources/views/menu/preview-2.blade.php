@@ -52,7 +52,33 @@ menu-template-2
             <div class="row">
                 <div class="col-md-12 plato">
                     <span>{{$plato->nombre}}</span>
-                   
+                    @if($traduccion)
+                        <br><span class="platosTraduccion">(
+                            @foreach(Auth::user()->idiomas as $idioma)
+
+                                @if($plato->hasTraduccion($idioma->id))
+                                    <span class="traduccion">{{ $plato->traduccion()->find($idioma->id)->pivot->content }}</span>
+                                @endif
+
+                            @endforeach
+                            )</span>
+
+                    @endif
+                    @if($plato->numIngVisibles()>0)
+                        <br>
+                        <i>(
+                            <?php $i=0; ?>
+                            @foreach($plato->ingredientes as $ingrediente)
+                                @if($ingrediente->plato()->find($plato->id)->pivot->visible_home)
+                                    @if($i>0)
+                                        ,
+                                    @endif
+                                    {{$ingrediente->nombre}}
+                                    <?php $i++;?>
+                                @endif
+                            @endforeach
+                            )</i>
+                    @endif
                     @foreach($plato->alergenos() as $alergeno)
                     <span><img height="40" src="{{asset($alergeno->img)}}" alt="{{$alergeno->nombre}}"></span>
                     @endforeach
@@ -65,18 +91,7 @@ menu-template-2
                     @endif
                                                     </span>
 
-                    @if($traduccion)
-                        <br><span class="platosTraduccion">(
-                        @foreach(Auth::user()->idiomas as $idioma) 
-                       
-                            @if($plato->hasTraduccion($idioma->id))
-                                 <span class="traduccion">{{ $plato->traduccion()->find($idioma->id)->pivot->content }}</span>
-                            @endif
-                            
-                        @endforeach
-                        )</span>
-                    
-                    @endif
+
                     
                 </div>
             </div>
