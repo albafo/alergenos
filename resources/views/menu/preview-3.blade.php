@@ -78,6 +78,8 @@ menu-template-3
                                             @foreach($plato->customAlergenos($menu->id) as $alergeno)
                                                 {{$alergeno}}
                                         @endforeach
+                                                                </span>
+
                                     @endif
                             </td>
                         </tr>

@@ -32,7 +32,7 @@ class Plato extends Model {
 
     }
 
-    public function customAlergenos($id_menu=null) {
+    public function customAlergenos($id_menu) {
         $c = array();
         foreach($this->ingredientes as $ingrediente) {
             if($ingrediente->hasCustomAlergeno($id_menu)) {

@@ -63,6 +63,8 @@ menu-template-2
                                 {{$alergeno}}
                             @endforeach
                             @endif
+                                                    </span>
+
                     @if($traduccion)
                         <br><span class="platosTraduccion">(
                         @foreach(Auth::user()->idiomas as $idioma) 

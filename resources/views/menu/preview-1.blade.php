@@ -69,6 +69,7 @@ menu-template-1
                         @foreach($plato->customAlergenos($menu->id) as $alergeno)
                             {{$alergeno}}
                         @endforeach
+                        </span>
                     @endif
 
 
@@ -81,7 +82,7 @@ menu-template-1
                             @endif
                             
                         @endforeach
-                        )</span>
+                        </span>
                     
                     @endif
                     
