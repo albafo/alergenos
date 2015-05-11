@@ -231,4 +231,14 @@ class IngredienteController extends Controller {
 
     }
 
+    public function editarVisibilidad($id_plato, $id_ingrediente) {
+
+        $ingrediente=Ingrediente::find($id_ingrediente);
+        if($ingrediente->plato()->find($id_plato)->pivot->visible_home)
+            $ingrediente->plato()->updateExistingPivot($id_plato, ['visible_home'=>0]);
+
+        else $ingrediente->plato()->updateExistingPivot($id_plato, ['visible_home'=>1]);
+
+    }
+
 }

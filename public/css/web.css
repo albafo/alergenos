@@ -80,10 +80,18 @@
     margin-top:10px;
 }
 
-.caja-menu .editDel .editar {
+.caja-menu .editDel .editar, .caja-menu .editDel .editarVisibilidad   {
     position:relative;
     float:left;
     margin-left:10px;
+}
+
+.caja-menu .editDel .editarVisibilidad .glyphicon-eye-open {
+    color:green;
+}
+
+.caja-menu .editDel .editarVisibilidad .glyphicon-eye-close {
+    color:red;
 }
 
 .caja-menu .editDel .borrar {

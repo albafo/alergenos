@@ -130,10 +130,16 @@ class PlatoController extends Controller {
             $html="";
             
             foreach($ingredientes as $ingrediente) {
+
+                $ojo="close";
+                if($ingrediente->plato()->find($id_plato)->pivot->visible_home) {
+                    $ojo="open";
+                }
+
                 $html.='<div class="panel panel-default caja-menu" id="ingrediente-'.$ingrediente->id.'">
                     <div class="editDel">
-                        <div class="editar">
-                            
+                        <div class="editarVisibilidad">
+                            <a href="#" title="Visible en menú" class="glyphicon glyphicon-eye-'.$ojo.'"></a>
                         </div>
                         <div class="borrar">
                             <a href="#" title="Borrar" class="glyphicon glyphicon-remove delIngrediente"></a>

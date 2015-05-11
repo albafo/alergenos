@@ -50,7 +50,7 @@ Route::post('ingredientes/nuevo',  [
 ]);
 Route::get('ingredientes/find', 'IngredienteController@find');
 Route::get('ingredientes/findWithAlerg', 'IngredienteController@findWithAlerg');
-
+Route::post('ingredientes/editar-visibilidad/{id_plato}/{id_ingrediente}', 'IngredienteController@editarVisibilidad');
 Route::get('ingredientes/show/{id}', 'IngredienteController@show');
 Route::post('ingredientes/editar/{id}',  [
     'middleware' => 'admin',

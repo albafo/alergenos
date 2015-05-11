@@ -549,6 +549,17 @@ jQuery(function($) {
             }, "json");
         }
     });
+
+
+    $('body').on('click', '.editarVisibilidad', function() {
+
+        var id_ing=$(this).parent().parent().attr('id').split("-")[1];
+        if(selectedPlato!=-1) {
+            $.post("{{url('ingredientes/editar-visibilidad')}}/"+selectedPlato+"/"+id_ing, {'_token':'{{csrf_token()}}'},function() {
+                obtener_ingredientes(selectedPlato);
+            });
+        }
+    });
     
     $('body').on('click', '.delIngrediente', function() {
         var id_ing=$(this).parent().parent().parent().attr('id').split("-")[1];

@@ -21,7 +21,7 @@ class Ingrediente extends Model {
     }
     
     public function plato() {
-        return $this->belongsToMany('App\Plato');
+        return $this->belongsToMany('App\Plato')->withPivot("visible_home");
     }
 
     public function customAlergeno() {
