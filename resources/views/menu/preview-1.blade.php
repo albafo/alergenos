@@ -62,15 +62,15 @@ menu-template-1
                    
                     @foreach($plato->alergenos() as $alergeno)
                     <span><img height="40" src="{{asset($alergeno->img)}}" alt="{{$alergeno->nombre}}"></span>
-                    @endforeach
-                    @if(!empty($plato->customAlergenos($menu->id)))
+
+
 
                         <span>Otros alérgenos:
                         @foreach($plato->customAlergenos($menu->id) as $alergeno)
                             {{$alergeno}}
                         @endforeach
                         </span>
-                    @endif
+
 
 
                     @if($traduccion)

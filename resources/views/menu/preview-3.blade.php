@@ -72,7 +72,7 @@ menu-template-3
                                 @foreach($plato->alergenos() as $alergeno)
                                 <span><img height="40" src="{{asset($alergeno->img)}}" alt="{{$alergeno->nombre}}"></span>
                                 @endforeach
-                                    @if(!empty($plato->customAlergenos($menu->id)))
+
 
                                         <span>Otros alérgenos:
                                             @foreach($plato->customAlergenos($menu->id) as $alergeno)
@@ -80,7 +80,7 @@ menu-template-3
                                         @endforeach
                                                                 </span>
 
-                                    @endif
+                                   
                             </td>
                         </tr>
                         @endforeach
