@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use PhpParser\Node\Expr\Cast\Object_;
 
 
 class Plato extends Model {
@@ -30,6 +31,17 @@ class Plato extends Model {
         }
         return $c->unique();        
 
+    }
+
+    public function customAlergenos($id_menu=null) {
+        $c = array();
+        foreach($this->ingredientes as $ingrediente) {
+            if($ingrediente->hasCustomAlergeno($id_menu)) {
+               $c[]=$ingrediente->customAlergeno()->find($id_menu)->pivot->nombre;
+            }
+
+        }
+        return array_unique($c);
     }
     
      public function traduccion() {
