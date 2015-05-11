@@ -59,6 +59,9 @@
               <div class="col-md-6" style="margin-top:10px;">
                    <a href="#" data-index="3"><img src="{{asset('img/plantilla-3.png')}}"></a>    
               </div>
+              <div class="col-md-6" style="margin-top:10px;">
+                  <a href="#" data-index="4"><img src="{{asset('img/plantilla-4.png')}}"></a>
+              </div>
           </div>
            
       </div>
