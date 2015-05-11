@@ -80,7 +80,7 @@ menu-template-3
                                         @endforeach
                                                                 </span>
 
-                                   
+
                             </td>
                         </tr>
                         @endforeach
