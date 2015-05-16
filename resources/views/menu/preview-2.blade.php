@@ -84,12 +84,12 @@ menu-template-2
                     @endforeach
 
                     @if(count($plato->customAlergenos($menu->id))>0)
-                        <span>Otros alérgenos:
-                            @foreach($plato->customAlergenos($menu->id) as $alergeno)
-                                {{$alergeno}}
+
+                        @foreach($plato->customAlergenos($menu->id) as $alergeno)
+                            <span><img height="40" src="{{asset($alergeno->img)}}" alt="{{$alergeno->nombre}}"></span>
                             @endforeach
-                    @endif
-                                                    </span>
+
+                            @endif
 
 
                     
