@@ -33,7 +33,7 @@ class Ticket extends Model {
             'fecha'=>date("d/M/Y H:i", time()),
             'nombre_usuario'=>$this->usuarios->nombre,
             'email_usuario'=>$emailUser,
-            'descripcion'=>$this->usuarios->peticion
+            'descripcion'=>$this->peticion
 
         ];
         \Mail::send('mail.newTicket', ['data'=>$data], function($msg) use ($emailUser) {

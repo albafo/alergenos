@@ -18,7 +18,7 @@
     </div>
     <div class="row ticketRow">
         <div class="col-md-3">
-            <strong>Petición:<strong>
+            <strong>Petición:</strong>
         </div>
         <div class="col-md-9">
             <span>{{$ticket->peticion}}</span>
