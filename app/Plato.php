@@ -36,7 +36,8 @@ class Plato extends Model {
         $c = array();
         foreach($this->ingredientes as $ingrediente) {
             if($ingrediente->hasCustomAlergeno($id_menu)) {
-               $c[]=$ingrediente->customAlergeno()->find($id_menu)->pivot->nombre;
+                $idAlergeno=$ingrediente->customAlergeno()->find($id_menu)->pivot->alergeno_id;
+                $c[]=Alergeno::find($idAlergeno);
             }
 
         }

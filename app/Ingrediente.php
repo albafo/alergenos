@@ -27,7 +27,7 @@ class Ingrediente extends Model {
     public function customAlergeno() {
 
         return $this->belongsToMany('App\Menu', 'custom_alergenos')
-            ->withPivot("nombre");
+            ->withPivot("alergeno_id");
     }
 
 

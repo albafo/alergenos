@@ -508,7 +508,9 @@ jQuery(function($) {
         $(this).addClass('selected');
         selectedIng=$(this).attr('data-index');
         $.get('{{url('ingrediente/customAlerg/'.$menu->id)}}/'+selectedIng, {}, function(data){
-            $('#alergCustom').val(data);
+            $('#alergCustom option[value="0"]').prop('selected', true);
+            if(data!="")
+                $('#alergCustom option[value="'+data+'"]').prop('selected', true);
         });
         $( "#myModalIng #saveIngrediente" ).prop( "disabled", false );
 

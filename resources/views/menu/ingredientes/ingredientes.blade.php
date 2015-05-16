@@ -46,8 +46,14 @@
                     <form id="customAlergeno" class="form-horizontal">
 
                         <div class="col-md-12">
-                            <label>Inserte el alérgeno que considere si no aparece en el ingrediente. Se asociará a los mismos ingredientes que aparezcan en el menú</label>
-                            <input type="text" name="alergCustom" class="form-control"  id="alergCustom" placeholder="Alérgeno no listado">
+                            <label>Puede añadir un alérgeno adicional al ingrediente. Se asociará a los mismos ingredientes que aparezcan en el menú</label>
+                            <select  name="alergCustom" class="form-control"  id="alergCustom">
+                                <option value="0">Alérgeno adicional</option>
+                                @foreach(\Alergeno::all() as $alergeno)
+                                <option value="{{$alergeno->id}}">{{$alergeno->nombre}}</option>
+                                @endforeach
+
+                            </select>
 
                         </div>
                     </form>
