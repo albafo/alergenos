@@ -1,8 +1,8 @@
 <?php namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use \App\LanguageModel;
 
-class Ingrediente extends Model {
+class Ingrediente extends LanguageModel {
     
     
     public static function findByChar($char) {
@@ -38,6 +38,9 @@ class Ingrediente extends Model {
                 ->first()
         );
     }
+
+
+
 
 
 

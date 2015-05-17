@@ -51,6 +51,13 @@ class IngredienteController extends Controller {
 				$ingrediente->alergenos()->attach($alergeno_id);
 			}
 		}
+
+        if (is_array($request->get('idioma'))) {
+            foreach($request->get('idioma') as $indexIdioma=>$traduccion) {
+
+                $ingrediente->traduccion()->attach($indexIdioma, ['table_name'=>$ingrediente->getTable(), 'content' => $traduccion]);
+            }
+        }
 	
 		
 	}
@@ -110,6 +117,7 @@ class IngredienteController extends Controller {
 	{
 		$ingrediente=Ingrediente::find($id);
 		$ingrediente->alergenos;
+        $ingrediente->traduccion;
 		return $ingrediente;
 	
 	}
@@ -199,6 +207,24 @@ class IngredienteController extends Controller {
 		if($ingrediente->nombre!=$request->get("nombre"))
 			$ingrediente->nombre=$request->get("nombre");
 		$ingrediente->save();
+
+        if (is_array($request->get('idioma'))) {
+            foreach($request->get('idioma') as $indexIdioma=>$traduccion) {
+
+                if($traduccion) {
+
+                    if(!$ingrediente->hasTraduccion($indexIdioma)) {
+                        $ingrediente->traduccion()->attach($indexIdioma, ['table_name'=>$ingrediente->getTable(), 'content' => $traduccion]);
+                    }
+
+                    else $ingrediente->traduccion()->updateExistingPivot($indexIdioma, ['content'=>$traduccion]);
+                }
+                else {
+                    $ingrediente->traduccion()->detach($indexIdioma);
+                }
+
+            }
+        }
 	}
 
 	/**
@@ -210,6 +236,15 @@ class IngredienteController extends Controller {
 	public function destroy($id)
 	{
 		$this->middleware('admin');
+
+
+        $ingrediente=Ingrediente::find($id);
+        foreach(\App\Idioma::all() as $idioma) {
+            if($ingrediente->hasTraduccion($idioma->id)) {
+                $ingrediente->traduccion()->detach($idioma->id);
+            }
+        }
+
 		Ingrediente::find($id)->delete();
 
 	}

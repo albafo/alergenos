@@ -18,23 +18,7 @@ class Categoria extends Model {
         return $this->belongsTo('App\Menu');
     }
     
-    public function traduccion() {
-    
-        
-            return $this->belongsToMany('App\Idioma', 'content_idiomas', 'content_id', 'idioma_id')
-            ->withPivot('content')
-            ->withPivot('table_name')
-            ->wherePivot('table_name', '=', $this->getTable());
-            
-    }
-    
-    public function hasTraduccion($idioma_id) {
-         return ! is_null(
-        $this->traduccion()
-             ->where('idioma_id', $idioma_id)
-             ->first()
-        );
-    }
+
 
 
 }
