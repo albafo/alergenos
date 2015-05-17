@@ -39,7 +39,7 @@ menu-template-3
                         <div class="col-md-12 categoriaPlato text-center">
                             {{$categoria->nombre}}
                             @if($traduccion)
-                                @foreach(Auth::user()->idiomas as $idioma)
+                                @foreach(\App\Idioma::all() as $idioma)
                                 
                                 @if($categoria->hasTraduccion($idioma->id))
                                     - {{ $categoria->traduccion()->find($idioma->id)->pivot->content }}
@@ -59,7 +59,7 @@ menu-template-3
                             <td width="80%">{{$plato->nombre}} - {{$plato->categoria()->find($categoria->id)->pivot->precio}}€
                             
                             @if($traduccion)
-                            @foreach(Auth::user()->idiomas as $idioma)
+                            @foreach(\App\Idioma::all() as $idioma)
                             
                             @if($plato->hasTraduccion($idioma->id))
                                 <br>{{ $plato->traduccion()->find($idioma->id)->pivot->content }}
@@ -77,6 +77,13 @@ menu-template-3
                                                     ,
                                                 @endif
                                                 {{$ingrediente->nombre}}
+                                                    @if($traduccion)
+                                                        @foreach(\App\Idioma::all() as $idioma)
+                                                            @if($ingrediente->hasTraduccion($idioma->id))
+                                                                / {{$ingrediente->traduccion()->find($idioma->id)->pivot->content}}
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
                                                 <?php $i++;?>
                                             @endif
                                         @endforeach

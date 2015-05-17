@@ -1,10 +1,10 @@
 <?php namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use App\LanguageModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 
-class Categoria extends Model {
+class Categoria extends LanguageModel {
 
     use SoftDeletes;
 
@@ -17,7 +17,6 @@ class Categoria extends Model {
     public function menu() {
         return $this->belongsTo('App\Menu');
     }
-    
 
 
 

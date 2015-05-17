@@ -42,7 +42,7 @@ menu-template-1
                     {{$categoria->nombre}}
                     @if($traduccion)
                         
-                        @foreach(Auth::user()->idiomas as $idioma) 
+                        @foreach(\App\Idioma::all() as $idioma)
                        
                             @if($categoria->hasTraduccion($idioma->id))
                                 - {{ $categoria->traduccion()->find($idioma->id)->pivot->content }}
@@ -63,7 +63,7 @@ menu-template-1
                     <span>{{$plato->nombre}}</span>
                     @if($traduccion)
                         <br><span class="platosTraduccion">(
-                            @foreach(Auth::user()->idiomas as $idioma)
+                            @foreach(\App\Idioma::all() as $idioma)
 
                                 @if($plato->hasTraduccion($idioma->id))
                                     <span class="traduccion">{{ $plato->traduccion()->find($idioma->id)->pivot->content }}</span>
@@ -84,6 +84,13 @@ menu-template-1
                                         ,
                                     @endif
                                     {{$ingrediente->nombre}}
+                                    @if($traduccion)
+                                    @foreach(\App\Idioma::all() as $idioma)
+                                        @if($ingrediente->hasTraduccion($idioma->id))
+                                                / {{$ingrediente->traduccion()->find($idioma->id)->pivot->content}}
+                                        @endif
+                                    @endforeach
+                                    @endif
                                     <?php $i++;?>
                                 @endif
                             @endforeach
@@ -125,6 +132,7 @@ menu-template-1
                      <div class="alergeno">
                          <img height="60" src="{{asset($alergeno->img)}}" alt="{{$alergeno->nombre}}"><br>
                          <span>{{$alergeno->nombre}}</span>
+
                      </div>
                      @endforeach
                 </div>

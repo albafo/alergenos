@@ -2,9 +2,10 @@
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\LanguageModel;
 
 
-class Plato extends Model {
+class Plato extends LanguageModel {
     
     use SoftDeletes;
     
@@ -44,23 +45,7 @@ class Plato extends Model {
         return array_unique($c);
     }
     
-     public function traduccion() {
-    
-        
-            return $this->belongsToMany('App\Idioma', 'content_idiomas', 'content_id', 'idioma_id')
-            ->withPivot('content')
-            ->withPivot('table_name')
-            ->wherePivot('table_name', '=', $this->getTable());
-            
-    }
-    
-    public function hasTraduccion($idioma_id) {
-         return ! is_null(
-        $this->traduccion()
-             ->where('idioma_id', $idioma_id)
-             ->first()
-        );
-    }
+
 
     public function numIngVisibles() {
         $i=0;

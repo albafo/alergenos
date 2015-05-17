@@ -290,7 +290,11 @@ class PlatoController extends Controller {
                         else {
                             Ingrediente::find($id_ingrediente)->customAlergeno()->detach($id_menu);
                         }
-                    } else Ingrediente::find($id_ingrediente)->customAlergeno()->attach($id_menu, ['alergeno_id' => $request->get("alergCustom")]);
+                    } else  {
+                        if($request->get("alergCustom")>0) {
+                            Ingrediente::find($id_ingrediente)->customAlergeno()->attach($id_menu, ['alergeno_id' => $request->get("alergCustom")]);
+                        }
+                    }
                 }
 
 
