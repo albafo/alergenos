@@ -41,6 +41,14 @@
                 </div>
             </div>
         </div>
+        <div clas="row">
+            <div class="col-md-12">
+                <div class="panel panel-default caja-menu ui-sortable-handle caja-link caja-href">
+
+                    <div class="panel-body"><a href="{{url('idiomas')}}">Idiomas</a></div>
+                </div>
+            </div>
+        </div>
     </div>
 </<div>
 <script>

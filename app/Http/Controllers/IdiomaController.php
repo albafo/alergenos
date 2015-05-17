@@ -4,9 +4,9 @@ use App\Http\Requests\IdiomaRequest;
 use App\Idioma;
 
 class IdiomaController extends Controller {
-    
+
     public function __construct() {
-        $this->middleware('auth');
+        $this->middleware('admin');
     }
     
     public function getIndex() {
@@ -16,7 +16,7 @@ class IdiomaController extends Controller {
     public function postNuevo(IdiomaRequest $request) {
         $idioma=new Idioma;
         $idioma->nombre=$request->get('nombre');
-        \Auth::user()->idiomas()->save($idioma);
+        $idioma->save();
         return redirect('idiomas')->withOk('Idioma creado con éxito');
     }
     
@@ -25,13 +25,13 @@ class IdiomaController extends Controller {
         $idioma=Idioma::find($request->route('id'));
         $idioma->nombre=$request->get('nombre');
         $idioma->save();
-        return redirect('idiomas')->withOk('Idioma editado con éxito');;
+        return redirect('idiomas')->withOk('Idioma editado con éxito');
         
     }
     
     public function getBorrar(IdiomaRequest $request) {
         Idioma::find($request->route('id'))->delete();
-        return redirect('idiomas')->withOk('Idioma eliminado con éxito');;
+        return redirect('idiomas')->withOk('Idioma eliminado con éxito');
     }
     
     

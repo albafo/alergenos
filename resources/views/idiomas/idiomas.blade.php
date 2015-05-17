@@ -32,7 +32,7 @@
 
             </form>
             <h4>Idiomas registrados</h4>
-            @foreach(Auth::user()->idiomas as $idioma)
+            @foreach(App\Idioma::all() as $idioma)
             <form class="form-horizontal" method="get" action="{{url('idioma/editar/'.$idioma->id)}}">
                 <div class="row" style="margin-top:15px">
                     <div class="col-sm-12">

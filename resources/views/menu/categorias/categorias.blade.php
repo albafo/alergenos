@@ -39,7 +39,7 @@
     
                         <p> <input type="text" class="form-control" id="myModalInput" name=nombre placeholder="Inserte nombre"> </p>
                         <div class="otrosIdiomas">
-                            @foreach(Auth::user()->idiomas as $idioma) 
+                            @foreach(App\Idioma::all() as $idioma)
                                 <p>{{$idioma->nombre}}</p>
                                 <p><input type="text" class="form-control" name="idioma[{{$idioma->id}}]" data-id="{{$idioma->id}}" placeholder="{{$idioma->nombre}}"> </p>
                             @endforeach

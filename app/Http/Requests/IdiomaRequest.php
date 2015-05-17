@@ -12,9 +12,7 @@ class IdiomaRequest extends Request {
 	 */
 	public function authorize()
 	{
-	    if($this->route('id'))
-		    return \Auth::id()==Idioma::find($this->route('id'))->user_id;
-		else return true;
+	    return true;
 	}
 
 	/**

@@ -153,9 +153,19 @@ class CategoriaController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy(DeleteCategoria $reuest, $id_menu, $id_cat)
+	public function destroy(DeleteCategoria $request, $id_menu, $id_cat)
 	{
-		Categoria::find($id_cat)->delete();
+
+        $categoria=Categoria::find($id_cat);
+
+
+        foreach(\App\Idioma::all() as $idioma) {
+            if($categoria->hasTraduccion($idioma->id)) {
+                $categoria->traduccion()->detach($idioma->id);
+            }
+        }
+
+        $categoria->delete();
 	}
 	
 	public function idiomas($id_cat) {
@@ -163,7 +173,7 @@ class CategoriaController extends Controller {
 			$idiomas=array();
 			$i=0;
 			
-			foreach(\Auth::user()->idiomas as $idioma) {
+			foreach(\App\Idioma::all() as $idioma) {
 				$idiomas[$i]["idIdioma"]=$idioma->id;
 				$idiomas[$i]["nombreIdioma"]=$idioma->nombre;
 				$categoria=Categoria::find($id_cat);

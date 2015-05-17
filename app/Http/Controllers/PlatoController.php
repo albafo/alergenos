@@ -69,8 +69,10 @@ class PlatoController extends Controller {
 		    
 		if (is_array($request->get('idioma'))) {
     		foreach($request->get('idioma') as $indexIdioma=>$traduccion) {
-            	
-            	$plato->traduccion()->attach($indexIdioma, ['table_name'=>$plato->getTable(), 'content' => $traduccion]);
+            	if($plato->hasTraduccion($indexIdioma)) {
+                    $plato->traduccion()->updateExistingPivot($indexIdioma, ['content'=>$traduccion]);
+                }
+                else $plato->traduccion()->attach($indexIdioma, ['table_name' => $plato->getTable(), 'content' => $traduccion]);
             }
 	    }
 		
@@ -161,7 +163,8 @@ class PlatoController extends Controller {
     public function datos($id_plato, $id_cat) {
         if(\Auth::id()==Plato::find($id_plato)->categoria()->first()->menu->user_id)    {
             $plato=Plato::find($id_plato);
-            $plato->categoria->find($id_cat);
+            $precio=$plato->categoria->find($id_cat)->pivot->precio;
+            $plato->precio=$precio;
             return $plato;
         }
         else abort(403);
@@ -229,13 +232,24 @@ class PlatoController extends Controller {
 	 */
 	public function destroy(Request $request, $id_plato, $id_cat)
 	{
-        
-        if(\Auth::id()==Plato::find($id_plato)->categoria()->first()->menu->user_id)    {
+        $plato=Plato::find($id_plato);
+
+        if(\Auth::id()==$plato->categoria()->first()->menu->user_id)    {
             /*$this->validate($request, [
                 'nombre' => 'required|min:4|max:255',
                 'precio' => 'numeric'
             ]);*/
-            Plato::find($id_plato)->categoria()->detach($id_cat);
+            $plato->categoria()->detach($id_cat);
+
+            if($plato->categoria()->count()<1) {
+                foreach(\App\Idioma::all() as $idioma) {
+                    if($plato->hasTraduccion($idioma->id)) {
+                        $plato->traduccion()->detach($idioma->id);
+                    }
+                }
+                $plato->delete();
+            }
+
         }
         else {
             abort(403);
@@ -309,7 +323,7 @@ class PlatoController extends Controller {
 			$idiomas=array();
 			$i=0;
 			
-			foreach(\Auth::user()->idiomas as $idioma) {
+			foreach(\App\Idioma::all() as $idioma) {
 				$idiomas[$i]["idIdioma"]=$idioma->id;
 				$idiomas[$i]["nombreIdioma"]=$idioma->nombre;
 				$plato=Plato::find($id_plato);

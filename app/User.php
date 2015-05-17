@@ -59,8 +59,5 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     	return ($platos->sortBy('nombre'));
     	
     }
-    
-    public function idiomas() {
-    	return $this->hasMany('App\Idioma');
-    }
+
 }

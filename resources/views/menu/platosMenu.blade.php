@@ -338,7 +338,7 @@ jQuery(function($) {
         $('#myModalPlato #myModalSave').text('Reemplazar nombre');
         $.get("{{url('plato/datos/')}}/"+id_plato+"/"+selectedCat, {'_token':'{{csrf_token()}}'}, function(data){
             $('#inputNombrePlato').val(data.nombre);
-            $('#inputPrecioPlato').val(data.categoria[0].pivot.precio);
+            $('#inputPrecioPlato').val(data.precio);
             $('#myModalPlato #platosList').addClass('hidden');
             $.get("{{url('plato/idiomas/')}}/"+id_plato, {'_token':'{{csrf_token()}}'}, function(data){
                 $('#myModalPlato .otrosIdiomas p').remove();
