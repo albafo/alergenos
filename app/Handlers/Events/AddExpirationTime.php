@@ -26,6 +26,7 @@ class AddExpirationTime {
 	public function handle(NewUser $event)
 	{
 		$event->getUsuario()->expired_at=date('Y-m-d H:i:s', time()+env("DEFAULT_EXPIRATION_USER"));
+
 		$event->getUsuario()->save();
 	}
 

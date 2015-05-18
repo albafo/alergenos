@@ -20,6 +20,18 @@
                     <input type="text" name="nombre" class="form-control" id="inputNombre" placeholder="Nombre alérgeno" value="{{ $alergeno->nombre or '' }}">
                 </div>
             </div>
+            <hr style="  border-top: 1px solid #ccc;">
+            <h4>Idiomas</h4>
+
+            @foreach(\App\Idioma::all() as $idioma)
+                <div class="form-group">
+                    <label for="idioma-{{$idioma->id}}" class="col-sm-2 control-label">{{$idioma->nombre}}</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="idioma[{{$idioma->id}}]" class="form-control inputIdioma" id="idioma-{{$idioma->id}}" placeholder="{{$idioma->nombre}}" value="@if($alergeno->hasTraduccion($idioma->id)){{$alergeno->traduccion()->find($idioma->id)->pivot->content}}@endif">
+                    </div>
+                </div>
+            @endforeach
+
         </div> 
         <div class="col-sm-6">
             <div class="form-group">

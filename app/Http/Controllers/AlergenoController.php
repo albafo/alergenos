@@ -59,6 +59,14 @@ class AlergenoController extends Controller {
 			return view('admin.alergenosForm')->withErrors(['Fallo al cargar imagen en el servidor']); 
 		}
 		$alergeno->save();
+
+        if (is_array($request->get('idioma'))) {
+            foreach($request->get('idioma') as $indexIdioma=>$traduccion) {
+
+                $alergeno->traduccion()->attach($indexIdioma, ['table_name'=>$alergeno->getTable(), 'content' => $traduccion]);
+            }
+        }
+
 		return redirect('admin/alergenos')->withOk('Alérgeno añadido con éxito');
 	}
 
@@ -120,6 +128,25 @@ class AlergenoController extends Controller {
 			
 		}
 		$alergeno->save();
+
+        if (is_array($request->get('idioma'))) {
+            foreach($request->get('idioma') as $indexIdioma=>$traduccion) {
+
+                if($traduccion) {
+
+                    if(!$alergeno->hasTraduccion($indexIdioma)) {
+                        $alergeno->traduccion()->attach($indexIdioma, ['table_name'=>$alergeno->getTable(), 'content' => $traduccion]);
+                    }
+
+                    else $alergeno->traduccion()->updateExistingPivot($indexIdioma, ['content'=>$traduccion]);
+                }
+                else {
+                    $alergeno->traduccion()->detach($indexIdioma);
+                }
+
+            }
+        }
+
 		return redirect('admin/alergenos/editar/'.$id)->withOk('Editado con éxito');	
 	}
 
@@ -133,6 +160,13 @@ class AlergenoController extends Controller {
 	{
 		$alergeno=Alergeno::find($id);
 		Storage::disk('public')->delete("/".$alergeno->img);
+
+        foreach(\App\Idioma::all() as $idioma) {
+            if($alergeno->hasTraduccion($idioma->id)) {
+                $alergeno->traduccion()->detach($idioma->id);
+            }
+        }
+
 		$alergeno->delete();
 		return redirect('admin/alergenos')->withOk('Alérgeno eliminado con éxito');
 	}

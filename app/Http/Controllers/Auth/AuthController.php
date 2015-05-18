@@ -6,8 +6,13 @@ use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use App\Events\NewUser;
+use App\User;
 
 
+/**
+ * Class AuthController
+ * @package App\Http\Controllers\Auth
+ */
 class AuthController extends Controller {
 
 	/*
@@ -37,15 +42,22 @@ class AuthController extends Controller {
 
 		$this->middleware('guest', ['except' => 'getLogout']);
 	}
-	
-	public function getLogout() {
+
+    /**
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function getLogout() {
 		$this->auth->logout();
 		\Session::flush();
 		return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/');
 		
 	}
-	
-	public function postLogin(Request $request)
+
+    /**
+     * @param Request $request
+     * @return $this|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function postLogin(Request $request)
 	{
 		$this->validate($request, [
 			'email' => 'required|email', 'password' => 'required',
@@ -78,13 +90,60 @@ class AuthController extends Controller {
 		}
 
 		$this->auth->login($this->registrar->create($request->all()));
+
 		event(new NewUser($this->auth->user()));
+
+        /* Añadimos código aleatorio al usuario */
+
+
+        /**
+         * @var $user \App\User
+         * */
+
+        $user = $this->auth->user();
+
+        $code = $user->setRandomActivation();
+
+        $this->sendNewUserMail($code);
+
 		return redirect($this->redirectPath());
 	}
 	
 	public function getRenew() {
 		echo "Próximamente";
 	}
+
+    public function sendNewUserMail($codigo) {
+
+        $emailUser = $this->auth->user()->email;
+
+        $data = [
+
+            'fecha'=>date("d/M/Y H:i", time()),
+            'nombre_usuario'=>$this->auth->user()->nombre,
+            'email_usuario'=>$emailUser,
+            'codigo'=>$codigo
+
+        ];
+
+        \Mail::send('mail.newUser', ['data'=>$data], function($msg) use ($emailUser) {
+
+
+            $firstAdmin=User::whereTipo("admin")->first();
+            $msg->to($firstAdmin->email, $firstAdmin->nombre);
+            $msg->from('web@alergias-hosteleria.com', '');
+            $msg->replyTo($emailUser);
+            $msg->subject("Nuevo ticket generado");
+            $admins=User::whereTipo("admin")->get();
+
+            $i=0;
+            foreach($admins as $admin) {
+                if ($i > 0)
+                    $msg->cc($admin->email, $admin->nombre);
+                $i++;
+            }
+        });
+    }
 	
 	public function redirectPath(){
 	

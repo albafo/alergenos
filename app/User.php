@@ -60,4 +60,31 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     	
     }
 
+    public function getRandmonNumber($digits=4) {
+
+        $min="";
+        $max="";
+
+        for($i = 0; $i < $digits; $i++) {
+            $min.="0";
+            $max.="9";
+        }
+
+        $min = intval($min);
+        $max = intval($max);
+
+        $number = rand($min, $max);
+
+        return $number;
+    }
+
+    public function setRandomActivation() {
+
+        $this->activation_code = $this->getRandmonNumber(6);
+        $this->save();
+        return $this->activation_code;
+
+
+    }
+
 }

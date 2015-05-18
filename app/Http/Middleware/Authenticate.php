@@ -54,6 +54,12 @@ class Authenticate {
 				return redirect('user/renew');
 			}
 		}
+
+
+        if(!(\Session::has('auth-admin')) && $this->auth->user()->status==0) {
+            $this->auth->logout();
+            return response("Usuario desactivado", 401);
+        }
 		
 		if($this->auth->user()->tipo=="admin") {
 		
