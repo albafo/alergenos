@@ -39,7 +39,7 @@ class AuthAdmin {
 		if ($this->auth->guest() || $this->auth->user()->tipo!="admin")
 		{
 			
-			
+
 			
 			if ($request->ajax())
 			{

@@ -95,6 +95,18 @@
                                 </div>
                             </div>
                         </div>
+                        @if(Auth::user()->tipo=="user" && Session::has('auth-admin') && Session::get('auth-admin')->tipo=="admin")
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="nombre_establ" class="col-sm-4 control-label">Código de activación</label>
+                                    <div class="col-sm-8">
+                                        <span>{{Auth::user()->activation_code}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endif
                     </div> 
                     <div class="col-sm-6">
                         @if(Auth::user()->tipo=="user" && Session::has('auth-admin') && Session::get('auth-admin')->tipo=="admin")
