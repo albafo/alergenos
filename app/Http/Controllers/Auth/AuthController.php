@@ -37,10 +37,12 @@ class AuthController extends Controller {
 	 */
 	public function __construct(Guard $auth, Registrar $registrar)
 	{
+
 		$this->auth = $auth;
 		$this->registrar = $registrar;
 
-		$this->middleware('guest', ['except' => 'getLogout']);
+		$this->middleware('guest', ['except' => array('getLogout', 'getActivation', 'postActivar')]);
+
 	}
 
     /**
@@ -161,5 +163,26 @@ class AuthController extends Controller {
 			return property_exists($this, 'redirectTo') ? $this->redirectTo : '/home';
 		}
 	}
+
+
+    public function getActivation() {
+
+
+        if($this->auth->user()->confirmed) {
+            return redirect("/home");
+        }
+
+        return view("usuario.activacion");
+    }
+
+    public function postActivar(Request $request) {
+        if($request->get("codigoActivacion") == $this->auth->user()->activation_code) {
+            $this->auth->user()->confirmed=1;
+            $this->auth->user()->save();
+            return redirect("/home")->withOk("Usuario activado con éxito");
+        }
+
+        return redirect("/auth/activation")->withErrors(array("Código incorrecto."));
+    }
 
 }

@@ -45,6 +45,17 @@ class AuthLess {
             return response("Usuario desactivado", 401);
         }
 
+        if(!(\Session::has('auth-admin')) && !$this->auth->user()->confirmed) {
+            if ($request->ajax())
+            {
+                return response('Unauthorized.', 401);
+            }
+            else
+            {
+                return redirect('auth/activation');
+            }
+        }
+
 		return $next($request);
 	}
 

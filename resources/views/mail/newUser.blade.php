@@ -944,7 +944,7 @@
 
                                         <p style="Margin-top: 0;color: #565656;font-family: Georgia,serif;font-size: 16px;line-height: 25px;Margin-bottom: 25px">Fecha: {{$data['fecha']}}<br />
                                             Nombre usuario: {{$data['nombre_usuario']}}<br />
-                                            Email:{{$data['email_usuario']}}</p>
+                                            Email: {{$data['email_usuario']}}</p>
 
                                     </td>
                                 </tr>
