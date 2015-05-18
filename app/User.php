@@ -66,7 +66,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         $max="";
 
         for($i = 0; $i < $digits; $i++) {
-            $min.="0";
+            $min.="1";
             $max.="9";
         }
 
