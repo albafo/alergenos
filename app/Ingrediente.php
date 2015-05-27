@@ -31,10 +31,12 @@ class Ingrediente extends LanguageModel {
     }
 
 
-    public function hasCustomAlergeno($id_menu){
+    public function hasCustomAlergeno($id_menu, $id_alergeno){
+
         return ! is_null(
             $this->customAlergeno()
                 ->where('menu_id', $id_menu)
+                ->where('alergeno_id', $id_alergeno)
                 ->first()
         );
     }

@@ -281,21 +281,21 @@ class PlatoController extends Controller {
             
             if(!$plato->ingredientes->contains($id_ingrediente)) {
                 $plato->ingredientes()->attach($id_ingrediente);
-                if($request->has("alergCustom")) {
 
-                    if (Ingrediente::find($id_ingrediente)->hasCustomAlergeno($id_menu)) {
-                        if($request->get("alergCustom")>0) {
-                            Ingrediente::find($id_ingrediente)->customAlergeno()->updateExistingPivot($id_menu, ['alergeno_id' => $request->get("alergCustom")]);
-                        }
-                        else {
-                            Ingrediente::find($id_ingrediente)->customAlergeno()->detach($id_menu);
-                        }
-                    } else  {
-                        if($request->get("alergCustom")>0) {
-                            Ingrediente::find($id_ingrediente)->customAlergeno()->attach($id_menu, ['alergeno_id' => $request->get("alergCustom")]);
-                        }
+                $ingrediente = Ingrediente::find($id_ingrediente);
+
+                $ingrediente->customAlergeno()->detach($id_menu);
+
+                foreach($request->get("alergCustom") as $alergCustom) {
+
+                    if($alergCustom > 0) {
+                        $ingrediente->customAlergeno()->attach($id_menu, ['alergeno_id' => $alergCustom]);
+
                     }
                 }
+
+
+
 
 
 

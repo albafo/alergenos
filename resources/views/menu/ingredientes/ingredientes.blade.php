@@ -45,14 +45,29 @@
                 <div class="row">
                     <form id="customAlergeno" class="form-horizontal">
 
+                        <div class="col-md-12 text-center">
+                            <label style="color:red; font-weight: bold;">Comprobar etiquetado para seleccionar alérgenos adicionales</label>
+
+
+                        </div>
+
                         <div class="col-md-12">
-                            <label>Puede añadir un alérgeno adicional al ingrediente. Se asociará a los mismos ingredientes que aparezcan en el menú</label>
-                            <select  name="alergCustom" class="form-control"  id="alergCustom">
+                            <label>Puede añadir alérgenos adicionales al ingrediente. Se asociará a los mismos ingredientes que aparezcan en el menú.</label>
+
+
+
+                            <select  name="alergCustom[]" class="form-control"  id="alergCustom1">
                                 <option value="0">Alérgeno adicional</option>
                                 @foreach(\Alergeno::all() as $alergeno)
                                 <option value="{{$alergeno->id}}">{{$alergeno->nombre}}</option>
                                 @endforeach
+                            </select><br>
 
+                            <select  name="alergCustom[]" class="form-control"  id="alergCustom2">
+                                <option value="0">Alérgeno adicional</option>
+                                @foreach(\Alergeno::all() as $alergeno)
+                                    <option value="{{$alergeno->id}}">{{$alergeno->nombre}}</option>
+                                @endforeach
                             </select>
 
                         </div>

@@ -36,12 +36,14 @@ class Plato extends LanguageModel {
     public function customAlergenos($id_menu) {
         $c = array();
         foreach($this->ingredientes as $ingrediente) {
-            if($ingrediente->hasCustomAlergeno($id_menu)) {
-                $idAlergeno=$ingrediente->customAlergeno()->find($id_menu)->pivot->alergeno_id;
-                $c[]=Alergeno::find($idAlergeno);
-            }
+            $alergenos = \DB::table("custom_alergenos")->select("alergeno_id")->where("menu_id", "=", $id_menu)->where("ingrediente_id", "=", $ingrediente->id)->get();
 
+            foreach($alergenos as $alergeno) {
+                $c[] = Alergeno::find($alergeno->alergeno_id);
+            }
         }
+
+
         return array_unique($c);
     }
     

@@ -261,8 +261,17 @@ class IngredienteController extends Controller {
 
     public function getAlergeno($id_menu, $id_ingrediente) {
 
-        if(Ingrediente::find($id_ingrediente)->hasCustomAlergeno($id_menu))
-            return Ingrediente::find($id_ingrediente)->customAlergeno()->find($id_menu)->pivot->alergeno_id;
+        $ids_alergenos=array();
+        $alergenos = \DB::table("custom_alergenos")->select("alergeno_id")->where("menu_id", "=", $id_menu)->where("ingrediente_id", "=", $id_ingrediente)->get();
+
+
+
+        foreach($alergenos as $alergeno) {
+
+            $ids_alergenos[]=$alergeno->alergeno_id;
+        }
+
+        return $ids_alergenos;
 
     }
 
