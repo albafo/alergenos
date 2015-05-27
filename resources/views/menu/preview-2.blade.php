@@ -117,8 +117,8 @@ menu-template-2
             
             <div class="row">
                 <div class="col-md-12 text-center alergenos">
-                    
-                     @foreach($menu->alergenos() as $alergeno)
+
+                    @foreach(Alergeno::all() as $alergeno)
                      <div class="alergeno">
                          <img height="60" src="{{asset($alergeno->img)}}" alt="{{$alergeno->nombre}}"><br>
                          <span>{{$alergeno->nombre}}</span>

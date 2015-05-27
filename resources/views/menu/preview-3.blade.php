@@ -113,8 +113,8 @@ menu-template-3
                     
                     <div class="row listado-ingredientes" style="margin-top:20px;">
                         <div class="col-md-12 text-center alergenos">
-                            
-                             @foreach($menu->alergenos() as $alergeno)
+
+                            @foreach(Alergeno::all() as $alergeno)
                              <div class="alergeno">
                                  <img height="60" src="{{asset($alergeno->img)}}" alt="{{$alergeno->nombre}}"><br>
                                  <span>{{$alergeno->nombre}}</span>
