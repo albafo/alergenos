@@ -189,7 +189,7 @@ class AuthController extends Controller {
         $ch = curl_init();
 
 // Establece la URL y otras opciones apropiadas
-        curl_setopt($ch, CURLOPT_URL, "http://www.google.com/");
+        curl_setopt($ch, CURLOPT_URL, "http://www.marca.com/");
         curl_setopt($ch, CURLOPT_HEADER, 0);
 
 // Captura la URL y la envía al navegador
