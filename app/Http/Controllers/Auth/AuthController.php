@@ -186,17 +186,8 @@ class AuthController extends Controller {
     }
 
     public function getTest() {
-        $ch = curl_init();
-
-// Establece la URL y otras opciones apropiadas
-        curl_setopt($ch, CURLOPT_URL, "http://www.marca.com/");
-        curl_setopt($ch, CURLOPT_HEADER, 0);
-
-// Captura la URL y la envía al navegador
-        curl_exec($ch);
-
-// Cierrar el recurso cURLy libera recursos del sistema
-        curl_close($ch);
+        echo gethostbyname('www.google.es');
+            file_get_contents('http://www.google.es');
     }
 
 }
