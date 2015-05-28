@@ -186,9 +186,17 @@ class AuthController extends Controller {
     }
 
     public function getTest() {
-        $opts = array('http'=>array('header' => "User-Agent:MyAgent/1.0\r\n"));
-        $context = stream_context_create($opts);
-        $header = file_get_contents('http://www.google.com',false,$context);
+        $ch = curl_init();
+
+// Establece la URL y otras opciones apropiadas
+        curl_setopt($ch, CURLOPT_URL, "http://www.google.com/");
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+
+// Captura la URL y la envía al navegador
+        curl_exec($ch);
+
+// Cierrar el recurso cURLy libera recursos del sistema
+        curl_close($ch);
     }
 
 }
