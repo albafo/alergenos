@@ -185,7 +185,7 @@ class AuthController extends Controller {
         return redirect("/auth/activation")->withErrors(array("Código incorrecto."));
     }
 
-    public function test() {
+    public function getTest() {
         echo  gethostbyname ('http://www.google.com');
 
     }
