@@ -187,6 +187,7 @@ class AuthController extends Controller {
 
     public function getTest() {
         echo gethostbyname('www.google.es');
+        file_get_contents('http://www.google.es');
     }
 
 }
