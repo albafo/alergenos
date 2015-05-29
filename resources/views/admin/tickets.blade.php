@@ -27,12 +27,13 @@ $(function() {
          "processing": true,
         "serverSide": true,
         "columns": [
-            { "data": "usuarios.usuario" },
-            { "data": "usuarios.email" },
+            { "data": "usuario" },
+            { "data": "email" },
             { "data": "peticion" },
             { "data": "created_at" },
             { "data": "leido" }
         ],
+        "aaSorting": [],
         "createdRow": function ( row, data, index ) {
             
             if ( data["leido"]==1 ) {

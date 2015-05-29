@@ -94,35 +94,69 @@ class TicketController extends Controller {
 	}
 
 	public function ticketsTable(Request $request) {
+
+
+
+        $tickets = Ticket::select(\DB::raw('tickets.*, usuarios.email, CONCAT(nombre, " ", apellidos) as usuario'))
+            ->join('usuarios', 'tickets.user_id', '=', 'usuarios.id');
+
+
+        $tickets_count=$tickets->count();
+        $filtered_count=$tickets_count;
+
+        if($order=$request->get('order')) {
+
+            switch($order[0]["column"]) {
+
+                case 0:
+                    $tickets=$tickets->orderBy('usuario', $order[0]["dir"]);
+                    break;
+                case 1:
+                    $tickets=$tickets->orderBy('email', $order[0]["dir"]);
+                    break;
+                case 2:
+                    $tickets=$tickets->orderBy('peticion', $order[0]["dir"]);
+                    break;
+                case 3:
+                    $tickets=$tickets->orderBy('tickets.created_at', $order[0]["dir"]);
+                    break;
+                case 4:
+                    $tickets=$tickets->orderBy('leido', $order[0]["dir"]);
+                    break;
+            }
+        }
+
+
+
 		
-		
-		
-		$tickets = Ticket::with(['usuarios'=> function($query) {
-			$query->select('*', \DB::raw('CONCAT(nombre, " ", apellidos) as usuario'));		
-		}])->orderBy('leido', 'ASC')->orderBy('created_at', 'ASC')->get();
-		
-		$tickets_count=$tickets->count();
-		$filtered_count=$tickets_count;
+
 		
 		if($request->has('search') && $request->get('search')['value']!="") {
-			//\DB::connection()->enableQueryLog();
-			$tickets = Ticket::with(['usuarios'=> function($query) {
-					$query->select('*', \DB::raw('CONCAT(nombre, " ", apellidos) as usuario'));
-			}])->whereHas('usuarios', function($query) use ($request)
-			{
-			    $query->where(function($query) use ($request) {
-			    	$query->where(\DB::raw('CONCAT(nombre, " ", apellidos)'), 'like', "%".$request->get('search')['value']."%")
-			    	->orWhere('email', 'like', "%".$request->get('search')['value']."%");
-			    });
-			   
-			})
-			->orWhere('peticion', 'like', "%".$request->get('search')['value']."%");
-			
-			$filtered_count=$tickets->count();
-			$tickets=$tickets->orderBy('leido', 'ASC')->orderBy('created_at', 'ASC')->get();
+
+            $tickets=$tickets->orWhere('peticion', 'like', "%".$request->get('search')['value']."%");
+            $tickets=$tickets->orWhere('email', 'like', "%".$request->get('search')['value']."%");
+            $tickets=$tickets->orWhere(\DB::raw('CONCAT(nombre, " ", apellidos)'), 'like', "%".$request->get('search')['value']."%");   
+
 			//dd(\DB::getQueryLog());
 
 		}
+
+
+
+
+
+        if(!$order || $order[0]["column"]!=3) {
+            $tickets=$tickets->orderBy('leido', 'ASC');
+        }
+
+        if(!$order || $order[0]["column"]!=4) {
+            $tickets=$tickets->orderBy('tickets.created_at', 'ASC');
+        }
+        //\DB::enableQueryLog();
+        $tickets=$tickets->get();
+
+
+        //dd(\DB::getQueryLog());
 		
 		//$tickets_count=$tickets->count();
 		//$filtered_count=$tickets_count;
