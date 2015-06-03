@@ -4,8 +4,8 @@ use Symfony\Component\HttpFoundation\Request;
 
 class NoCaptcha {
 
-	const CLIENT_API = 'https://74.125.140.94/recaptcha/api.js';
-	const VERIFY_URL = 'https://74.125.140.94/recaptcha/api/siteverify';
+	const CLIENT_API = 'https://www.google.com/recaptcha/api.js';
+	const VERIFY_URL = 'https://www.google.com/recaptcha/api/siteverify';
 
 	/**
 	 * //
@@ -40,6 +40,7 @@ class NoCaptcha {
 	 */
 	public function display($attributes = [], $lang = null)
 	{
+
 		$attributes['data-sitekey'] = $this->sitekey;
 
 		$html  = '<script src="'.$this->getJsLink($lang).'" async defer></script>'."\n";

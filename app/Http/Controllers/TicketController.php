@@ -135,7 +135,7 @@ class TicketController extends Controller {
 
             $tickets=$tickets->orWhere('peticion', 'like', "%".$request->get('search')['value']."%");
             $tickets=$tickets->orWhere('email', 'like', "%".$request->get('search')['value']."%");
-            $tickets=$tickets->orWhere(\DB::raw('CONCAT(nombre, " ", apellidos)'), 'like', "%".$request->get('search')['value']."%");   
+            $tickets=$tickets->orWhere(\DB::raw('CONCAT(nombre, " ", apellidos)'), 'like', "%".$request->get('search')['value']."%");
 
 			//dd(\DB::getQueryLog());
 
