@@ -425,31 +425,7 @@ jQuery(function($) {
     });
     
     
-    $( ".lista-categorias" ).sortable({
-        axis: "y",
-        items: "div[id^='categoria-']",
-        update: function( event, ui ) {
-            var data = $(this).sortable('toArray');
-           
-            $.post("{{url('categoria/reordenar/'.$menu->id)}}", {'_token':'{{csrf_token()}}', 'data':data}, function() {
-                 $('#mensajes-platos-ok').bootstrapAlert({
-                        title:"Enhorabuena!",
-                        messages:['Categorías reordenadas con éxito'],
-                        type:'success',
-                        time:5000
-                    });
-            }).fail(function(data) {
-                $('#mensajes-platos-ok').bootstrapAlert({
-                        title:"Error!",
-                        messages:['Fallo al conectar con el servidor.'],
-                        type:'danger',
-                        time:5000
-                    });
-            }, "json");
-        }
-        
-    });
-    
+
     $('body').on('click', "[id^='plato-']", function(e) {
        var id_plato=$(this).attr('id').split("-")[1];
        obtener_ingredientes(id_plato);
@@ -592,32 +568,65 @@ jQuery(function($) {
         }
     });
 
-    
-    
-    $( ".lista-platos" ).sortable({
-        axis: "y",
-        items: "div[id^='plato-']",
-        update: function( event, ui ) {
-            var data = $(this).sortable('toArray');
-           
-            $.post("{{url('plato/reordenar')}}/"+selectedCat, {'_token':'{{csrf_token()}}', 'data':data}, function() {
-                 $('#mensajes-platos-ok').bootstrapAlert({
-                        title:"Enhorabuena!",
-                        messages:['Platos reordenados con éxito'],
-                        type:'success',
-                        time:5000
+    if($(window).width()>770) {
+
+        $(".lista-categorias").sortable({
+            axis: "y",
+            items: "div[id^='categoria-']",
+            update: function (event, ui) {
+                var data = $(this).sortable('toArray');
+
+                $.post("{{url('categoria/reordenar/'.$menu->id)}}", {
+                    '_token': '{{csrf_token()}}',
+                    'data': data
+                }, function () {
+                    $('#mensajes-platos-ok').bootstrapAlert({
+                        title: "Enhorabuena!",
+                        messages: ['Categorías reordenadas con éxito'],
+                        type: 'success',
+                        time: 5000
                     });
-            }).fail(function(data) {
-                $('#mensajes-platos-ok').bootstrapAlert({
-                        title:"Error!",
-                        messages:['Fallo al conectar con el servidor.'],
-                        type:'danger',
-                        time:5000
+                }).fail(function (data) {
+                    $('#mensajes-platos-ok').bootstrapAlert({
+                        title: "Error!",
+                        messages: ['Fallo al conectar con el servidor.'],
+                        type: 'danger',
+                        time: 5000
                     });
-            }, "json");
-        }
-        
-    });   
+                }, "json");
+            }
+
+        });
+
+
+        $(".lista-platos").sortable({
+            axis: "y",
+            items: "div[id^='plato-']",
+            update: function (event, ui) {
+                var data = $(this).sortable('toArray');
+
+                $.post("{{url('plato/reordenar')}}/" + selectedCat, {
+                    '_token': '{{csrf_token()}}',
+                    'data': data
+                }, function () {
+                    $('#mensajes-platos-ok').bootstrapAlert({
+                        title: "Enhorabuena!",
+                        messages: ['Platos reordenados con éxito'],
+                        type: 'success',
+                        time: 5000
+                    });
+                }).fail(function (data) {
+                    $('#mensajes-platos-ok').bootstrapAlert({
+                        title: "Error!",
+                        messages: ['Fallo al conectar con el servidor.'],
+                        type: 'danger',
+                        time: 5000
+                    });
+                }, "json");
+            }
+
+        });
+    }
     
     
 });
