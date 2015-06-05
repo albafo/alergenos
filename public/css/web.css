@@ -145,6 +145,12 @@ body[class*='page-menu-menu-pdf'], body[class*='page-menu-preview'] .container
 
 
 
+
+.table {
+    page-break-inside: avoid;
+
+}
+
 .menu-template-1 {
     background-color:#fff !important;
     font-family: 'Muli', sans-serif !important;

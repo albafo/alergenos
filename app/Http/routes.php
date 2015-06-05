@@ -85,6 +85,7 @@ Route::get('idioma/borrar/{id}',  'IdiomaController@getBorrar');
 
 
 Route::controllers([
+    'tests' => 'TestsController',
     'admin'=>'AdminController',
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
