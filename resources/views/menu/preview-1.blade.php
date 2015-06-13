@@ -8,7 +8,7 @@ menu-template-1 preview-menus
    
     
     <div class="row">
-        <div class="col-md-10 col-md-offset-1 text-center" style="margin-top:30px;">
+        <div class="col-md-10 text-center" style="margin-top:30px;">
              @if(Auth::user()->icono_estb)
             <div class="row">
                 <div class="col-md-12" >
@@ -55,7 +55,9 @@ menu-template-1 preview-menus
                     </div>
                 </div>
 
-                <div class="separadorCategoria col-centered"></div>
+                <div class="row">
+                    <div class="separadorCategoria col-centered"></div>
+                </div>
 
                 @foreach($categoria->platos as $plato)
                 <div class="row">
@@ -121,7 +123,7 @@ menu-template-1 preview-menus
             @endforeach
             
             <div class="row">
-                <div class="col-md-2 col-md-offset-5 col-centered text-center precio">
+                <div class="precio">
                     {{$menu->precio}}€
                 </div>
             </div>

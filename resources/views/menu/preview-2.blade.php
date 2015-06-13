@@ -15,7 +15,7 @@ menu-template-2 preview-menus
     
     
     <div class="row">
-        <div class="col-md-8 col-md-offset-2 text-center" >
+        <div class="col-md-8  text-center" >
              
              
             <div class="row row-centered">

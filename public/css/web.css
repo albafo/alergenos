@@ -414,7 +414,9 @@ body[class*='page-menu-menu-pdf'], body[class*='page-menu-preview'] .container
   color: #fff;
   font-weight: bold;
   font-size: 50px;
-  max-width:25%;
+    max-width: 25%;
+    margin:0 auto;
+    margin-top: 25px;
 }
 
 .menu-template-1 .alergeno {
