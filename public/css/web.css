@@ -143,7 +143,10 @@ body[class*='page-menu-menu-pdf'], body[class*='page-menu-preview'] .container
 
 /*PLANTILLA MENU DIARIO*/
 
-
+.preview-menus {
+    width: 21cm !important;
+    margin: 0 auto;
+}
 
 .categoria-total {
     page-break-inside: avoid;

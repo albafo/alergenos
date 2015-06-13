@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('class-body')
-menu-template-2
+menu-template-2 preview-menus
 @endsection
 
 @section('content')
