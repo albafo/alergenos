@@ -55,7 +55,7 @@
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/') }}">{{trans('web.inicio')}}</a></li>
+					<li><a href="{{ url('/') }}"><i class="glyphicon glyphicon-home"></i> {{trans('web.inicio')}}</a></li>
 					
 					@if(!Auth::guest() && Auth::user()->tipo=="user" && Session::has('auth-admin') && Session::get('auth-admin')->tipo=="admin")
 					<li><a href="{{ url('admin/usuarios') }}">{{trans('web.admin')}}</a></li>
@@ -68,7 +68,7 @@
 						<li><a href="{{ url('/auth/register') }}">{{trans('web.registro')}}</a></li>
 					@else
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->nombre }} <span class="caret"></span></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="glyphicon glyphicon-pencil"></i> {{ Auth::user()->nombre }} <span class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu">
 								<li><a href="{{ url('usuario/datos') }}">{{trans('web.misDatos')}}</a></li>
 								<li><a href="{{ url('/auth/logout') }}">{{trans('web.salir')}}</a></li>

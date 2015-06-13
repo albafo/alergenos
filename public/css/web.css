@@ -541,8 +541,18 @@ body[class*='page-admin-ingredientes'] #listaIngredientes p:hover {
 }
 
 .navbar-nav>li>a {
+    color: #ffffff !important;
     padding-top:3px !important;
     padding-bottom:3px !important;
+}
+
+.navbar-nav>li>a:hover {
+    color:#777 !important;
+}
+@media (max-width: 767px) {
+    .navbar-default .navbar-nav .open .dropdown-menu>li>a {
+    color: #fff !important;
+    }
 }
 
 .navbar-default {
