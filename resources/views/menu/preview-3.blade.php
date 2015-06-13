@@ -92,13 +92,13 @@ menu-template-3
                                 </td>
                                 <td>
                                     @foreach($plato->alergenos() as $alergeno)
-                                    <span><img height="40" src="{{asset($alergeno->img)}}" alt="{{$alergeno->nombre}}"></span>
+                                    <span><img width="30" src="{{asset($alergeno->img)}}" alt="{{$alergeno->nombre}}"></span>
                                     @endforeach
 
                                         @if(count($plato->customAlergenos($menu->id))>0)
 
                                             @foreach($plato->customAlergenos($menu->id) as $alergeno)
-                                                <span><img height="40" src="{{asset($alergeno->img)}}" alt="{{$alergeno->nombre}}"></span>
+                                                <span><img width="30" src="{{asset($alergeno->img)}}" alt="{{$alergeno->nombre}}"></span>
                                             @endforeach
 
                                         @endif
