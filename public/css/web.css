@@ -145,11 +145,10 @@ body[class*='page-menu-menu-pdf'], body[class*='page-menu-preview'] .container
 
 
 
-
-.table {
+.categoria-total {
     page-break-inside: avoid;
-
 }
+
 
 .menu-template-1 {
     background-color:#fff !important;

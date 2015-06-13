@@ -36,87 +36,88 @@ menu-template-1
             </div>
             
              @foreach($menu->categorias->sortBy('orden') as $categoria)
+            <div class="categoria-total">
+                <div class="row">
+                    <div class="col-md-12 categoriaPlato">
+                        {{$categoria->nombre}}
+                        @if($traduccion)
 
-            <div class="row">
-                <div class="col-md-12 categoriaPlato">
-                    {{$categoria->nombre}}
-                    @if($traduccion)
-                        
-                        @foreach(\App\Idioma::all() as $idioma)
-                       
-                            @if($categoria->hasTraduccion($idioma->id))
-                                - {{ $categoria->traduccion()->find($idioma->id)->pivot->content }}
-                            @endif
-                            
-                        @endforeach
-                        
-                    
-                    @endif
-                </div>
-            </div>
-           
-            <div class="separadorCategoria col-centered"></div>
-
-            @foreach($categoria->platos as $plato)
-            <div class="row">
-                <div class="col-md-12 plato">
-                    <span>{{$plato->nombre}}</span>
-                    @if($traduccion)
-                        <br><span class="platosTraduccion">(
                             @foreach(\App\Idioma::all() as $idioma)
 
-                                @if($plato->hasTraduccion($idioma->id))
-                                    <span class="traduccion">{{ $plato->traduccion()->find($idioma->id)->pivot->content }}</span>
+                                @if($categoria->hasTraduccion($idioma->id))
+                                    - {{ $categoria->traduccion()->find($idioma->id)->pivot->content }}
                                 @endif
 
                             @endforeach
-                            )
-                        </span>
 
-                    @endif
-                    @if($plato->numIngVisibles()>0)
-                        <br>
-                        <i>(
-                            <?php $i=0; ?>
-                            @foreach($plato->ingredientes as $ingrediente)
-                                @if($ingrediente->plato()->find($plato->id)->pivot->visible_home)
-                                    @if($i>0)
-                                        ,
+
+                        @endif
+                    </div>
+                </div>
+
+                <div class="separadorCategoria col-centered"></div>
+
+                @foreach($categoria->platos as $plato)
+                <div class="row">
+                    <div class="col-md-12 plato">
+                        <span>{{$plato->nombre}}</span>
+                        @if($traduccion)
+                            <br><span class="platosTraduccion">(
+                                @foreach(\App\Idioma::all() as $idioma)
+
+                                    @if($plato->hasTraduccion($idioma->id))
+                                        <span class="traduccion">{{ $plato->traduccion()->find($idioma->id)->pivot->content }}</span>
                                     @endif
-                                    {{$ingrediente->nombre}}
-                                    @if($traduccion)
-                                    @foreach(\App\Idioma::all() as $idioma)
-                                        @if($ingrediente->hasTraduccion($idioma->id))
-                                                / {{$ingrediente->traduccion()->find($idioma->id)->pivot->content}}
+
+                                @endforeach
+                                )
+                            </span>
+
+                        @endif
+                        @if($plato->numIngVisibles()>0)
+                            <br>
+                            <i>(
+                                <?php $i=0; ?>
+                                @foreach($plato->ingredientes as $ingrediente)
+                                    @if($ingrediente->plato()->find($plato->id)->pivot->visible_home)
+                                        @if($i>0)
+                                            ,
                                         @endif
-                                    @endforeach
+                                        {{$ingrediente->nombre}}
+                                        @if($traduccion)
+                                        @foreach(\App\Idioma::all() as $idioma)
+                                            @if($ingrediente->hasTraduccion($idioma->id))
+                                                    / {{$ingrediente->traduccion()->find($idioma->id)->pivot->content}}
+                                            @endif
+                                        @endforeach
+                                        @endif
+                                        <?php $i++;?>
                                     @endif
-                                    <?php $i++;?>
-                                @endif
-                            @endforeach
-                            )</i>
-                    @endif
-                    @foreach($plato->alergenos() as $alergeno)
-                    <span><img height="40" src="{{asset($alergeno->img)}}" alt="{{$alergeno->nombre}}"></span>
-                    @endforeach
-
-                    @if(count($plato->customAlergenos($menu->id))>0)
-
-                        @foreach($plato->customAlergenos($menu->id) as $alergeno)
-                            <span><img height="40" src="{{asset($alergeno->img)}}" alt="{{$alergeno->nombre}}"></span>
+                                @endforeach
+                                )</i>
+                        @endif
+                        @foreach($plato->alergenos() as $alergeno)
+                        <span><img height="40" src="{{asset($alergeno->img)}}" alt="{{$alergeno->nombre}}"></span>
                         @endforeach
 
-                    @endif
+                        @if(count($plato->customAlergenos($menu->id))>0)
+
+                            @foreach($plato->customAlergenos($menu->id) as $alergeno)
+                                <span><img height="40" src="{{asset($alergeno->img)}}" alt="{{$alergeno->nombre}}"></span>
+                            @endforeach
+
+                        @endif
 
 
 
 
 
 
+                    </div>
                 </div>
-            </div>
-            @endforeach
-            
+                @endforeach
+
+             </div>
             @endforeach
             
             <div class="row">
