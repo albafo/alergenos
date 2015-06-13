@@ -5,6 +5,7 @@
         <tr>
             <th>Nombre</th>
             <th>Apellidos</th>
+            <th>Establecimiento</th>
             <th>Email</th>
             <th>Fecha de alta</th>
             <th>Caduca</th>
@@ -16,6 +17,7 @@
         <tr>
             <th>Nombre</th>
             <th>Apellidos</th>
+            <th>Establecimiento</th>
             <th>Email</th>
             <th>Fecha de alta</th>
             <th>Caduca</th>
@@ -39,6 +41,7 @@ $(function() {
         "columns": [
             { "data": "nombre" },
             { "data": "apellidos" },
+            { "data": "nombre_establ" },
             { "data": "email" },
             { "data": "created_at" },
             { "data": "expired_at" },

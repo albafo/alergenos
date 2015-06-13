@@ -27,6 +27,7 @@ class UsuarioController extends Controller {
 			$users=$users->where(function($query) use ($request) {
   				$query->orWhere('nombre', 'like', "%".$request->get('search')['value']."%")
   					->orWhere('apellidos', 'like', "%".$request->get('search')['value']."%")
+                    ->orWhere('nombre_establ', 'like', "%".$request->get('search')['value']."%")
   					->orWhere('email', 'like', "%".$request->get('search')['value']."%");
 			});
 			$filtered_count=$users->count();
