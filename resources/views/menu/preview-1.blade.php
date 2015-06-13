@@ -97,13 +97,13 @@ menu-template-1 preview-menus
                                 )</i>
                         @endif
                         @foreach($plato->alergenos() as $alergeno)
-                        <span><img width="30" src="{{asset($alergeno->img)}}" alt="{{$alergeno->nombre}}"></span>
+                        <span><img class="preview-ico-alergeno" src="{{asset($alergeno->img)}}" alt="{{$alergeno->nombre}}"></span>
                         @endforeach
 
                         @if(count($plato->customAlergenos($menu->id))>0)
 
                             @foreach($plato->customAlergenos($menu->id) as $alergeno)
-                                <span><img width="30" src="{{asset($alergeno->img)}}" alt="{{$alergeno->nombre}}"></span>
+                                <span><img class="preview-ico-alergeno" src="{{asset($alergeno->img)}}" alt="{{$alergeno->nombre}}"></span>
                             @endforeach
 
                         @endif

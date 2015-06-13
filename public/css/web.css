@@ -148,6 +148,11 @@ body[class*='page-menu-menu-pdf'], body[class*='page-menu-preview'] .container
     margin: 0 auto;
 }
 
+.preview-ico-alergeno {
+    width: 30px;
+    margin-top: 5px;
+}
+
 .categoria-total {
     page-break-inside: avoid;
 }
