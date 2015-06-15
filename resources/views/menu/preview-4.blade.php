@@ -116,7 +116,7 @@ menu-template-4 preview-menus
 
                             @foreach(Alergeno::all() as $alergeno)
                              <div class="alergeno">
-                                 <img height="60" src="{{asset($alergeno->img)}}" alt="{{$alergeno->nombre}}"><br>
+                                 <img height="40" src="{{asset($alergeno->img)}}" alt="{{$alergeno->nombre}}"><br>
                                  <span>{{$alergeno->nombre}}</span>
                                  @if($traduccion)
                                      @foreach(\App\Idioma::all() as $idioma)
