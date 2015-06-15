@@ -162,6 +162,10 @@ body[class*='page-menu-menu-pdf'], body[class*='page-menu-preview'] .container
     page-break-inside: avoid;
 }
 
+td {
+    page-break-inside: avoid;
+}
+
 
 .menu-template-1 {
     background-color:#fff !important;
