@@ -50,7 +50,7 @@
             </div>
         </div>
     </div>
-</<div>
+</div>
 <script>
     $(document).ready(function(){
        $('.caja-menu').click(function(){

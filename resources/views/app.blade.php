@@ -33,8 +33,10 @@
 	<script src="{{asset('bootstrap-fileinput/js/fileinput.min.js')}}" type="text/javascript"></script>
 	<script type="text/javascript" language="javascript" src="http://cdn.datatables.net/1.10.6/js/jquery.dataTables.min.js"></script>
 	<script type="text/javascript" language="javascript" src="http://cdn.datatables.net/plug-ins/1.10.6/integration/bootstrap/3/dataTables.bootstrap.js"></script>
+    <script src="{{asset('js/albafo.typeahead.js')}}"></script>
 
-	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>
 		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -60,6 +62,9 @@
 					@if(!Auth::guest() && Auth::user()->tipo=="user" && Session::has('auth-admin') && Session::get('auth-admin')->tipo=="admin")
 					<li><a href="{{ url('admin/usuarios') }}">{{trans('web.admin')}}</a></li>
 					@endif
+                    @if(!Auth::guest() && Auth::user()->tipo=="user" && Session::has('auth-tecnico') && Session::get('auth-tecnico')->tipo=="tecnico")
+                        <li><a href="{{ url('admin/usuarios') }}">{{trans('web.admin')}}</a></li>
+                    @endif
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">

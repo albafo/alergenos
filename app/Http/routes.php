@@ -27,11 +27,12 @@ Route::post('plato/store/{id_cat}', 'PlatoController@store');
 Route::get('plato/datos/{id_plato}/{id_cat}', 'PlatoController@datos');
 Route::post('plato/update/{id_plato}', 'PlatoController@update');
 Route::post('plato/update/{id_plato}/{id_cat}', 'PlatoController@update');
-
 Route::post('plato/destroy/{id_plato}/{id_cat}', 'PlatoController@destroy');
 Route::post('plato/reordenar/{id_cat}', 'PlatoController@reordenar');
 Route::get('plato/ingredientes/{id_plato}', 'PlatoController@showIngredientes');
 Route::get('plato/idiomas/{id_plato}', 'PlatoController@idiomas');
+Route::get('plato/all', 'PlatoController@all');
+
 
 Route::get('ingrediente/buscar-letra/{char}', 'IngredienteController@showByChar');
 Route::get('ingrediente/buscar-letra-alerg/{char}', 'IngredienteController@showByCharAlerg');
@@ -87,6 +88,7 @@ Route::get('idioma/borrar/{id}',  'IdiomaController@getBorrar');
 Route::controllers([
     'tests' => 'TestsController',
     'admin'=>'AdminController',
+    'tecnico'=>'TecnicoController',
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
     'menu'  =>  'MenuController'

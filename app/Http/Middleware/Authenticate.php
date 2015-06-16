@@ -72,24 +72,44 @@ class Authenticate {
             $this->auth->logout();
             return response("Usuario desactivado", 401);
         }
-		
-		if($this->auth->user()->tipo=="admin") {
-		
-			if($request->is("admin/usuarios*") || $request->is("usuario/datos*")) {
-				
-				return $next($request);
-			}
-			if($request->is("admin/usuario/*")) {
-				\Session::put("auth-admin", $this->auth->user());
-				$this->auth->loginUsingId($request->id);
-				return $next($request);
-			}
-			return redirect()->guest('admin');
-		}
-		
-		
-        
-        //Activar cuando esté el envío por mail
+
+        if($this->auth->user()->tipo=="admin") {
+
+            if($request->is("admin/usuarios*") || $request->is("usuario/datos*")) {
+
+                return $next($request);
+            }
+            if($request->is("admin/usuario/*")) {
+                \Session::put("auth-admin", $this->auth->user());
+                $this->auth->loginUsingId($request->id);
+                return $next($request);
+            }
+            return redirect()->guest('admin');
+        }
+
+
+
+
+        if($this->auth->user()->tipo=="tecnico") {
+
+            if($request->is("admin/usuarios*") || $request->is("usuario/datos*")) {
+                return $next($request);
+            }
+
+            if($request->is("admin/usuario/*")) {
+                \Session::put("auth-tecnico", $this->auth->user());
+                $this->auth->loginUsingId($request->id);
+                return $next($request);
+            }
+
+            return redirect()->guest('tecnico');
+
+        }
+
+
+
+
+            //Activar cuando esté el envío por mail
         /* 
          * Realiza la verificación de si el usuario ha confirmado su cuenta.    
          * 

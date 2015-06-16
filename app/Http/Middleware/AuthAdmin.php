@@ -28,6 +28,7 @@ class AuthAdmin {
 	
 	public function handle($request, Closure $next)
 	{
+
 	
 		if(\Session::has('auth-admin')) {
 			
@@ -35,8 +36,15 @@ class AuthAdmin {
 			$this->auth->loginUsingId($auth_admin->id);
 
 		}
+
+        if(\Session::has('auth-tecnico')) {
+
+            $auth_admin=\Session::get('auth-tecnico');
+            $this->auth->loginUsingId($auth_admin->id);
+
+        }
 		
-		if ($this->auth->guest() || $this->auth->user()->tipo!="admin")
+		if ($this->auth->guest() || $this->auth->user()->tipo=="user" || ($this->auth->user()->tipo=="tecnico" && !$request->is("admin/usuarios*")))
 		{
 			
 

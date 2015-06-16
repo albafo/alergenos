@@ -17,6 +17,12 @@
             </div>
             <div class="modal-body">
                 <form id="formPlato">
+
+                    @if((Session::has('auth-admin') && (Session::get('auth-admin')->tipo=="admin")) || (Session::has('auth-tecnico') && Session::get('auth-tecnico')->tipo=="tecnico"))
+                    <div class="form-group">
+                        <input type="text" class="form-control"  id="platosUsuarios" placeholder="Búsqueda de platos">
+                    </div>
+                    @endif
                     <div class="form-group">
                         <select class="form-control" name="platoAdded" id="platosList">
                           <option value="0">Platos ya añadidos</option>
@@ -58,9 +64,18 @@
     </div>
     <script>
         $(function() {
+
             $('body').on('change', '#platosList', function() {
                 $('#inputNombrePlato').val($(this).find(":selected").text());
             });
+
+            @if((Session::has('auth-admin') && (Session::get('auth-admin')->tipo=="admin")) || (Session::has('auth-tecnico') && Session::get('auth-tecnico')->tipo=="tecnico"))
+            $('#platosUsuarios').typeahead({
+                "url":"{{url("plato/all")}}",
+                "stringAttribute" : "nombre"
+
+            });
+            @endif
         });
     </script>
 </div>

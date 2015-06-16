@@ -42,8 +42,20 @@ class PlatoController extends Controller {
 	 */
 	public function store(CreateNewPlato $request, $id_cat)
 	{
-		
-		if($request->has('platoAdded') && $request->get('platoAdded')!=0) {
+
+        if($request->has("typeahead") && $request->get('typeahead')!= "off") {
+            $platoCopy = Plato::find($request->get('typeahead'));
+            $plato = new Plato;
+            $plato->fill($platoCopy->toArray());
+            $plato->save();
+            $ingredientes = $platoCopy->ingredientes;
+            foreach($ingredientes as $ingrediente) {
+                $plato->ingredientes()->attach($ingrediente->id);
+            }
+
+        }
+
+		else if($request->has('platoAdded') && $request->get('platoAdded')!=0) {
 		    if(\Auth::id()!=Plato::find($request->get('platoAdded'))->categoria()->first()->menu->user_id) {
 		        abort(403);
 		    }
@@ -345,5 +357,11 @@ class PlatoController extends Controller {
 		else abort(403);
 	}
 
+    public function all()
+    {
+        $filter = $_GET["filter"];
+        $platos = Plato::where("nombre", "like", "%$filter%")->get();
+        return $platos;
+    }
 
 }

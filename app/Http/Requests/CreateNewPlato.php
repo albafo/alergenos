@@ -22,11 +22,20 @@ class CreateNewPlato extends Request {
 	 */
 	public function rules()
 	{
-        
-		return [
-            'nombre' => 'required|min:4|max:255',
-            'precio' => 'numeric'
-        ];
+        if(Request::has("typeahead") && Request::get('typeahead')!= "off") {
+            return [
+
+                'precio' => 'numeric'
+            ];
+        }
+        else {
+
+            return [
+                'nombre' => 'required|min:4|max:255',
+                'precio' => 'numeric'
+            ];
+
+        }
 	}
     
     public function update_request() {
