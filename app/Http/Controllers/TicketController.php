@@ -211,5 +211,33 @@ class TicketController extends Controller {
 		$ticket=Ticket::find($id)->delete();
 		return redirect('admin/tickets')->withOk("Eliminado con éxito");
 	}
-	
+
+
+    public function resolved($id) {
+        $ticket=Ticket::find($id);
+        $emailUser = $ticket->usuarios->email;
+        $ticket->resuelto=1;
+        $ticket->save();
+
+        $data = [
+
+            'fecha'=>date("d/M/Y H:i", time()),
+            'nombre_usuario'=>$ticket->usuarios->nombre,
+            'email_usuario'=>$emailUser,
+            'descripcion'=>$this->peticion
+
+        ];
+
+        \Mail::send('mail.ticketSolved', ['data'=>$data], function($msg) use ($emailUser) {
+
+            $firstAdmin = User::whereTipo("admin")->first();
+            $msg->to($emailUser->email, $firstAdmin->nombre);
+            $msg->from('info@alergias-hosteleria.com', '');
+            $msg->subject("Ticket resuelto satisfactoriamente");
+
+
+        });
+
+        return redirect('admin/tickets')->withOk("Ticket resuelto. Email enviado al usuario.");
+    }
 }

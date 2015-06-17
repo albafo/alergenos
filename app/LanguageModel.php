@@ -12,6 +12,11 @@ use Illuminate\Database\Eloquent\Model;
 
 
 
+/**
+ * app\LanguageModel
+ *
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Idioma[] $traduccion
+ */
 class LanguageModel extends Model{
 
     public function traduccion() {

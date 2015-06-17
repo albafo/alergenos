@@ -3,6 +3,25 @@
 use Illuminate\Database\Eloquent\Model;
 
 
+/**
+ * App\Ticket
+ *
+ * @property integer $id
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @property string $peticion
+ * @property integer $user_id
+ * @property boolean $leido
+ * @property boolean $resuelto
+ * @property-read \App\User $usuarios
+ * @method static \Illuminate\Database\Query\Builder|\App\Ticket whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Ticket whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Ticket whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Ticket wherePeticion($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Ticket whereUserId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Ticket whereLeido($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Ticket whereResuelto($value)
+ */
 class Ticket extends Model {
 
 	public function usuarios() {

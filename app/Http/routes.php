@@ -74,6 +74,7 @@ Route::get('user/renew',  'UsuarioController@renew');
 Route::get('admin/ticketsTable',  'TicketController@ticketsTable');
 Route::get('admin/ticket/{id}',  'TicketController@getTicket');
 Route::get('admin/ticket/noReaded/{id}',  'TicketController@removeReaded');
+Route::get('admin/ticket/resolved/{id}',  'TicketController@resolved');
 Route::get('admin/ticket/delete/{id}',  'TicketController@remove');
 Route::get('idiomas',  'IdiomaController@getIndex');
 Route::post('idioma/nuevo',  'IdiomaController@postNuevo');

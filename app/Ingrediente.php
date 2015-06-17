@@ -2,6 +2,22 @@
 
 use \App\LanguageModel;
 
+/**
+ * App\Ingrediente
+ *
+ * @property integer $id
+ * @property string $nombre
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Alergeno[] $alergenos
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Plato')->withPivot("visible_home[] $plato
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Menu[] $customAlergeno
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Idioma[] $traduccion
+ * @method static \Illuminate\Database\Query\Builder|\App\Ingrediente whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Ingrediente whereNombre($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Ingrediente whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Ingrediente whereUpdatedAt($value)
+ */
 class Ingrediente extends LanguageModel {
     
     

@@ -6,6 +6,50 @@ use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
+/**
+ * App\User
+ *
+ * @property integer $id
+ * @property string $nombre
+ * @property string $apellidos
+ * @property string $tipo
+ * @property string $email
+ * @property string $password
+ * @property boolean $status
+ * @property boolean $confirmed
+ * @property string $email_confirmation
+ * @property string $icono_estb
+ * @property string $direccion
+ * @property string $telefono
+ * @property string $nombre_establ
+ * @property string $expired_at
+ * @property string $remember_token
+ * @property integer $activation_code
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @property string $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Menu[] $menus
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Ticket[] $tickets
+ * @method static \Illuminate\Database\Query\Builder|\App\User whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\User whereNombre($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\User whereApellidos($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\User whereTipo($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\User whereEmail($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\User wherePassword($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\User whereStatus($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\User whereConfirmed($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\User whereEmailConfirmation($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\User whereIconoEstb($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\User whereDireccion($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\User whereTelefono($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\User whereNombreEstabl($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\User whereExpiredAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\User whereRememberToken($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\User whereActivationCode($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\User whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\User whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\User whereDeletedAt($value)
+ */
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
 
 	use Authenticatable, CanResetPassword;

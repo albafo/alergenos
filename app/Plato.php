@@ -5,6 +5,27 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\LanguageModel;
 
 
+/**
+ * App\Plato
+ *
+ * @property integer $id
+ * @property string $nombre
+ * @property float $precio
+ * @property integer $orden
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @property string $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Categoria')->withPivot('precio[] $categoria
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Ingrediente[] $ingredientes
+ * @method static \Illuminate\Database\Query\Builder|\App\Plato whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Plato whereNombre($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Plato wherePrecio($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Plato whereOrden($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Plato whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Plato whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Plato whereDeletedAt($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Idioma[] $traduccion 
+ */
 class Plato extends LanguageModel {
     
     use SoftDeletes;
