@@ -216,6 +216,7 @@ class TicketController extends Controller {
     public function resolved($id) {
         $ticket=Ticket::find($id);
         $emailUser = $ticket->usuarios->email;
+        $nameUser = $ticket->usuarios->nombre;
         $ticket->resuelto=1;
         $ticket->save();
 
@@ -228,10 +229,9 @@ class TicketController extends Controller {
 
         ];
 
-        \Mail::send('mail.ticketSolved', ['data'=>$data], function($msg) use ($emailUser) {
+        \Mail::send('mail.ticketSolved', ['data'=>$data], function($msg) use ($emailUser, $nameUser) {
 
-            $firstAdmin = User::whereTipo("admin")->first();
-            $msg->to($emailUser->email, $firstAdmin->nombre);
+            $msg->to($emailUser, $nameUser);
             $msg->from('info@alergias-hosteleria.com', '');
             $msg->subject("Ticket resuelto satisfactoriamente");
 
