@@ -224,7 +224,7 @@ class TicketController extends Controller {
             'fecha'=>date("d/M/Y H:i", time()),
             'nombre_usuario'=>$ticket->usuarios->nombre,
             'email_usuario'=>$emailUser,
-            'descripcion'=>$this->peticion
+            'descripcion'=>$ticket->peticion
 
         ];
 
