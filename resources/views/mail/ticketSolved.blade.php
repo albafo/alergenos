@@ -969,7 +969,7 @@
                                     <td class="padded" style="padding: 0;vertical-align: top;padding-left: 32px;padding-right: 32px;word-break: break-word;word-wrap: break-word">
 
                                         <p style="Margin-top: 0;color: #565656;font-family: Georgia,serif;font-size: 16px;line-height: 25px;Margin-bottom: 25px">Descripci&#243;n:&nbsp;</p>
-                                        <p style="Margin-top: 0;color: #565656;font-family: Georgia,serif;font-size: 16px;line-height: 25px;Margin-bottom: 24px">El ticket con la siguiente petición: "{{$data['descripcion']}}" ha sido resulto.</p>
+                                        <p style="Margin-top: 0;color: #565656;font-family: Georgia,serif;font-size: 16px;line-height: 25px;Margin-bottom: 24px">El ticket con la siguiente petición: "{{$data['descripcion']}}" ha sido resuelto.</p>
                                         <p>Muchas gracias por su colaboración.</p>
                                     </td>
                                 </tr>
