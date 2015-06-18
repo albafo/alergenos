@@ -12,7 +12,7 @@ use App\User;
 class UsuarioController extends Controller {
 	
 	public function __construct() {
-		$this->middleware('auth', ['except'=>'renew']);
+		$this->middleware('auth', ['except'=>array('renew', 'paid', 'postPaid')]);
 	}
 	
 	
@@ -130,6 +130,34 @@ class UsuarioController extends Controller {
 		}
 		echo "Próximamente";
 	}
+
+    public function paid($id)
+    {
+        $user = User::find($id);
+
+        if($user->password != "") {
+            return redirect("auth/login");
+        }
+        else {
+            return view('usuario.paid', ['id'=>$id]);
+        }
+    }
+
+    public function postPaid(Requests\PaidUser $request, $id)
+    {
+        $user = User::find($id);
+
+        if($user->password != "") {
+            return redirect("auth/login");
+        }
+
+        else {
+            $user->password = bcrypt($request->get("password"));
+            $user->expired_at = date('Y-m-d H:i:s', time()+env("DEFAULT_EXPIRATION_USER"));
+            $user->save();
+            return redirect("auth/login")->withOk("Usuario activado con éxito");
+        }
+    }
 
 
 

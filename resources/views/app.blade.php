@@ -70,7 +70,7 @@
 				<ul class="nav navbar-nav navbar-right">
 					@if (Auth::guest())
 						
-						<li><a href="{{ url('/auth/register') }}">{{trans('web.registro')}}</a></li>
+						<li><a href="http://www.ecede.es/formulario.php">{{trans('web.registro')}}</a></li>
 					@else
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="glyphicon glyphicon-pencil"></i> {{ Auth::user()->nombre }} <span class="caret"></span></a>
