@@ -105,6 +105,27 @@ class MenuController extends Controller {
       
         
     }
+
+    public function getExportCuadrante()
+    {
+        $snappy = App::make('snappy.pdf');
+        $view = view('menu.cuadrante');
+
+        /*return new Response(
+            $snappy->getOutputFromHtml($view),
+            200,
+            array(
+                'Content-Type'          => 'application/pdf',
+                'Content-Disposition'   => 'attachment; filename="cuadrante-platos.pdf"'
+            )
+        );*/
+
+        $view = str_replace("http://alvaro.dev:8080/web.Alergenos/public", public_path(), $view);
+
+        return \PDF::loadHTML($view)->setPaper('a4')->setOrientation('landscape')->setOption('margin-bottom', 0)->download('cuadrante-platos.pdf');
+
+
+    }
     
     
     
@@ -218,6 +239,11 @@ class MenuController extends Controller {
         Menu::find($id)->delete();
         return redirect('home')->with('ok', 'Menú eliminado con éxito');;
 	}
+
+    public function getCuadrantePlatos()
+    {
+        return view("menu.cuadrante");
+    }
 	
 
 

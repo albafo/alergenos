@@ -24,7 +24,7 @@ use App\LanguageModel;
  * @method static \Illuminate\Database\Query\Builder|\App\Plato whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Plato whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Plato whereDeletedAt($value)
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Idioma[] $traduccion 
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Idioma[] $traduccion
  */
 class Plato extends LanguageModel {
     
@@ -80,4 +80,16 @@ class Plato extends LanguageModel {
         return $i;
     }
 
+    public function hasAlergeno($idAlergeno)
+    {
+        $alergenosPlato = $this->alergenos();
+        foreach($alergenosPlato as $alergeno)
+        {
+            if($alergeno->id == $idAlergeno) {
+                return true;
+            }
+        }
+        return false;
+
+    }
 }

@@ -12,6 +12,7 @@ listado-ingredientes
        <div class="col-md-8 col-md-offset-2">
            <div class="row text-center">
                <a href="{{url('menu/export-listado')}}" type="button" class="btn btn-primary">Exportar a pdf</a>
+               <a href="{{url('menu/cuadrante-platos')}}" type="button" class="btn btn-primary">Modo cuadrante</a>
            </div>
            
            <div class="row">
@@ -26,9 +27,12 @@ listado-ingredientes
            <div class="row">
                  <div class="col-md-12">
                      
-                    <h1>Fichas de cocina</h1>
+                    <h1>Book de fichas de cocina</h1>
                 </div>
             </div>
+           <div class="row">
+               <div class="col-md-12 text-right">Documento actualizado a fecha {{strftime("%d/%m/%Y", time())}}</div>
+           </div>
             <div class="row plato">
                 <div class="col-md-12">
                     @foreach(Auth::user()->platos() as $plato) 
@@ -38,7 +42,7 @@ listado-ingredientes
                             <li class="list-group-item">
                                 {{$ingrediente->nombre}} 
                                 @foreach($ingrediente->alergenos as $alergeno) 
-                                <img height="50" src="{{asset($alergeno->img)}}" alt="{{$alergeno->nombre}}"> 
+                                <img height="40" src="{{asset($alergeno->img)}}" alt="{{$alergeno->nombre}}">
                                 @endforeach
                             </li> 
                             
@@ -52,7 +56,7 @@ listado-ingredientes
                         
                      @foreach(\Alergeno::all() as $alergeno)
                      <div class="alergeno">
-                         <img height="60" src="{{asset($alergeno->img)}}" alt="{{$alergeno->nombre}}"><br>
+                         <img height="50" src="{{asset($alergeno->img)}}" alt="{{$alergeno->nombre}}"><br>
                          <span>{{$alergeno->nombre}}</span>
                      </div>
                      @endforeach

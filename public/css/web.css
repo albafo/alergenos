@@ -692,6 +692,27 @@ body h1{
     
 }
 
+
+.page-menu-export-cuadrante .navbar-default{
+    display:none !important;
+
+}
+
+.page-menu-export-cuadrante .cabeceraLogo{
+    display:none !important;
+
+}
+
+.page-menu-export-cuadrante .btn{
+    display:none !important;
+
+}
+
+.page-menu-export-cuadrante {
+    background-color: #ffffff !important;
+}
+
+
 .page-menu-export-listado .btn{
     display:none !important;
     
@@ -700,5 +721,9 @@ body h1{
 .page-menu-export-listado {
     background-color:#fff !important;
 }
+
+table { page-break-inside:auto }
+tr    { page-break-inside:avoid; page-break-after:auto }
+
 
 

@@ -200,7 +200,9 @@ return [
 		'Image' 	=> 'Intervention\Image\Facades\Image',
 		'DateSql'	=> 'App\Librerias\DateFormat\DateSql',
 		'Ticket'	=> 'App\Ticket',
-		'Alergeno'	=> 'App\Alergeno'
+		'Alergeno'	=> 'App\Alergeno',
+        'PDF'       => 'Barryvdh\Snappy\Facades\SnappyPdf',
+
 		
 
 	],

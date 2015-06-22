@@ -21,7 +21,7 @@
         <div class="col-md-12">
             <div class="panel panel-default caja-menu ui-sortable-handle caja-link caja-href">
 
-                <div class="panel-body"><a href="{{url('menu/listado-ingredientes')}}">Fichas de cocina</a></div>
+                <div class="panel-body"><a href="{{url('menu/listado-ingredientes')}}">Book de fichas de cocina</a></div>
             </div>
         </div>
     </div>
