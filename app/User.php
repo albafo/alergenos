@@ -131,4 +131,20 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     }
 
+    public function hasCompletedMenu()
+    {
+        foreach($this->menus as $menu) {
+            $numPlatos=0;
+            foreach($menu->categorias as $categoria) {
+                foreach($categoria->platos as $plato) {
+                    $numPlatos++;
+                    if($numPlatos >= 5) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
 }

@@ -16,7 +16,7 @@
             <div class="col-md-10 col-md-offset-1">
                 <div class="row text-center">
                     <h3>Bienvenido/a a la herramienta CartaOnline</h3>
-                    <h4>Para poder empezar, necesitamos que generes tu contraseña por primera vez.</h4>
+                    <h4>Estás a punto de poder cumplir con la normativa sobre alérgenos, finaliza el registro.</h4>
                 </div>
 
                 <form class="form-horizontal" method="post" action="{{url("user/paid/{$id}")}}">
@@ -32,6 +32,31 @@
                                 <label for="password_confirmation" class="col-sm-4 control-label">Confirme contraseña</label>
                                 <div class="col-sm-4">
                                     <input type="password" name="password_confirmation" id="password_confirmation" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="col-sm-4 control-label">Establecimiento</label>
+                                <div class="col-sm-4">
+                                    <input type="text"  class="form-control" value="{{$user->nombre_establ}}" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="col-sm-4 control-label">Email</label>
+                                <div class="col-sm-4">
+                                    <input type="text"  class="form-control" value="{{$user->email}}" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="col-sm-4 control-label">Teléfono</label>
+                                <div class="col-sm-4">
+                                    <input type="text"  class="form-control" value="{{$user->telefono}}" readonly>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="password" class="col-sm-4 control-label">Persona de contacto</label>
+                                <div class="col-sm-4">
+                                    <input type="text"  class="form-control" value="{{$user->nombre}}" readonly>
                                 </div>
                             </div>
                         </div>

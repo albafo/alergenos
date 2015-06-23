@@ -244,7 +244,11 @@ class MenuController extends Controller {
     {
         return view("menu.cuadrante");
     }
-	
+
+    public function getIndex() {
+        $menus=Auth::user()->menus()->orderBy('estado', 'desc')->orderBy('created_at', 'desc')->paginate(4);
+        return view("menus", ['menus'=>$menus]);
+    }
 
 
 }

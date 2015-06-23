@@ -73,6 +73,7 @@ Route::get('iconos/{id}/{name}',  'IconoController@show');
 Route::get('user/renew',  'UsuarioController@renew');
 Route::get('user/paid/{id}', 'UsuarioController@paid');
 Route::post('user/paid/{id}', 'UsuarioController@postPaid');
+Route::get('user/manual', 'UsuarioController@getManual');
 
 Route::get('admin/ticketsTable',  'TicketController@ticketsTable');
 Route::get('admin/ticket/{id}',  'TicketController@getTicket');

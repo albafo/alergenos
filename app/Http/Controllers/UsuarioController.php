@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\EditUsuario;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 
 use App\User;
@@ -139,7 +140,7 @@ class UsuarioController extends Controller {
             return redirect("auth/login");
         }
         else {
-            return view('usuario.paid', ['id'=>$id]);
+            return view('usuario.paid', ['id'=>$id, 'user'=>$user]);
         }
     }
 
@@ -157,6 +158,14 @@ class UsuarioController extends Controller {
             $user->save();
             return redirect("auth/login")->withOk("Usuario activado con éxito");
         }
+    }
+
+    public function getManual(Response $response)
+    {
+        \Auth::getUser()->manual_downloaded = 1;
+        \Auth::getUser()->save();
+        $file = public_path() . "/pdf-docs/manual.pdf";
+        return response()->download($file, "Manual alergenos.pdf");
     }
 
 

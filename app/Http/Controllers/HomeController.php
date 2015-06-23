@@ -31,8 +31,8 @@ class HomeController extends Controller {
 	 */
 	public function index()
 	{
-        $menus=Auth::user()->menus()->orderBy('estado', 'desc')->orderBy('created_at', 'desc')->paginate(4);
-		return view('home', ['menus'=>$menus]);
+        $user = Auth::user();
+		return view('home', ['user'=>$user]);
 	}
 
 }
