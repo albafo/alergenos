@@ -12,10 +12,10 @@
         <div class="row">
             <div class="col-md-10 col-md-offset-1 text-center">
                 <div class="row">
-                    <div class="col-md-5 productoHome certificado" data-toggle="tooltip" data-placement="top" title="Podrás descargarte este certificado una vez hayas descargado el manual sobre la normativa de alérgenos y hayas completado al menos un menú en la herramienta de gestión de menús o cartas.">
+                    <div class="col-md-5 productoHome certificado" data-toggle="tooltip" data-placement="top" title="Próximamente ofreceremos este servicio.">
                         <h3>CERTIFICADO<br>acreditativo sobre normativa de alérgenos</h3>
                         @if($user->hasCompletedMenu() && $user->manual_downloaded)
-                            <a href="{{url('user/certificado')}}"></a>
+                            <a href="{{url('#')}}"></a>
 
                         @endif
                     </div>
