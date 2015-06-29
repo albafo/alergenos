@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,26 +13,26 @@
     <link href="{{ asset('/css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet">
     <link href="{{ asset('/css/bootstrap-switch.min.css') }}" rel="stylesheet">
     <link href="{{ asset('bootstrap-fileinput/css/fileinput.min.css') }}" media="all" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('css/dataTables.bootstrap.css')}}">
+	<link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/plug-ins/1.10.6/integration/bootstrap/3/dataTables.bootstrap.css">
 
 	<!-- Fonts -->
 	<link href='http://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
-    <script src="{{asset('js/jquery.min.js')}}"></script>
-    <script src="{{asset('js/jquery-ui.min.js')}}"></script>
-    <script src="{{asset('js/jquery.ui.touch-punch.min.js')}}"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="{{asset('js/jquery-ui.min.js')}}"></script>
+        <script src="{{asset('js/jquery.ui.touch-punch.min.js')}}"></script>
 
     <script src="{{asset('js/moment-with-locales.js')}}"></script>
     <script src="{{asset('js/transition.js')}}"></script>
     <script src="{{asset('js/collapse.js')}}"></script>
-    <script src="{{asset('js/bootstrap.min.js')}}"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <script src="{{asset('js/bootstrap-datetimepicker.min.js')}}"></script>
     <script src="{{asset('js/bootstrap-switch.min.js')}}"></script>
     <script src="{{asset('js/extra.js')}}"></script>
     <script src="{{asset('js/bootbox.min.js')}}"></script>
-    <script src="{{asset('bootstrap-fileinput/js/fileinput.min.js')}}" type="text/javascript"></script>
-    <script type="text/javascript" language="javascript" src="{{asset('js/jquery.dataTables.min.js')}}"></script>
-    <script type="text/javascript" language="javascript" src="{{asset('js/dataTables.bootstrap.js')}}"></script>
+	<script src="{{asset('bootstrap-fileinput/js/fileinput.min.js')}}" type="text/javascript"></script>
+	<script type="text/javascript" language="javascript" src="http://cdn.datatables.net/1.10.6/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" language="javascript" src="http://cdn.datatables.net/plug-ins/1.10.6/integration/bootstrap/3/dataTables.bootstrap.js"></script>
     <script src="{{asset('js/albafo.typeahead.js')}}"></script>
 
 
@@ -105,7 +105,7 @@
 	@yield('content')
 
 
-
+   
 
 	<!-- Scripts -->
 
