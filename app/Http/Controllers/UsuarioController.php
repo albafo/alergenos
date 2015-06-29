@@ -169,5 +169,27 @@ class UsuarioController extends Controller {
     }
 
 
+    public function getCertificado()
+    {
+        $user = \Auth::user();
+        if($user->hasCompletedMenu() && $user->manual_downloaded) {
+            $snappy = \App::make('snappy.pdf');
+
+            $view = view('usuario/certificado', ['user'=>$user]);
+
+            $view = str_replace("http://alvaro.dev:8080/web.Alergenos/public", public_path(), $view);
+
+            return \PDF::loadHTML($view)->setPaper('a4')->setOption('margin-bottom', 0)->setOption('margin-top', 0)->setOption('margin-left', '5mm')->setOption('margin-right', '5mm')->download('Certificado 1169/2011.pdf');
+        }
+        else return \Redirect('home');
+
+    }
+
+    public function testCertificado() {
+        $user = \Auth::user();
+        return view('usuario/certificado',  ['user'=>$user]);
+    }
+
+
 
 }

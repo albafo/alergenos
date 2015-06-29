@@ -147,4 +147,19 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return false;
     }
 
+    public function certificationDate() {
+
+        $menu = $this->menus()->orderBy('created_at', 'desc')->first();
+
+        if(!$menu) {
+            return null;
+        }
+
+        else {
+            return $menu->created_at;
+        }
+
+
+    }
+
 }
