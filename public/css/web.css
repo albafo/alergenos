@@ -723,7 +723,7 @@ body h1{
 }
 
 .page-menu-export-listado .grupo-plato{
-    page-break-inside:auto;
+    page-break-inside:avoid; 
 }
 
 .page-menu-export-listado .listado-ingredientes {
