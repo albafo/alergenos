@@ -257,6 +257,7 @@ class IngredienteController extends Controller {
     	$ticket=new Ticket();
     	$ticket->peticion="Petición de ingredientes: ".$request->get('peticion');
     	\Auth::user()->tickets()->save($ticket);
+        $ticket->sendMail();
 	}
 
     public function getAlergeno($id_menu, $id_ingrediente) {

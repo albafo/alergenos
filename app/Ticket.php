@@ -43,7 +43,7 @@ class Ticket extends Model {
         return $array;
 	}
 
-    public function save(array $options = array())
+    public function sendMail()
     {
         $emailUser=$this->usuarios->email;
 
@@ -73,7 +73,7 @@ class Ticket extends Model {
             }
         });
 
-        return parent::save($options);
+
 
 
     }
