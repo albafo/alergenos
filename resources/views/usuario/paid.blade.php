@@ -13,7 +13,10 @@
             </div>
         @endif
         <div class="row">
-            <div class="col-md-10 col-md-offset-1">
+            <div class="col-md-4">
+                <img src="{{asset('img/logo_ecede.png')}}">
+            </div>
+            <div class="col-md-8">
                 <div class="row text-center">
                     <h3>Bienvenido/a a la herramienta CartaOnline</h3>
                     <h4>Estás a punto de poder cumplir con la normativa sobre alérgenos, finaliza el registro.</h4>

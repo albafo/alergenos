@@ -35,19 +35,21 @@ listado-ingredientes
            </div>
             <div class="row plato">
                 <div class="col-md-12">
-                    @foreach(Auth::user()->platos() as $plato) 
-                    <h3>{{$plato->nombre}}</h3>
-                    <ul class="list-group"> 
-                        @foreach($plato->ingredientes as $ingrediente)
-                            <li class="list-group-item">
-                                {{$ingrediente->nombre}} 
-                                @foreach($ingrediente->alergenos as $alergeno) 
-                                <img height="40" src="{{asset($alergeno->img)}}" alt="{{$alergeno->nombre}}">
-                                @endforeach
-                            </li> 
-                            
-                        @endforeach
-                    </ul>
+                    @foreach(Auth::user()->platos() as $plato)
+                    <div class="grupo-plato">
+                        <h3>{{$plato->nombre}}</h3>
+                        <ul class="list-group listado-ingredientes">
+                            @foreach($plato->ingredientes as $ingrediente)
+                                <li class="list-group-item">
+                                    {{$ingrediente->nombre}}
+                                    @foreach($ingrediente->alergenos as $alergeno)
+                                    <img height="40" src="{{asset($alergeno->img)}}" alt="{{$alergeno->nombre}}">
+                                    @endforeach
+                                </li>
+
+                            @endforeach
+                        </ul>
+                    </div>
                     @endforeach
                 </div>
             </div>

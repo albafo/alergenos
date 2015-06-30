@@ -61,7 +61,8 @@ class MenuController extends Controller {
             
             
             $view = view('menu.preview-'.$id_plantilla,['menu'=>$menu, 'traduccion'=>$traduccion]);
-          
+            $view = str_replace("http://alvaro.dev:8080/web.Alergenos/public", public_path(), $view);
+
             //$compiledView = $view->render();
            
 
@@ -89,8 +90,9 @@ class MenuController extends Controller {
             
             
             $view = view('menu.listado-ingredientes');
-          
-            //$compiledView = $view->render();
+            $view = str_replace("http://alvaro.dev:8080/web.Alergenos/public", public_path(), $view);
+
+        //$compiledView = $view->render();
            
 
 

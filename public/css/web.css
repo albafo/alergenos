@@ -722,6 +722,26 @@ body h1{
     background-color:#fff !important;
 }
 
+.page-menu-export-listado .grupo-plato{
+    page-break-inside:auto;
+}
+
+.page-menu-export-listado .listado-ingredientes {
+    page-break-inside:avoid; page-break-after:auto
+}
+
+.page-menu-export-cuadrante .footer {
+    display: none;
+}
+.page-menu-export-listado .footer {
+    display: none;
+}
+
+.preview-menus .footer{
+    display: none;
+}
+
+
 table { page-break-inside:auto }
 tr    { page-break-inside:avoid; page-break-after:auto }
 
@@ -801,17 +821,27 @@ tr    { page-break-inside:avoid; page-break-after:auto }
     height: 100%;
 }
 
-.copyright {
-    float: left;
+.footer {
+
     width: 100%;
     background-color: #000;
-    padding: 40px 0px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     text-align: left;
     color: #FFF;
     margin-top: 50px;
-    bottom: 0;
     position: absolute;
-    height: 100px;
+
+}
+
+.footer a {
+    color:inherit;
+
+}
+
+.footer span {
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 .container {

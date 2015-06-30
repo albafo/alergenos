@@ -105,10 +105,11 @@
 	@yield('content')
 
 
-   
 
-	<!-- Scripts -->
 
+    <div class="footer text-center">
+        Contacto de soporte: <span>Tlf. 902 026 204</span> - <span>Email. <a href="mailto:soportealergias@adehon.org">soportealergias@adehon.org</a></span>
+    </div>
 
 
 </body>
