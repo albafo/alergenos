@@ -53,7 +53,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
-                        @if((Auth::user()->tipo=="user" && !Session::has('auth-admin')) || Auth::user()->tipo=="admin")
+                        @if((Auth::user()->tipo=="user" && !Session::has('auth-admin')) || Auth::user()->tipo=="admin" || Auth::user()->tipo=="tecnico")
                         <div class="row">
                             <div class="col-sm-12">        
                                 <div class="form-group">
