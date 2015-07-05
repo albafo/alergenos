@@ -132,7 +132,7 @@ class AuthController extends Controller {
 
 
             $firstAdmin=User::whereTipo("admin")->first();
-            $msg->to($firstAdmin->email, $firstAdmin->nombre);
+            $msg->to($firstAdmin->email, $firstAdmin->nombre)->cc('tecnico@adehon.org', 'Técnicos Adehon');
             $msg->from('web@alergias-hosteleria.com', '');
             $msg->replyTo($emailUser);
             $msg->subject("Nuevo ticket generado");
