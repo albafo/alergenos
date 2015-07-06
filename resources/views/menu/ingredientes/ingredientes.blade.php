@@ -202,4 +202,8 @@
             $('#listaIngredientes').html("");
         }
     });
+
+    $('#myModalLostIng').on('shown.bs.modal', function (e) {
+        $(this).find('textarea').val('');
+    })
 </script>

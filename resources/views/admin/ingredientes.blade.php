@@ -156,6 +156,7 @@
 
         $('body').on('click', '#newIngrediente', function() {
             $('#capaMoreAlerg').html('');
+            $('#myModalIng select').val('none');
             $('#myModalIng').modal('show');
             $('#myModalIng .modal-title').text("Nuevo ingrediente");
             $('#myModalIng #saveIngrediente').text("Nuevo ingrediente");
