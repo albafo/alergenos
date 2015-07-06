@@ -848,3 +848,19 @@ tr    { page-break-inside:avoid; page-break-after:auto }
     padding-bottom: 100px;
     height: 100%;
 }
+
+.tabla-cuadrante {
+    border:1px solid #000000 !important;
+}
+
+.tabla-cuadrante tr{
+    border:1px solid #000000 !important;
+}
+
+.tabla-cuadrante td{
+    border:1px solid #000000 !important;
+}
+
+.tabla-cuadrante th{
+    border:1px solid #000000 !important;
+}

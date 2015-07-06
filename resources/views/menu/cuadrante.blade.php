@@ -24,7 +24,7 @@
         <div class="col-md-12 text-right">Documento actualizado a fecha {{strftime("%d/%m/%Y", time())}}</div>
     </div>
 
-    <table class="table table-bordered">
+    <table class="table table-bordered tabla-cuadrante">
         <tr>
         <th></th>
         @foreach(\App\Alergeno::all() as $alergeno)
