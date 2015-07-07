@@ -206,6 +206,14 @@
                             <button type="submit" class="btn btn-primary">Guardar datos</button>
                         </div>
                     </div>
+
+                    @if(Auth::user()->tipo=="user" && Session::has('auth-admin') && Session::get('auth-admin')->tipo=="admin")
+                    <div class="col-sm-6 text-center">
+                        <div class="form-group">
+                            <button type="submit" id="btnDelUser" class="btn btn-danger">Peligro: Eliminar usuario</button>
+                        </div>
+                    </div>
+                    @endif
                 </div>
                 <input type="hidden" name="deletedImg" id="deletedImg" value="0" />
                 <input type="hidden" name="_token" id="csrf-token" value="{{ csrf_token() }}" />
@@ -227,8 +235,24 @@ $(function() {
            alert("Próximamente activaremos la pasarela de pago para poder renovar su suscripción"); 
         });
     @endif
-    
-    
+
+
+    @if(Auth::user()->tipo=="user" && Session::has('auth-admin') && Session::get('auth-admin')->tipo=="admin")
+
+    $('body').on('click', '#btnDelUser', function(e) {
+        e.preventDefault();
+        bootbox.confirm("¿Estás seguro de eliminar el usuario? Esta acción es irreversible", function(result) {
+
+            if(result) {
+                window.location.href = '{{url('user/delete')}}';
+            }
+        });
+
+    });
+    @endif
+
+
+
 });
 </script>
 @endsection

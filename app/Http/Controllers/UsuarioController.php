@@ -190,6 +190,14 @@ class UsuarioController extends Controller {
         return view('usuario/certificado',  ['user'=>$user]);
     }
 
+    public function remove()
+    {
+        if(\Auth::user()->tipo=="user" && \Session::has('auth-admin') && \Session::get('auth-admin')->tipo=="admin") {
+            \Auth::user()->delete();
+            return \Redirect('admin/usuarios');
+        }
+    }
+
 
 
 }
