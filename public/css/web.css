@@ -874,3 +874,9 @@ tr    { page-break-inside:avoid; page-break-after:auto }
 .menu-template-3 td{
     border:1px solid #000000 !important;
 }
+
+.tituloModalidadPdf {
+    color: red;
+    margin-top: 15px;
+    font-weight: bold;
+}
