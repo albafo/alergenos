@@ -231,7 +231,7 @@ td {
       font-size: 25px;
       margin-top: 30px;
       font-weight:bold;
-      border-bottom:1px solid #D6D6D6;
+      border-bottom:1px solid #9d9d9d;
 }
 
 .menu-template-2 .plato {
@@ -259,7 +259,7 @@ td {
 }
 
 .menu-template-2 .alergenos {
-      border-top: 1px solid #CECECE;
+      border-top: 1px solid #9d9d9d;
       margin-top: 40px;
       padding-top: 20px;
 }
@@ -862,5 +862,13 @@ tr    { page-break-inside:avoid; page-break-after:auto }
 }
 
 .tabla-cuadrante th{
+    border:1px solid #000000 !important;
+}
+
+.menu-template-3 tr{
+    border:1px solid #000000 !important;
+}
+
+.menu-template-3 td{
     border:1px solid #000000 !important;
 }
