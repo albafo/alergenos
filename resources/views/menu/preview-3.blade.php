@@ -56,7 +56,7 @@ menu-template-3 preview-menus
                             @foreach($categoria->platos as $plato)
                             <tr>
 
-                                <td width="80%">{{$plato->nombre}} - {{$plato->categoria()->find($categoria->id)->pivot->precio}}€
+                                <td width="80%">{{$plato->nombre}} @if($plato->categoria()->find($categoria->id)->pivot->precio>0)- {{$plato->categoria()->find($categoria->id)->pivot->precio}}€@endif
 
                                 @if($traduccion)
                                 @foreach(\App\Idioma::all() as $idioma)
