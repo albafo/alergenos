@@ -31,7 +31,14 @@ class Plato extends LanguageModel {
     use SoftDeletes;
     
     protected $guarded = ['id'];
-    private static $alergenosCol;
+
+    public function usuario() {
+        $result = null;
+        if($categoria = $this->categoria()->first()) {
+            $result = $categoria->menu->usuario();
+        }
+        return $result;
+    }
 
     public function categoria() {
         return $this->belongsToMany('App\Categoria')->withPivot('precio');

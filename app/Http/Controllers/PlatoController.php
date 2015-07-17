@@ -361,6 +361,12 @@ class PlatoController extends Controller {
     {
         $filter = $_GET["filter"];
         $platos = Plato::where("nombre", "like", "%$filter%")->get();
+        foreach($platos as $plato) {
+            if($plato->usuario()) {
+                $restaurante = $plato->usuario->nombre_establ;
+                $plato->nombre .= " - " . $restaurante;
+            }
+        }
         return $platos;
     }
 
