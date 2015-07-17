@@ -17,7 +17,7 @@
                         <a href="{{url('user/manual')}}"></a>
                     </div>
                     <div class="col-md-5 col-md-offset-2 productoHome herramienta" data-toggle="tooltip" data-placement="top" title="Entra y comienza a introducir tus platos. La herramienta está programada para hacer el resto en relación con la normativa de alérgenos">
-                        <h3>2.- Herramienta de Gestión de Menús o Cartas</h3>
+                        <h3>2.- Gestor de Menús o Cartas</h3>
                         <a href="{{url('menu')}}"></a>
                     </div>
 
