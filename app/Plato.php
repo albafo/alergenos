@@ -35,7 +35,8 @@ class Plato extends LanguageModel {
     public function usuario() {
         $result = null;
         if($categoria = $this->categoria()->first()) {
-            return $categoria->menu->usuario();
+            if($categoria->menu)
+                $result = $categoria->menu->usuario();
         }
         return $result;
     }
