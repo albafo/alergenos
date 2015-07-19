@@ -393,8 +393,8 @@ td {
 }
 
 .menu-template-1 .categoriaPlato {
-      font-size: 25px;
-      margin-top: 30px;
+      font-size: 20px;
+      margin-top: 20px;
 }
 
 .menu-template-1 .separadorCategoria {
@@ -405,8 +405,9 @@ td {
 }
 
 .menu-template-1 .plato {
-    font-size:20px;
-    margin-top:25px;
+    font-size:15px;
+    line-height: 5px;
+    margin-top:20px;
 }
 
 .menu-template-1 .precio
