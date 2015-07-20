@@ -1,6 +1,11 @@
 @extends('menu.home')
 @section('contentMenu')
 <div id="listadoHerramientas">
+    <div class="row" id="alert-ingredients" style="margin-bottom: 20px;">
+        <div class="col-md-12 text-center btn-danger">
+            <span>AVISO: Recuerde que ciertos ingredientes que han sido adquiridos a proveedores externos y no elaborados en el mismo establecimiento pueden contener alérgenos. CHEQUEAR ETIQUETADO e incluir de forma adicional los alérgenos correspondientes</span>
+        </div>
+    </div>
     <div clas="row">
         <div class="col-md-12">
             <div class="panel panel-default caja-menu ui-sortable-handle caja-link caja-modal">

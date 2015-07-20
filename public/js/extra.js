@@ -42,3 +42,7 @@ $(document).ajaxError(function( event, jqxhr, settings, thrownError ) {
     }
 });
 
+function show_alert_ingredients() {
+    $('#alert-ingredients').removeClass('hidden');
+}
+

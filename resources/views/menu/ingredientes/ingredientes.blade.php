@@ -45,11 +45,11 @@
                 <div class="row">
                     <form id="customAlergeno" class="form-horizontal">
 
-                        <div class="col-md-12 text-center">
-                            <label style="color:red; font-weight: bold;">Comprobar etiquetado para seleccionar alérgenos adicionales</label>
 
-
+                        <div class="col-md-12 text-center btn-danger" style="margin-top: 10px; margin-bottom: 10px;">
+                            <span>AVISO: Recuerde que ciertos ingredientes que han sido adquiridos a proveedores externos y no elaborados en el mismo establecimiento pueden contener alérgenos. CHEQUEAR ETIQUETADO e incluir de forma adicional los alérgenos correspondientes</span>
                         </div>
+
 
                         <div class="col-md-12">
                             <label>Puede añadir alérgenos adicionales al ingrediente. Se asociará a los mismos ingredientes que aparezcan en el menú.</label>

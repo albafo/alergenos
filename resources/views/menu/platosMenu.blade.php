@@ -15,6 +15,11 @@
     @endif
     <div id="mensajes-platos-ok">   
     </div>
+    <div class="row hidden" id="alert-ingredients">
+        <div class="col-md-12 text-center btn-danger">
+            <span>AVISO: Recuerde que ciertos ingredientes que han sido adquiridos a proveedores externos y no elaborados en el mismo establecimiento pueden contener alérgenos. CHEQUEAR ETIQUETADO e incluir de forma adicional los alérgenos correspondientes</span>
+        </div>
+    </div>
     <div class="row" id="pag-platos">
         @include('menu.categorias.categorias')
         @include('menu.platos.platos')
@@ -428,6 +433,7 @@ jQuery(function($) {
 
     $('body').on('click', "[id^='plato-']", function(e) {
        var id_plato=$(this).attr('id').split("-")[1];
+       show_alert_ingredients();
        obtener_ingredientes(id_plato);
     });
     
