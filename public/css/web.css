@@ -228,8 +228,8 @@ td {
 }
 
 .menu-template-2 .categoriaPlato {
-        margin-top:15px;
-        margin-bottom:15px;
+        margin-top:10px;
+        margin-bottom:10px;
         font-size:20px;
       font-weight:bold;
       border-bottom:1px solid #9d9d9d;
@@ -262,8 +262,8 @@ td {
 
 .menu-template-2 .alergenos {
       border-top: 1px solid #9d9d9d;
-      margin-top: 40px;
-      padding-top: 20px;
+      margin-top: 20px;
+      padding-top: 15px;
 }
 
 .menu-template-2 span.traduccion:last-child:after {
