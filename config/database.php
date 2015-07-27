@@ -64,7 +64,20 @@ return [
 			'strict'    => false,
 		],
 
-		'pgsql' => [
+        'mysql_ecede' => [
+            'driver'    => 'mysql',
+            'host'      => env('DB_HOST', 'localhost'),
+            'database'  => env('DB_DATABASE_ECEDE', 'forge'),
+            'username'  => env('DB_USERNAME_ECEDE', 'forge'),
+            'password'  => env('DB_PASSWORD_ECEDE', ''),
+            'charset'   => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix'    => '',
+            'strict'    => false,
+        ],
+
+
+        'pgsql' => [
 			'driver'   => 'pgsql',
 			'host'     => env('DB_HOST', 'localhost'),
 			'database' => env('DB_DATABASE', 'forge'),
