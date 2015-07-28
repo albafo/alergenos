@@ -24,6 +24,7 @@ class Kernel extends ConsoleKernel {
 	 */
 	protected function schedule(Schedule $schedule)
 	{
+
 		$schedule->call(function() {
             $usersNotPaid = \DB::connection("mysql_ecede")->table("registroClientes")
                 ->where('estadoPago', '<>', 1)
@@ -42,12 +43,10 @@ class Kernel extends ConsoleKernel {
                         $message->bcc('alvaro1988@hotmail.com');
                         $message->from('soportealergias@adehon.org', 'ECEDE - Normativa alérgenos');
                         $message->subject("Te ayudamos a adaptarte a la normativa en alérgenos");
-
-
                     });
                 }
             }
-        })->hourly();
+        })->cron('* * * * *');
 
 
 	}
