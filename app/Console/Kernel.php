@@ -40,13 +40,14 @@ class Kernel extends ConsoleKernel {
                     \Mail::send('mail.userNoRegistered', ['user'=>$user], function($message) use ($user) {
 
                         $message->to($user->email, $user->contacto);
-                        $message->bcc('alvaro1988@hotmail.com');
+                        $message->bcc('soportealergias@adehon.org');
+                        $message->bcc('alvaro.bano.fos@gmail.com');
                         $message->from('soportealergias@adehon.org', 'ECEDE - Normativa alérgenos');
                         $message->subject("Te ayudamos a adaptarte a la normativa en alérgenos");
                     });
                 }
             }
-        })->cron('* * * * *');
+        })->hourly();
 
 
 	}
