@@ -6,8 +6,10 @@ listado-ingredientes
 
 @section('content')
    <div class="row">
-       
-      
+
+       <div class="buttonHelp" style="top: 40px;">
+           <a href="https://www.youtube.com/watch?v=dppZqw2XZCA&index=4&list=PLXC20vLfXNNmrjBJN86ghgHR3TguK344v" target="_blank"><img src="{{asset('img/btn_help.png')}}" width="50"></a>
+       </div>
        
        <div class="col-md-8 col-md-offset-2">
            <div class="row text-center">

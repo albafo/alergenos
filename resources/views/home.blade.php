@@ -1,6 +1,15 @@
 @extends('app')
 @section('content')
-    <div class="container">
+    <div class="container" style="position: relative">
+        <div class="buttonHelp">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><img src="{{asset('img/btn_help.png')}}" width="50"></a>
+            <ul class="dropdown-menu" role="menu" style="left:-165px">
+                <li><a href="https://www.youtube.com/watch?v=qtWEuWZLPpY&list=PLXC20vLfXNNmrjBJN86ghgHR3TguK344v&index=2" target="_blank">Manual normativa alérgenos</a></li>
+                <li><a href="https://www.youtube.com/watch?v=iua8B9Zgt2I&index=5&list=PLXC20vLfXNNmrjBJN86ghgHR3TguK344v" target="_blank">Certificado</a></li>
+                <li><a href="https://www.youtube.com/watch?v=c2WTtLyBJdw&list=PLXC20vLfXNNmrjBJN86ghgHR3TguK344v&index=6" target="_blank">Datos del usuario</a></li>
+            </ul>
+
+        </div>
         <div class="row">
             <div class="col-md-12 text-center">
                 <h2>Bienvenid@ a nuestra herramienta cartaonline certificada por ECEDE</h2>

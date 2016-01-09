@@ -883,3 +883,14 @@ tr    { page-break-inside:avoid; page-break-after:auto }
     margin-top: 15px;
     font-weight: bold;
 }
+
+
+.container {
+    position: relative;
+}
+
+.buttonHelp {
+    position: absolute;
+    top:-106px;
+    right: 40px;
+}

@@ -2,6 +2,9 @@
 
 @section('content')
 <div class="container">
+	<div class="buttonHelp">
+		<a href="https://www.youtube.com/watch?v=FGY21hBEU2U&index=3&list=PLXC20vLfXNNmrjBJN86ghgHR3TguK344v" target="_blank"><img src="{{asset('img/btn_help.png')}}" width="50"></a>
+	</div>
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1">
 			<div class="col2height row">
