@@ -129,7 +129,8 @@ class UsuarioController extends Controller {
 		if(strtotime(\Auth::user()->expired_at) - time() > env('TIME_ACTIVATE_RENEW')) {
 			return redirect("/home");
 		}
-		echo "Próximamente";
+		echo "Su suscripción ha finalizado. Pulse en \"Renovar\" si quiere seguir disfrutando del servicio.<br>
+			<a href='http://www.ecede.es/formulario.php'>Renovar</a>";
 	}
 
     public function paid($id)
