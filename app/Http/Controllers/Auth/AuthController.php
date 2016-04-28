@@ -112,7 +112,8 @@ class AuthController extends Controller {
 	}
 	
 	public function getRenew() {
-		echo "Próximamente";
+		echo "Su suscripción ha finalizado. Pulse en \"Renovar\" si quiere seguir disfrutando del servicio.<br>
+			<a href='http://www.ecede.es/formulario.php'>Renovar</a>";
 	}
 
     public function sendNewUserMail($codigo) {
