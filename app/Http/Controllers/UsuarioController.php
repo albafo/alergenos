@@ -130,7 +130,7 @@ class UsuarioController extends Controller {
 			return redirect("/home");
 		}
 		echo "Su suscripción ha finalizado. Pulse en \"Renovar\" si quiere seguir disfrutando del servicio.<br>
-			<a href='http://www.ecede.es/formulario.php'>Renovar</a>";
+			<a href='http://www.ecede.es/formulario.php'>Renovar</a> <a href='".url("auth/logout")."'>Cerrar sesión</a>";
 	}
 
     public function paid($id)
