@@ -8,6 +8,7 @@ listado-ingredientes
    <div class="row">
 
        <div class="buttonHelp" style="top: 40px;">
+           <span>VÍDEO-AYUDA</span>
            <a href="https://www.youtube.com/watch?v=dppZqw2XZCA&index=4&list=PLXC20vLfXNNmrjBJN86ghgHR3TguK344v" target="_blank"><img src="{{asset('img/btn_help.png')}}" width="50"></a>
        </div>
        

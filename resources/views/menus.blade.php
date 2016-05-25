@@ -3,6 +3,7 @@
 @section('content')
 <div class="container">
 	<div class="buttonHelp">
+		<span>VÍDEO-AYUDA</span>
 		<a href="https://www.youtube.com/watch?v=FGY21hBEU2U&index=3&list=PLXC20vLfXNNmrjBJN86ghgHR3TguK344v" target="_blank"><img src="{{asset('img/btn_help.png')}}" width="50"></a>
 	</div>
 	<div class="row">

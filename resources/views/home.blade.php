@@ -2,6 +2,7 @@
 @section('content')
     <div class="container" style="position: relative">
         <div class="buttonHelp">
+            <span>VÍDEO-AYUDA</span>
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><img src="{{asset('img/btn_help.png')}}" width="50"></a>
             <ul class="dropdown-menu" role="menu" style="left:-165px">
                 <li><a href="https://www.youtube.com/watch?v=qtWEuWZLPpY&list=PLXC20vLfXNNmrjBJN86ghgHR3TguK344v&index=2" target="_blank">Manual normativa alérgenos</a></li>
