@@ -81,6 +81,7 @@ Route::get('user/delete', 'UsuarioController@remove');
 
 
 Route::get('admin/ticketsTable',  'TicketController@ticketsTable');
+Route::post('admin/tickets', 'TicketController@modifyGroup');
 Route::get('admin/ticket/{id}',  'TicketController@getTicket');
 Route::get('admin/ticket/noReaded/{id}',  'TicketController@removeReaded');
 Route::get('admin/ticket/resolved/{id}',  'TicketController@resolved');

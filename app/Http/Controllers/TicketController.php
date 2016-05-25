@@ -4,6 +4,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Ticket;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class TicketController extends Controller {
 
@@ -164,6 +165,9 @@ class TicketController extends Controller {
 		
 
 		$return['data']=$tickets->toArray();
+		foreach($return['data'] as &$itemTicket) {
+			$itemTicket["checkbox"] = '<input type="checkbox" name="checkTicket['.$itemTicket["id"].'][]">';
+		}
 		$return["draw"]=intval($request->get("draw"));
   		$return["recordsTotal"]=$tickets_count;
   		$return["recordsFiltered"]= $filtered_count;
@@ -240,4 +244,27 @@ class TicketController extends Controller {
 
         return redirect('admin/tickets')->withOk("Ticket resuelto. Email enviado al usuario.");
     }
+
+	public function modifyGroup(Request $request) {
+
+
+		if($request->has("checkTicket")) {
+			foreach($request->get("checkTicket") as $idTicket=>$value) {
+				$ticket = Ticket::find($idTicket);
+				if($request->has("marcarLeido")) {
+					$ticket->leido = 1;
+				}
+				if($request->has("marcarResuelto")) {
+					$ticket->resuelto = 1;
+				}
+
+				if($request->has("marcarLeidoResuelto")) {
+					$ticket->resuelto = 1;
+					$ticket->leido = 1;
+				}
+				$ticket->save();
+			}
+		}
+		return \Response::redirectTo("/admin/tickets");
+	}
 }
