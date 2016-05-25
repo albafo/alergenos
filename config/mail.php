@@ -80,7 +80,7 @@ return [
 	|
 	*/
 
-	'username' => 'webalergenos@gmail.com',
+	'username' => 'alergenosweb@gmail.com',
 
 	/*
 	|--------------------------------------------------------------------------
