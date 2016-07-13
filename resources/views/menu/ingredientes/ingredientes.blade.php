@@ -105,7 +105,10 @@
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                     <button type="button" class="btn btn-primary" id="saveIngrediente" disabled>Guardar cambios</button>
                 </div>
-                    
+
+            </div>
+            <div id="mensajes-ingredientes">
+
             </div>
         </div>
     </div>
@@ -149,9 +152,11 @@
                 
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                     <button type="button" class="btn btn-primary" id="sendPeticion" d>Enviar</button>
-                
-                    
+
+
             </div>
+
+
         </div>
     </div>
 </div>

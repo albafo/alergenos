@@ -506,35 +506,45 @@ jQuery(function($) {
             data.push({name: '_token', value: '{{csrf_token()}}'});
             $.post("{{url('plato/add-ingrediente')}}/{{$menu->id}}/"+selectedPlato+"/"+selectedIng, data, function(data){
                 if(data.repeated) {
-                   $('#myModalIng').modal('hide');
-                   $('#mensajes-platos-ok').bootstrapAlert({
+                   //$('#myModalIng').modal('hide');
+                   $('#mensajes-ingredientes').bootstrapAlert({
                         title:"Error!",
                         messages:['Ingrediente ya añadido al plato'],
                         type:'danger',
                         time:5000
                     });
+                    scrollToDiv('#myModalIng', '#myModalIng');
+
                 }
                 else {
-                    $('#mensajes-platos-ok').bootstrapAlert({
+                    $('#mensajes-ingredientes').bootstrapAlert({
                         title:"Enhorabuena!",
                         messages:['Ingrediente añadido al plato'],
                         type:'success',
                         time:5000
                     });
                     obtener_ingredientes(selectedPlato);
-                    $('#myModalIng').modal('hide');
+                    scrollToDiv('#myModalIng', '#myModalIng');
+                    //$('#myModalIng').modal('hide');
                 }
             }).fail(function(data) {
-                $('#myModalIng').modal('hide');
-                $('#mensajes-platos-ok').bootstrapAlert({
+                //$('#myModalIng').modal('hide');
+                $('#mensajes-ingredientes').bootstrapAlert({
                         title:"Error!",
                         messages:['Fallo al conectar con el servidor.'],
                         type:'danger',
                         time:5000
                     });
+                scrollToDiv('#myModalIng', '#myModalIng');
+
             }, "json");
         }
     });
+
+    function scrollToDiv(content, id) {
+        $(content).animate({ scrollTop: $(id).prop("scrollHeight")}, 1000);
+
+    }
 
 
     $('body').on('click', '.editarVisibilidad', function() {
@@ -555,7 +565,7 @@ jQuery(function($) {
                     $.post("{{url('plato/eliminar-ingrediente')}}/"+selectedPlato+"/"+id_ing, {'_token':'{{csrf_token()}}'},function() {
                         obtener_ingredientes(selectedPlato);
                         $('#mensajes-platos-ok').bootstrapAlert({
-                            title:"Error!",
+                            title:"Enhorabuena!",
                             messages:['Ingrediente eliminado del plato'],
                             type:'success',
                             time:5000
