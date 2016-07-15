@@ -56,7 +56,7 @@ menu-template-4 preview-menus
                             @foreach($categoria->platos as $plato)
                             <tr>
 
-                                <td width="80%">{{$plato->nombre}} @if($plato->categoria()->find($categoria->id)->pivot->precio>0)- {{$plato->categoria()->find($categoria->id)->pivot->precio}}€@endif
+                                <td width="80%">{{$plato->nombre}}
 
                                 @if($traduccion)
                                 @foreach(\App\Idioma::all() as $idioma)
@@ -90,6 +90,7 @@ menu-template-4 preview-menus
                                     )</i>
                                         @endif
                                 </td>
+                                <td>@if($plato->categoria()->find($categoria->id)->pivot->precio>0){{$plato->categoria()->find($categoria->id)->pivot->precio}}€@endif</td>
                                 <td>
                                     @foreach($plato->alergenos() as $alergeno)
                                     <span><img class="preview-ico-alergeno" src="{{asset($alergeno->img)}}" alt="{{$alergeno->nombre}}"></span>
