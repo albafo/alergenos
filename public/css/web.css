@@ -162,6 +162,10 @@ body[class*='page-menu-menu-pdf'], body[class*='page-menu-preview'] .container
     page-break-inside: avoid;
 }
 
+.categoria-total table tr td, table tr th {
+    page-break-inside: avoid;
+}
+
 td {
     page-break-inside: avoid;
 }
