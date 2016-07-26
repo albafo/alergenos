@@ -134,7 +134,7 @@ menu-template-3 preview-menus
                     
                     <div class="row">
                         <div class="col-md-12 text-center alergenos" style="margin-top:20px;">
-                            {{Auth::user()->direccion}} - Tlf:{{Auth::user()->telefono}}
+                            {{Auth::user()->direccion}}@if(Auth::user()->telefono) - Tlf:{{Auth::user()->telefono}}@endif
                         </div>
                     </div>
                     
