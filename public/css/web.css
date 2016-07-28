@@ -898,3 +898,9 @@ tr    { page-break-inside:avoid; page-break-after:auto }
     top:-106px;
     right: 40px;
 }
+
+@media print {
+    .listado-ingredientes {
+        page-break-inside: avoid;
+    }
+}
