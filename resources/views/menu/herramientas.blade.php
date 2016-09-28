@@ -52,6 +52,13 @@
                       @endforeach
                   </select>
               </div>
+              @if((Session::has('auth-admin') && Session::get('auth-admin')->tipo=="admin") || (Session::has('auth-tecnico') && Session::get('auth-admin')->tipo=="tecnico"))
+              <br><br>
+              <div class="col-md-12 text-center">
+                  <label for="demo">Marca de agua DEMO:</label>
+                  <input type="checkbox" id="demo" name="demo">
+              </div>
+              @endif
               <div class="col-md-12 tituloModalidadPdf text-center">Modalidad menú</div>
               <div class="col-md-6" style="margin-top:10px;">
                    <a href="#" data-index="1"><img src="{{asset('img/plantilla-1.jpg')}}"></a>    
@@ -101,8 +108,12 @@
        $('body').on('click', '#modalPlantillas .cuerpo a', function (e) {
              e.preventDefault();
              var traduccion = $('#idiomaActivado').val();
+            var url = $(this).attr('href')+"/"+traduccion;
+            if($('#demo').is(':checked')) {
+                url+="?demo=1";
+            }
 
-             window.location.href=$(this).attr('href')+"/"+traduccion;
+             window.location.href=url;
        });
       
     });

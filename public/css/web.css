@@ -152,6 +152,12 @@ body[class*='page-menu-menu-pdf'], body[class*='page-menu-preview'] .container
     width: 21cm;
 }
 
+.preview-menus.client-preview {
+    background-image:url('../img/watermark.original.png');
+    background-repeat:repeat;
+    background-size:contain;
+    background-position:center;
+}
 
 .preview-ico-alergeno {
     width: 30px;

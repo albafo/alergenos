@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('class-body')
-menu-template-1 preview-menus
+menu-template-1 preview-menus @if(isset($clientPreview) && $clientPreview) client-preview @endif
 @endsection
 
 @section('content')

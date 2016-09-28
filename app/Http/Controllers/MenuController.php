@@ -42,8 +42,11 @@ class MenuController extends Controller {
     
     public function getPreview($id, $id_plantilla, $traduccion) {
         if($menu=Auth::user()->menus()->find($id)) {
-          
-            return view('menu.preview-'.$id_plantilla,['menu'=>$menu, 'traduccion'=>$traduccion]);
+            $params = ['menu'=>$menu, 'traduccion'=>$traduccion];
+            if(\Request::has("demo")) {
+                $params["clientPreview"] = 1;
+            }
+            return view('menu.preview-'.$id_plantilla,$params);
         }
         else abort(403);
     }
@@ -57,11 +60,14 @@ class MenuController extends Controller {
         //$snappy->generate('http://www.github.com', '/tmp/github.pdf');
         //Or output:
         if($menu=Auth::user()->menus()->find($id)) {
-            
-            
-            
-            $view = view('menu.preview-'.$id_plantilla,['menu'=>$menu, 'traduccion'=>$traduccion]);
-            $view = str_replace("http://alvaro.dev:8080/web.Alergenos/public", public_path(), $view);
+
+            $params = ['menu'=>$menu, 'traduccion'=>$traduccion];
+            if(\Request::has("demo")) {
+                $params["clientPreview"] = 1;
+            }
+
+            $view = view('menu.preview-'.$id_plantilla,$params);
+            $view = str_replace("http://localhost:8080/web.Alergenos/public", public_path(), $view);
 
             //$compiledView = $view->render();
            
