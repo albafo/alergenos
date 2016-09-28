@@ -44,7 +44,13 @@
       <div class="modal-body cuerpo">
           <div class="row">
               <div class="col-md-12 text-center">
-                <label for="idiomaActivado">Activar traducciones</label> <input type="checkbox" id="idiomaActivado" name="idiomaActivado">
+                <label for="idiomaActivado">Idioma:</label>
+                  <select id="idiomaActivado" name="idiomaActivado">
+                      <option value="1">CASTELLANO</option>
+                      @foreach(App\Idioma::all() as $idioma)
+                          <option value="{{$idioma->id}}">{{$idioma->nombre}}</option>
+                      @endforeach
+                  </select>
               </div>
               <div class="col-md-12 tituloModalidadPdf text-center">Modalidad menú</div>
               <div class="col-md-6" style="margin-top:10px;">
@@ -94,10 +100,8 @@
       
        $('body').on('click', '#modalPlantillas .cuerpo a', function (e) {
              e.preventDefault();
-             var traduccion="0";
-             if($('#idiomaActivado').is(':checked')) {
-                 traduccion="1";
-             }
+             var traduccion = $('#idiomaActivado').val();
+
              window.location.href=$(this).attr('href')+"/"+traduccion;
        });
       

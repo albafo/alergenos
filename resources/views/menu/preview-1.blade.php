@@ -39,19 +39,16 @@ menu-template-1 preview-menus
             <div class="categoria-total">
                 <div class="row">
                     <div class="col-md-12 categoriaPlato">
-                        {{$categoria->nombre}}
-                        @if($traduccion)
 
-                            @foreach(\App\Idioma::all() as $idioma)
+                        @if($traduccion > 1 && $categoria->hasTraduccion($traduccion))
 
-                                @if($categoria->hasTraduccion($idioma->id))
-                                    - {{ $categoria->traduccion()->find($idioma->id)->pivot->content }}
-                                @endif
+                           {{ $categoria->traduccion()->find($traduccion)->pivot->content }}
 
-                            @endforeach
-
+                        @else
+                            {{$categoria->nombre}}
 
                         @endif
+
                     </div>
                 </div>
 
@@ -62,20 +59,17 @@ menu-template-1 preview-menus
                 @foreach($categoria->platos as $plato)
                 <div class="row">
                     <div class="col-md-12 plato">
-                        <span>{{$plato->nombre}}</span>
-                        @if($traduccion)
-                            <br><span class="platosTraduccion">(
-                                @foreach(\App\Idioma::all() as $idioma)
+                        <span>@if($traduccion > 1 && $plato->hasTraduccion($traduccion))
 
-                                    @if($plato->hasTraduccion($idioma->id))
-                                        <span class="traduccion">{{ $plato->traduccion()->find($idioma->id)->pivot->content }}</span>
-                                    @endif
+                                {{ $plato->traduccion()->find($traduccion)->pivot->content }}
 
-                                @endforeach
-                                )
-                            </span>
+                            @else
+                                {{$plato->nombre}}
 
-                        @endif
+                            @endif
+                        </span>
+
+
                         @if($plato->numIngVisibles()>0)
                             <br>
                             <i>(
@@ -85,14 +79,14 @@ menu-template-1 preview-menus
                                         @if($i>0)
                                             ,
                                         @endif
-                                        {{$ingrediente->nombre}}
-                                        @if($traduccion)
-                                        @foreach(\App\Idioma::all() as $idioma)
-                                            @if($ingrediente->hasTraduccion($idioma->id))
-                                                    / {{$ingrediente->traduccion()->find($idioma->id)->pivot->content}}
+                                            @if($traduccion > 1 && $ingrediente->hasTraduccion($traduccion))
+
+                                                {{ $ingrediente->traduccion()->find($traduccion)->pivot->content }}
+
+                                            @else
+                                                {{$ingrediente->nombre}}
+
                                             @endif
-                                        @endforeach
-                                        @endif
                                         <?php $i++;?>
                                     @endif
                                 @endforeach
@@ -134,14 +128,17 @@ menu-template-1 preview-menus
                      @foreach(Alergeno::all() as $alergeno)
                      <div class="alergeno">
                          <img height="40" src="{{asset($alergeno->img)}}" alt="{{$alergeno->nombre}}"><br>
-                         <span>{{$alergeno->nombre}}</span>
-                         @if($traduccion)
-                             @foreach(\App\Idioma::all() as $idioma)
-                                 @if($alergeno->hasTraduccion($idioma->id))
-                                     / {{$alergeno->traduccion()->find($idioma->id)->pivot->content}}
-                                 @endif
-                             @endforeach
-                         @endif
+                         <span>
+                             @if($traduccion > 1 && $alergeno->hasTraduccion($traduccion))
+
+                                 {{ $alergeno->traduccion()->find($traduccion)->pivot->content }}
+
+                             @else
+                                 {{$alergeno->nombre}}
+
+                             @endif
+                         </span>
+
 
                      </div>
                      @endforeach

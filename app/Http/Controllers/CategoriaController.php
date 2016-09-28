@@ -61,8 +61,8 @@ class CategoriaController extends Controller {
         
         if (is_array($request->get('idioma'))) {
     		foreach($request->get('idioma') as $indexIdioma=>$traduccion) {
-            	
-            	$categoria->traduccion()->attach($indexIdioma, ['table_name'=>$categoria->getTable(), 'content' => $traduccion]);
+            	if($traduccion != "")
+            		$categoria->traduccion()->attach($indexIdioma, ['table_name'=>$categoria->getTable(), 'content' => $traduccion]);
             }
 	    }
         

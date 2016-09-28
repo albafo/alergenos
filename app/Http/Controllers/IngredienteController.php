@@ -54,8 +54,8 @@ class IngredienteController extends Controller {
 
         if (is_array($request->get('idioma'))) {
             foreach($request->get('idioma') as $indexIdioma=>$traduccion) {
-
-                $ingrediente->traduccion()->attach($indexIdioma, ['table_name'=>$ingrediente->getTable(), 'content' => $traduccion]);
+				if($traduccion != "")
+                	$ingrediente->traduccion()->attach($indexIdioma, ['table_name'=>$ingrediente->getTable(), 'content' => $traduccion]);
             }
         }
 	

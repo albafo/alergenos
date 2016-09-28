@@ -81,10 +81,11 @@ class PlatoController extends Controller {
 		    
 		if (is_array($request->get('idioma'))) {
     		foreach($request->get('idioma') as $indexIdioma=>$traduccion) {
-            	if($plato->hasTraduccion($indexIdioma)) {
-                    $plato->traduccion()->updateExistingPivot($indexIdioma, ['content'=>$traduccion]);
+                if($traduccion != "") {
+                    if ($plato->hasTraduccion($indexIdioma)) {
+                        $plato->traduccion()->updateExistingPivot($indexIdioma, ['content' => $traduccion]);
+                    } else $plato->traduccion()->attach($indexIdioma, ['table_name' => $plato->getTable(), 'content' => $traduccion]);
                 }
-                else $plato->traduccion()->attach($indexIdioma, ['table_name' => $plato->getTable(), 'content' => $traduccion]);
             }
 	    }
 		
