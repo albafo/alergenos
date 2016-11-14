@@ -37,13 +37,12 @@ menu-template-4 preview-menus @if(isset($clientPreview) && $clientPreview) clien
         <div class="col-md-10 col-md-offset-1" style="margin-top:30px;">
             <div class="row">
                 <div class="col-md-8 nota-alergenos">
-                    LISTA DE ALÉRGENOS - {{Auth::user()->nombre_establ}}<br>
-                    Adaptación a la normativa (UE) Nº 1 1169/2011 ALERGIAS
+                    Carta adaptada a la normativa ue 1169/2011 sobre alergias e intolerancias alimentarias.
                 </div>
                 <div class="col-md-4">
-                      @if(Auth::user()->icono_estb)
+                    @if(Auth::user()->icono_estb)
                         <img src="{{asset('iconos-estb/'.Auth::user()->id.'/'.Auth::user()->icono_estb)}}" style="max-width:100%; max-height:100px">
-                    @endif        
+                    @endif
                 </div>
             </div>
             
@@ -51,7 +50,7 @@ menu-template-4 preview-menus @if(isset($clientPreview) && $clientPreview) clien
                 <div class="col-md-12  nombreRestaurante">
                     {{ Auth::user()->nombre_establ }}<br>
                 </div>
-                 (Alimentos susceptibles de contener alérgenos)
+                {{Auth::user()->direccion}}@if(Auth::user()->telefono) - Tlf:{{Auth::user()->telefono}}@endif
             </div>
             
             <div class="row">
@@ -137,11 +136,7 @@ menu-template-4 preview-menus @if(isset($clientPreview) && $clientPreview) clien
                     
                     
 
-                    <div class="row">
-                        <div class="col-md-12 text-center alergenos" style="margin-top:20px;">
-                            {{Auth::user()->direccion}}@if(Auth::user()->telefono) - Tlf:{{Auth::user()->telefono}}@endif
-                        </div>
-                    </div>
+
                     
                 </div>
             </div>
