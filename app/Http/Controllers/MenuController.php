@@ -55,6 +55,7 @@ class MenuController extends Controller {
     
     public function getMenuPdf($id, $id_plantilla, $traduccion) {
         $snappy = App::make('snappy.pdf');
+
         //To file
         //$snappy->generateFromHtml('<h1>Bill</h1><p>You owe me money, dude.</p>', '/tmp/bill-123.pdf');
         //$snappy->generate('http://www.github.com', '/tmp/github.pdf');
