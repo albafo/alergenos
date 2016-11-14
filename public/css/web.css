@@ -265,15 +265,15 @@ td {
 }
 
 .menu-template-2 .alergeno {
-    display:inline-block;
-      margin-left: 15px;
-      margin-right: 15px;
 }
 
-.menu-template-2 .alergenos {
-      border-top: 1px solid #9d9d9d;
-      margin-top: 20px;
-      padding-top: 15px;
+.preview-menus .alergenos {
+
+}
+
+.preview-menus .alergeno {
+    width: 80px;
+
 }
 
 .menu-template-2 span.traduccion:last-child:after {
@@ -359,7 +359,7 @@ td {
 
 
 .listado-ingredientes .alergeno {
-    display:inline-block;
+        display:inline-block;
       margin-left: 15px;
       margin-right: 15px;
 }
@@ -440,15 +440,8 @@ td {
 
 .menu-template-1 .alergeno {
     display:inline-block;
-      margin-left: 15px;
-      margin-right: 15px;
 }
 
-.menu-template-1 .alergenos {
-    border-top: 1px solid #CECECE;
-        margin-top: 10px;
-        padding-top: 10px;
-}
 
 
 /* columns of same height styles */
@@ -880,11 +873,11 @@ tr    { page-break-inside:avoid; page-break-after:auto }
     border:1px solid #000000 !important;
 }
 
-.menu-template-3 tr{
+.table-platos tr{
     border:1px solid #000000 !important;
 }
 
-.menu-template-3 td{
+.table-platos td{
     border:1px solid #000000 !important;
 }
 

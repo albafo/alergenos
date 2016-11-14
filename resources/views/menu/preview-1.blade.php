@@ -5,7 +5,35 @@ menu-template-1 preview-menus @if(isset($clientPreview) && $clientPreview) clien
 @endsection
 
 @section('content')
-   
+
+    <div class="row">
+        <div class="col-md-12 text-center alergenos">
+            <table align="center"><tr>
+            @foreach(Alergeno::all() as $index=>$alergeno)
+                <td>
+                <div class="alergeno">
+                    <img height="25" src="{{asset($alergeno->img)}}" alt="{{$alergeno->nombre}}"><br>
+                    <span>
+                             @if($traduccion > 1 && $alergeno->hasTraduccion($traduccion))
+
+                            {{ $alergeno->traduccion()->find($traduccion)->pivot->content }}
+
+                        @else
+                            {{$alergeno->nombre}}
+
+                        @endif
+                         </span>
+                </div>
+
+                </td>
+                        @if($index==6)
+                            </tr><tr>
+                        @endif
+
+                    @endforeach
+                </tr></table>
+        </div>
+    </div>
     
     <div class="row">
         <div class="col-md-10 text-center" style="margin-top:30px;">
@@ -122,28 +150,7 @@ menu-template-1 preview-menus @if(isset($clientPreview) && $clientPreview) clien
                 </div>
             </div>
             
-            <div class="row">
-                <div class="col-md-12 text-center alergenos">
-                    
-                     @foreach(Alergeno::all() as $alergeno)
-                     <div class="alergeno">
-                         <img height="40" src="{{asset($alergeno->img)}}" alt="{{$alergeno->nombre}}"><br>
-                         <span>
-                             @if($traduccion > 1 && $alergeno->hasTraduccion($traduccion))
 
-                                 {{ $alergeno->traduccion()->find($traduccion)->pivot->content }}
-
-                             @else
-                                 {{$alergeno->nombre}}
-
-                             @endif
-                         </span>
-
-
-                     </div>
-                     @endforeach
-                </div>
-            </div>
             
             <div class="row">
                 <div class="col-md-12 text-center alergenos">
