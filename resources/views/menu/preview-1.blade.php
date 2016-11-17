@@ -87,7 +87,8 @@ menu-template-1 preview-menus @if(isset($clientPreview) && $clientPreview) clien
                 @foreach($categoria->platos as $plato)
                 <div class="row">
                     <div class="col-md-12 plato">
-                        <span>@if($traduccion > 1 && $plato->hasTraduccion($traduccion))
+                        <span style="@if(isset($fontSize))font-size: {{$fontSize}}px;@endif">
+                                    @if($traduccion > 1 && $plato->hasTraduccion($traduccion))
 
                                 {{ $plato->traduccion()->find($traduccion)->pivot->content }}
 
@@ -95,7 +96,7 @@ menu-template-1 preview-menus @if(isset($clientPreview) && $clientPreview) clien
                                 {{$plato->nombre}}
 
                             @endif
-                        </span>
+                                    </span>
 
 
                         @if($plato->numIngVisibles()>0)

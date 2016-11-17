@@ -59,6 +59,28 @@
                   <input type="checkbox" id="demo" name="demo">
               </div>
               @endif
+              <br><br>
+
+              <div class="col-md-12 text-center">
+                  <label for="fontSize">Tamaño Letra Platos:</label>
+                  <select id="fontSize" name="fontSize">
+                      <option value="">Auto</option>
+                      <option value="12">12px</option>
+                      <option value="13">13px</option>
+                      <option value="14">14px (defecto)</option>
+                      <option value="15">15px</option>
+                      <option value="16">16px</option>
+                      <option value="17">17px</option>
+                      <option value="18">18px</option>
+                      <option value="19">19px</option>
+                      <option value="20">20px</option>
+                      <option value="21">21px</option>
+                      <option value="22">22px</option>
+
+
+
+                  </select>
+              </div>
               <div class="col-md-12 tituloModalidadPdf text-center">Modalidad menú</div>
               <div class="col-md-6" style="margin-top:10px;">
                    <a href="#" data-index="1"><img src="{{asset('img/plantilla-1.jpg')}}"></a>    
@@ -108,11 +130,13 @@
        $('body').on('click', '#modalPlantillas .cuerpo a', function (e) {
              e.preventDefault();
              var traduccion = $('#idiomaActivado').val();
-            var url = $(this).attr('href')+"/"+traduccion;
+            var url = $(this).attr('href')+"/"+traduccion+"?";
             if($('#demo').is(':checked')) {
-                url+="?demo=1";
+                url+="demo=1&";
             }
-
+            if($('#fontSize').val()!="") {
+                url+="font-size="+$('#fontSize').val()+"&";
+            }
              window.location.href=url;
        });
       

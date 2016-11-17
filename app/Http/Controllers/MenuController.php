@@ -46,6 +46,9 @@ class MenuController extends Controller {
             if(\Request::has("demo")) {
                 $params["clientPreview"] = 1;
             }
+            if(\Request::has('font-size')) {
+                $params["fontSize"] = \Request::get('font-size');
+            }
             return view('menu.preview-'.$id_plantilla,$params);
         }
         else abort(403);
@@ -65,6 +68,9 @@ class MenuController extends Controller {
             $params = ['menu'=>$menu, 'traduccion'=>$traduccion];
             if(\Request::has("demo")) {
                 $params["clientPreview"] = 1;
+            }
+            if(\Request::has('font-size')) {
+                $params["fontSize"] = \Request::get('font-size');
             }
 
             $view = view('menu.preview-'.$id_plantilla,$params);

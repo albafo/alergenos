@@ -82,6 +82,7 @@ menu-template-3 preview-menus @if(isset($clientPreview) && $clientPreview) clien
                             <tr>
 
                                 <td width="70%">
+                                    <span style="@if(isset($fontSize))font-size: {{$fontSize}}px;@endif">
                                     @if($traduccion > 1 && $plato->hasTraduccion($traduccion))
 
                                         {{ $plato->traduccion()->find($traduccion)->pivot->content }}
@@ -90,6 +91,7 @@ menu-template-3 preview-menus @if(isset($clientPreview) && $clientPreview) clien
                                         {{$plato->nombre}}
 
                                     @endif
+                                    </span>
                                 @if($plato->numIngVisibles()>0)
                                         <br>
                                         <i>(
