@@ -65,17 +65,19 @@
                   <label for="fontSize">Tamaño Letra Platos:</label>
                   <select id="fontSize" name="fontSize">
                       <option value="">Auto</option>
+                      <option value="6">6px</option>
+                      <option value="8">8px</option>
+                      <option value="10">10px</option>
                       <option value="12">12px</option>
-                      <option value="13">13px</option>
                       <option value="14">14px (defecto)</option>
-                      <option value="15">15px</option>
                       <option value="16">16px</option>
-                      <option value="17">17px</option>
                       <option value="18">18px</option>
-                      <option value="19">19px</option>
                       <option value="20">20px</option>
-                      <option value="21">21px</option>
                       <option value="22">22px</option>
+                      <option value="24">24px</option>
+                      <option value="26">26px</option>
+                      <option value="28">28px</option>
+                      <option value="30">30px</option>
 
 
 
