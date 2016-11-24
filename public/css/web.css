@@ -298,8 +298,9 @@ td {
 }
 
 .menu-template-3 .nota-alergenos {
-    font-size:12px;
+    font-size:11px;
     text-transform:uppercase;
+    text-align: center;
 }
 
 .menu-template-3 .nombreRestaurante {
@@ -331,9 +332,10 @@ td {
 }
 
 .menu-template-4 .nota-alergenos {
-    font-size:12px;
+    font-size:11px;
     text-transform:uppercase;
     color: #ffffff;
+    text-align: center;
 }
 
 .menu-template-4 .nombreRestaurante {
@@ -900,4 +902,8 @@ tr    { page-break-inside:avoid; page-break-after:auto }
     .listado-ingredientes {
         page-break-inside: avoid;
     }
+}
+
+.icono-establ {
+    margin-top: 20px;
 }

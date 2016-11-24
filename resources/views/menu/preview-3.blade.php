@@ -36,10 +36,10 @@ menu-template-3 preview-menus @if(isset($clientPreview) && $clientPreview) clien
     <div class="row">
         <div class="col-md-10 col-md-offset-1" style="margin-top:30px;">
             <div class="row">
-                <div class="col-md-8 nota-alergenos">
+                <div class="col-md-12 nota-alergenos">
                     Carta adaptada a la normativa ue 1169/2011 sobre alergias e intolerancias alimentarias.
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-12 text-center icono-establ">
                       @if(Auth::user()->icono_estb)
                         <img src="{{asset('iconos-estb/'.Auth::user()->id.'/'.Auth::user()->icono_estb)}}" style="max-width:100%; max-height:100px">
                     @endif        
