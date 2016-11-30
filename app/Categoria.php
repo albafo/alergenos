@@ -32,7 +32,7 @@ class Categoria extends LanguageModel {
 	protected $guarded = ['id'];
 
 	public function platos() {
-        return $this->belongsToMany('App\Plato');
+        return $this->belongsToMany('App\Plato')->orderBy('orden', 'asc');
     }
     
     public function menu() {
