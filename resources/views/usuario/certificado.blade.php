@@ -73,7 +73,6 @@
                 float: left;
                 height: 240mm;
                 max-height: 240mm;
-                border: 1px solid #000000;
                 text-align: center;
                 position: relative;
             }
@@ -106,23 +105,34 @@
 
             .col-der .p4 {
                 margin-top: 8mm;
+                font-size: 5mm;
             }
 
             .col-der .p5{
                 margin-top: 5mm;
             }
 
-            .col-der .p6, .col-der .p7 {
-                margin-top: 5mm;
+            .col-der .p6{
+                margin-top: 4mm;
                 font-size: 3mm;
             }
 
+            .col-der .p7 {
+                margin-top: 4mm;
+                font-size: 4mm;
+            }
+
             .col-der .p8 {
-                font-size: 3mm;
+                font-size: 4mm;
             }
             .col-der .p9 {
-                font-size: 2mm;
+                font-size: 3.5mm;
                 margin-top: 5mm;
+                text-align: justify;
+            }
+            .col-der .p10 {
+                font-size: 3.5mm;
+                text-align: justify;
             }
 
             .col-der .firmaCertificado {
@@ -145,7 +155,46 @@
             .col-der .avisoCertificado {
                 position: absolute;
                 bottom: 0;
+                text-align: left;
+            }
 
+            .pieTexto {
+                border: 1px solid #92D050;
+                overflow: auto;
+            }
+
+            .pieTexto img {
+                width: 100%;
+            }
+
+            .pieTexto .logo-adehon {
+                float: left;
+                width: 40mm;
+                margin-left: 5mm;
+                margin-right: 5mm;
+                padding-top: 6mm;
+
+            }
+
+            .pieTexto .pie-texto {
+                float: left;
+                width: 100mm;
+                text-align: left;
+                font-size: 3.2mm;
+                padding-top: 6mm;
+
+            }
+
+            .pieTexto .oca-2012 {
+                width: 30mm;
+                float: left;
+
+            }
+
+            .pieTexto .oca-9001 {
+                float: left;
+                width: 27.6mm;
+                margin-left: 5mm;
             }
 
 
@@ -160,13 +209,11 @@
 </head>
 <body class="page-{{App\MyRequest::mySegments()}} @yield('class-body')">
 
-    <div class="cabecera">
-        <img src="{{asset('img/logo-adehon.png')}}">
-    </div>
+
     <div class="content">
         <div class="col-izq">
             <div class="logo">
-                <img src="{{asset('img/logo_ecede.png')}}">
+                <img style="width: 100%; margin-top: 10mm;" src="{{asset('img/ecede-new.png')}}">
             </div>
             <div class="fondo">
                 <img src="{{asset('img/fondo-certificado.png')}}">
@@ -180,24 +227,20 @@
                 <p>{{$user->direccion}}</p>
 
             </div>
-            <p class="p4"><strong>ECEDE certifica que ha sido formado de acuerdo a los requerimientos de la NORMATIVA EUROPEA Nº 1169/2011 ALERGIAS ALIMENTARIAS</strong></p>
-            <p class="p5">ECEDE certifies that has been trained in accordance with the requirements of EUROPEAN NORMATIVE Nº 1169/2011 WARNING ALLERGIES</p>
-            <hr>
-            <p><strong>El sistema de Adaptación se aplica a:</strong></p>
-            <p>The system of Adjustment is applied to:</p>
+            <p class="p4"><strong>ECEDE certifica que</strong> / ECEDE certifies that</p>
+            <p class="p5"><strong>Este establecimiento dispone de información relativa a la presencia de sustancias susceptibles de causar alergias e intolerancias en su oferta gastronómica y que está a disposición de todos los clientes conforme a los requerimientos de la  NORMATIVA EUROPEA Nº 1169/2011 ALERGIAS ALIMENTARIAS</strong></p>
+
             <p class="p6">
-                <strong>Todos los operadores de empresas alimentarias en todas las fases de la cadena alimentaria.
-                    Todos los alimentos destinados al consumidor final, incluidos los entregados por las colectividades y
-                    los destinados al suministro de las colectividades. Y a los servicios de restauración que ofrecen las
-                    empresas de transporte.
-                </strong>
+                This local-trade provides information related to the presence of substances susceptible of causing allergies and intolerances in his gastronomic offer and handles its services to all the customers in accordance with the requirements of EUROPEAN NORMATIVE Nº 1169/2011
+                WARNING ALLERGIES
             </p>
             <p class="p7">
-                All the operators of food companies in all the phases of the food chain. All the food destined to the final consumer, including the food delivered by the collectivities and the destined ones for the supply of the collectivities. Also to the services of hospitality and catering that offer the transport companies.
+                <strong>El sistema de Adaptación se aplica a:</strong>
             </p>
-            <hr>
-            <p class="p8"><strong>ESTE ESTABLECIMIENTO DISPONE DE INFORMACIÓN RELATIVA A LA PRESENCIA DE SUSTANCIAS SUSCEPTIBLES DE CAUSAR ALERGIAS E INTOLERANCIAS EN SU OFERTA GASTRONÓMICA Y ESTÁ A DISPOSICIÓN DE TODOS LOS CLIENTES.</strong></p>
-            <p class="p9">THIS LOCAL-TRADE PROVIDES INFORMATION RELATED TO THE PRESENCE OF SUBSTANCES SUSCEPTIBLE OF CAUSING ALLERGIES AND INTOLERANCES IN HIS GASTRONOMIC OFFER AND HANDLES ITS SERVICES TO ALL THE CUSTOMERS.</p>
+            <p class="p8">The system of Adjustment is applied to:</p>
+            <p class="p9"><strong>Todos los operadores de empresas alimentarias en todas las fases de la cadena alimentaria. Todos los alimentos destinados al consumidor final, incluidos los entregados por las colectividades y los destinados al suministro de las colectividades. Y a los servicios de restauración que ofrecen las empresas de transporte.</strong></p>
+            <p class="p10">All the operators of food companies in all the phases of the food chain. All the food destined to the final consumer, including the food delivered by the collectivities and the destined ones for the supply of the collectivities. Also to the services of hospitality and catering that offer the transport companies.</p>
+
             <div class="firmaCertificado">
                 <div class="row">
                     <div class="col-xs-6 text-right">
@@ -238,12 +281,21 @@
     </div>
 
     <div class="pieTexto">
-        <p>Adehon es Centro de formación acreditado e inscrito en el registro de entidades de formación profesional para el empleo con Nº 4600000877</p>
+        <div class="logo-adehon">
+            <img src="{{asset("img/logo-adehon.jpg")}}">
+        </div>
+        <div class="pie-texto">
+            <strong>ADEHON</strong> está acreditado e inscrito en el registro de entidades de formación profesional para el empleo con Nº 4600000877 y certificado en calidad <strong>ISO 9001 e ISO 27001</strong>
+        </div>
+        <div class="oca-9001">
+            <img src="{{asset("img/OCA-9001-ENAC.jpg")}}">
+        </div>
+        <div class="oca-2012">
+            <img src="{{asset("img/OCA-2012-27001-ENAC.png")}}">
+        </div>
     </div>
 
-    <div class="pieLogos">
-        <img src="{{asset('img/iso9001.png')}}"> <img src="{{asset('img/oca-certificado.png')}}">
-    </div>
+    
 
 
 

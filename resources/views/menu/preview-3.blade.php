@@ -94,7 +94,7 @@ menu-template-3 preview-menus @if(isset($clientPreview) && $clientPreview) clien
                                     </span>
                                 @if($plato->numIngVisibles()>0)
                                         <br>
-                                        <i>(
+                                        <i style="@if(isset($fontSize))font-size: {{$fontSize-1}}px;@endif">(
                                             <?php $i=0; ?>
                                             @foreach($plato->ingredientes as $ingrediente)
                                                 @if($ingrediente->plato()->find($plato->id)->pivot->visible_home)
